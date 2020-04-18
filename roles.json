@@ -1,0 +1,18 @@
+{
+    "tier1":{"id": "699988406008283146", "name":" Khởi nghiệp ", "cost": 100},
+    "tier2":{"id": "699988401142759557", "name":" Doanh nhân trẻ ", "cost": 1000},
+    "tier3":{"id": "699988642298331297", "name":" Stonks man ", "cost": 5000},
+
+    "tier4":{"id": "699988766974279691", "name":" Double stonks ", "cost": 10000},
+    "tier5":{"id": "699988764792979476", "name":" Triple stonks ", "cost": 30000},
+    "tier6":{"id": "699990071008297021", "name":" Chủ tịch ", "cost": 50000},
+
+    "tier7":{"id": "700184151554523186", "name":" Tổng thống tiểu quốc ", "cost": 75000},
+    "tier8":{"id": "700187287002153011", "name":" Tổng thống cường quốc ", "cost": 100000},
+    
+    "tier9":{"id": "700187760853647360", "name":" Pseudo-Herrscher ", "cost": 200000},
+    "tier10":{"id": "700188096523796501", "name":" Herrscher ", "cost": 1000000}
+
+
+
+}
