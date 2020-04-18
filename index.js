@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const {prefix, noPrefix ,  token, giphyToken} = require('./config.json');
+const {prefix, noPrefix , token, giphyToken} = require('./config.json');
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const client = new Discord.Client();
@@ -69,4 +69,4 @@ client.on('message', message =>
 
    
 })
-client.login(process.env.token);
+client.login(token);
