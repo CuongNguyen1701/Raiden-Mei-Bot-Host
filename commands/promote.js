@@ -17,13 +17,14 @@ module.exports = {
 
         function Promote(currentTier, promoteTier)
         {
+            //check if the balance have enough money to promote
             if(money[message.author.id].money < promoteTier.cost) return message.reply('you do not have enough money, you need at least ' + promoteTier.cost + currency + ' to become a ' + promoteTier.name);
 
             money[message.author.id].money -= promoteTier.cost;
             fs.writeFile('./money.json', JSON.stringify(money), (err) => {
                 if(err) console.log('error', err);
             });
-            if (currentTier != null) roleMember.roles.remove(currentTier.id);
+            if (currentTier != null) roleMember.roles.remove(currentTier.id);//use for cases when user has no eco role
             
             roleMember.roles.add(promoteTier.id);
 
@@ -74,7 +75,7 @@ module.exports = {
             return Promote(role.tier1, role.tier2);
         }
 
-        else Promote( null , role.tier1);
+        else Promote( null , role.tier1);//no role
         
 
 

@@ -36,19 +36,19 @@ module.exports = {
 
         if(!user) return message.reply('sorry, could not find that user...');
 
-        if(!args[1] || isNaN(args[1])) return message.reply('please specify the amount you want to pay.');
+        if(!args[1] || isNaN(args[1])) return message.reply('please specify the amount you want to pay.');//no provided number
 
-        if(!money[message.author.id]) return message.reply('sorry you have no money, you are poor.' );
+        if(!money[message.author.id]) return message.reply('sorry you have no money, you are poor.' );//have no account
 
-        if(parseInt(args[1]) > money[message.author.id].money) return message.reply('you do not have that much money, stop daydreaming!' );
+        if(parseInt(args[1]) > money[message.author.id].money) return message.reply('you do not have that much money, stop daydreaming!' ); //if author try to pay more than he has
 
         if(parseInt(args[1]) < 1) return message.reply('you cannot pay less than 1' + currency +  ', you greedy little potato!' );
 
-        if(parseInt(args[1]) > maxPay) return message.reply('you cannot pay more than ' + maxPay + currency)
+        if(parseInt(args[1]) > maxPay) return message.reply('you cannot pay more than ' + maxPay + currency);
 
-        if(user.id === message.author.id) 
+        if(user.id === message.author.id) //if the author pay himself
         {
-            if(roleMember.roles.cache.has(role.tier3.id) && money[message.author.id].money >= role.tier4.cost)
+            if(roleMember.roles.cache.has(role.tier3.id) && money[message.author.id].money >= role.tier4.cost)//if has role tier 3, trigger promote
             {
                 money[message.author.id].money -= role.tier4.cost;
 
@@ -62,14 +62,14 @@ module.exports = {
             else return message.reply('you cannot pay yourself, get a friend or something!');
         }
         
-            if(!money[user.id])
+            if(!money[user.id])//no account
             {
                 money[user.id] = {
                     name: client.users.cache.get(user.id).tag,
-                    money: parseInt(args[1])
+                    money: parseInt(args[1])//add the money to the person
                 };
     
-                money[message.author.id].money -= parseInt(args[1]);
+                money[message.author.id].money -= parseInt(args[1]);//take the money from payer
     
                 fs.writeFile('./money.json', JSON.stringify(money), (err) => {
                     if(err) console.log('error', err);
@@ -77,9 +77,9 @@ module.exports = {
             }
             else
             {
-                money[message.author.id].money -= parseInt(args[1]);
+                money[message.author.id].money -= parseInt(args[1]);//take money
     
-                money[user.id].money += parseInt(args[1]);
+                money[user.id].money += parseInt(args[1]);//add money
     
                 fs.writeFile('./money.json', JSON.stringify(money), (err) => {
                     if(err) console.log('error', err);

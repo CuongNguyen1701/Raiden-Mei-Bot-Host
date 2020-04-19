@@ -31,31 +31,37 @@ client.on('ready', async () => {
 
 client.on('message', message => 
 {   
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    //check if the message author is a bot
+    if(message.author.bot) return;
+
+    const commandName_noPrefix = message.content.toLowerCase();
+    const command_noPrefix = message.client.commands.get(commandName_noPrefix);
+
+    switch(commandName_noPrefix)
+    {
+        case'alo mei': command_noPrefix.execute(message, args); break;
+        case'mei ơi': command_noPrefix.execute(message, args); break;
+    }
+    
+
+
+    //check if the message has any prefix 
+    if (!message.content.startsWith(prefix)) return;
+
+    
     const args = message.content.slice(prefix.length).split(/ +/);
+
     const commandName = args.shift().toLowerCase();
     const command = message.client.commands.get(commandName)
     || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     
-    const commandName_noPrefix = message.content.toLowerCase();
-    const command_noPrefix = message.client.commands.get(commandName_noPrefix);
-    if (message.author.bot) return;
-    
-    if(commandName_noPrefix === 'alo mei')
-    {
-        command_noPrefix.execute(message, args);
-    }
-
-    if(commandName_noPrefix === 'mei ơi')
-    {
-        command_noPrefix.execute(message, args);
-    }
 
 
     if (!client.commands.has(commandName)) return;
     
     try 
     {
+        //perform the command with the same name in commands folder
         command.execute(client, message, args);
     } 
     catch (error) 

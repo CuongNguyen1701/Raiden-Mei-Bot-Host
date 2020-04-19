@@ -12,7 +12,7 @@ module.exports = {
 
         function Reborn(rMoney)
         {
-            try
+            try//remove all role
             {
             roleMember.roles.remove(role.tier1.id);
             roleMember.roles.remove(role.tier2.id);
@@ -27,7 +27,7 @@ module.exports = {
             }
             catch{}
 
-            money[message.author.id].money = rMoney;
+            money[message.author.id].money = rMoney;//reborn money
             fs.writeFile('./money.json', JSON.stringify(money), (err) => {
                 if(err) console.log('error', err);
             });
@@ -35,16 +35,16 @@ module.exports = {
             message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + money[message.author.id].money + currency + ' and ' + money[message.author.id].pMoney + pCurrency);
         }
 
-        if(roleMember.roles.cache.has(role.tier10.id))
+        if(roleMember.roles.cache.has(role.tier10.id))//max role
         {
-            money[message.author.id].pMoney += 5000;
+            money[message.author.id].pMoney += 5000;//add premium currency 
             Reborn(10000);
         }
 
         else if(money[message.author.id].money <= 100 && (roleMember.roles.cache.has(role.tier2.id) || roleMember.roles.cache.has(role.tier1.id))) 
-        message.reply('khôn như đồng chí quê tôi xích đầy. Không làm mà đòi có ăn...');
+        message.reply('khôn như đồng chí quê tôi xích đầy. Không làm mà đòi có ăn...');//prevent exploiting the reborn command
 
-        else if(roleMember.roles.cache.has(role.tier6.id) && money[message.author.id].money >= role.tier7.cost)
+        else if(roleMember.roles.cache.has(role.tier6.id) && money[message.author.id].money >= role.tier7.cost)//promote from tier 6 to 7 using reborn
         {
             money[message.author.id].money = role.tier3.cost;
             fs.writeFile('./money.json', JSON.stringify(money), (err) => {

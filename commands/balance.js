@@ -6,12 +6,14 @@ module.exports = {
 	name: 'balance',
 	description: 'tài khoản',
 	execute(client, message, args) {
-
+        
+        //check if no first argument is provided(user mentioned) 
         if(!args[0]){
             var user = message.author;
         }else{
             var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
         }
+        //check if user has a balance
         if(!money[user.id]){
             money[user.id] = {
                 name: client.users.cache.get(user.id).tag,

@@ -13,11 +13,17 @@ module.exports = {
 	name: 'daily',
 	description: 'get daily rewards',
 	execute(client, message, args) {
+
+        //the cooldowns (in milisecond)
         let timeout = 86400000;  
+
+        //multiplier based on role
         let base = 1;
+
         let roleMember = message.guild.member(message.author);
         let embed = new Discord.MessageEmbed();
-        
+
+        //check if the user has the role
         function hasTier(tier) {return roleMember.roles.cache.has(tier.id)}
 
         function writeDaily()
@@ -30,6 +36,8 @@ module.exports = {
               });
         }
         
+
+        //send the embed message that provide the info about daily reward
         function sendDaily()
         {
 
@@ -40,6 +48,7 @@ module.exports = {
             message.channel.send(embed);
         }
    
+        //check role => base
     switch(hasTier(role.tier1) ? 1 : hasTier(role.tier2) ? 2 :
             hasTier(role.tier3) ? 3 : hasTier(role.tier4) ? 4 :
             hasTier(role.tier5) ? 5 : hasTier(role.tier6) ? 6 :
@@ -61,13 +70,14 @@ module.exports = {
 
         
         
-        let reward = 100*base;
-        let pReward = 100;
+        let reward = 100*base; //normal currency
+        let pReward = 100; //premium currency
 
         embed.setTitle('Daily Reward!');
 
         if(!money[message.author.id])
         {
+            //create a money account
             money[message.author.id] = {
                 name: client.users.cache.get(message.author.id).tag,
                 money: reward,
@@ -77,6 +87,7 @@ module.exports = {
                 if(err) console.log('error', err);
               });
 
+              //if there is no cooldowns
               if(!cooldowns[message.author.id]){
                 cooldowns[message.author.id] = {
                     name: client.users.cache.get(message.author.id).tag,
@@ -117,9 +128,9 @@ module.exports = {
 
 
             } 
-            else 
+            else //there is a cooldowns
             {
-                if(timeout - (Date.now() - cooldowns[message.author.id].daily) > 0)
+                if(timeout - (Date.now() - cooldowns[message.author.id].daily) > 0) //cooldowns has not reached 0
                 {
                     time = ms(timeout - (Date.now() - cooldowns[message.author.id].daily))
 
@@ -130,7 +141,7 @@ module.exports = {
 
                     message.channel.send(embed);
                 }
-                else 
+                else //cooldowns has reached 0 or below
                 {
                     cooldowns[message.author.id].daily = Date.now();
                   fs.writeFile('./cooldowns.json', JSON.stringify(cooldowns),(err) => {

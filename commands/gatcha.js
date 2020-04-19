@@ -25,10 +25,11 @@ module.exports = {
 
                 let gatchaPool = ["Mei's birthday cake", "Mei's underwears", "Mei's emblem", "Mei's bentou", "Mei's MAG Typhoon" ];
 
-                var result = Math.floor(Math.random() * 100) +1;
-                var index = 0;
+                var result = Math.floor(Math.random() * 100) + 1; //get a number from 1 to 100
+                var index = 0; //index for gatchaPool
                 var reward = 0;
 
+                //check result
                 if(result <= 50)
                 {
                     index = 0;
@@ -55,9 +56,10 @@ module.exports = {
                     reward = 5000;
                 }
 
-                var pick = gatchaPool[index];
+                var pick = gatchaPool[index]; //get the item in the gatcha pool
 
-                var total = reward - gatchaPrice;
+                var total = reward - gatchaPrice; 
+
                 money[message.author.id].money += total;
                 
                 fs.writeFile('./money.json', JSON.stringify(money), (err) => {
@@ -72,15 +74,20 @@ module.exports = {
                   embed.setFooter('');
                   
                   message.channel.send(embed);
+
+                  //if user has role tier 8, the balance >= tier 9 cost, get one of the last two item in gatcha pool
                   if(roleMember.roles.cache.has(role.tier8.id) && money[message.author.id].money >= role.tier9.cost && index >= (gatchaPool.length - 1))
                   {
-                    money[message.author.id].money -= role.tier9.cost;
+                    money[message.author.id].money -= role.tier9.cost;//user pay the money
 
                     fs.writeFile('./money.json', JSON.stringify(money), (err) => {
                         if(err) console.log('error', err);
                     });
+
+                    //promote
                     roleMember.roles.remove(role.tier8.id);
                     roleMember.roles.add(role.tier9.id);
+                    
                     message.channel.send('Something special has happened, I wonder what it is :/');
 
                   }

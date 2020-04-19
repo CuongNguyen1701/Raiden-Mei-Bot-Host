@@ -43,10 +43,10 @@ module.exports = {
         if(investment[user.id].stonks) return message.reply('you have already collected your money!');
         if(timeout - (Date.now() - investment[user.id].timeInvest) <= 0 )
         {
-            investment[user.id].cooldowns = false;
+            investment[user.id].cooldowns = false;//no cooldowns, use for triggering if statement
 
         }
-        if(investment[user.id].cooldowns)
+        if(investment[user.id].cooldowns)//still has cooldowns
         {
             time = ms(timeout -(Date.now() - investment[user.id].timeInvest));
     
@@ -58,9 +58,9 @@ module.exports = {
             message.channel.send(embed);
             
         }
-        else
+        else//no cooldowns
         {
-            var investedMoney = investment[user.id].money;
+            var investedMoney = investment[user.id].money;//invested money using invest command
 
             let base = 1;
             function hasTier(tier) {return roleMember.roles.cache.has(tier.id)}
@@ -125,7 +125,7 @@ module.exports = {
                 case 9:
                     interest = 0.0005;
                     break;
-            }
+            }//interest decrease as more money invested
 
 
             let extra = Math.ceil(investedMoney * (1 + interest) * base);
@@ -134,7 +134,7 @@ module.exports = {
             Write();
 
             embed.setColor(color.orange);
-            if(investedMoney < 0) embed.setTitle('STINKS!');
+            if(investedMoney < 0) embed.setTitle('STINKS!');//if the author borrow money
             else embed.setTitle('STONKS!');
             
             embed.setDescription( user.username + ' received ' + extra + currency + ' (' + (extra - investedMoney) + currency +' interest)'+'! New balance: ' + money[user.id].money + currency);
