@@ -41,7 +41,7 @@ module.exports = {
 
         money[user.id].money -= cost;
 
-        message.reply('you left ' + faction[user.id].faction + ' faction' )
+        message.reply('you paid ' + cost + currency + ' andleft ' + faction[user.id].faction + ' faction' )
         
         faction[user.id].faction = null;
 

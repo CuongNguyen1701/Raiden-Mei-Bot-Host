@@ -12,7 +12,7 @@ const color = require('../color.json');
 
 module.exports = {
 	name: 'invest',
-	description: 'đầu tư, thay số bằng max để đầu tư tối đa' ,
+	description: 'đầu tư, thay số bằng max hoặc all để đầu tư tối đa' ,
 	execute(client, message, args) {
         let timeout = 1800000;  
         let roleMember = message.guild.member(message.author);
@@ -41,9 +41,10 @@ module.exports = {
 
         let maxBorrow = 1000;
         
-        let base = 1;
+        let base = 70;
+        /*
         function hasTier(tier) {return roleMember.roles.cache.has(tier.id)}
-        
+    
         switch(hasTier(role.tier1) ? 1 : hasTier(role.tier2) ? 2 :
         hasTier(role.tier3) ? 3 : hasTier(role.tier4) ? 4 :
         hasTier(role.tier5) ? 5 : hasTier(role.tier6) ? 6 :
@@ -62,7 +63,7 @@ module.exports = {
             case 10: base = 65; break;
             case 0: base = 50; break;
         }
-        
+        */
         let maxInvest = Math.ceil((base/100)*money[user.id].money);
 
 
@@ -70,7 +71,7 @@ module.exports = {
         
         if(!args[0]) return message.reply('please specify the amount you want to invest or borrow.');
 
-        if(args[0] == 'max' && maxInvest > 0) args[0] = maxInvest;
+        if((args[0] == 'max' || args[0] == 'all') && maxInvest > 0) args[0] = maxInvest;
         
         if(isNaN(args[0])) return;
         

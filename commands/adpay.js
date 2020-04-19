@@ -13,11 +13,7 @@ module.exports = {
 
         if(!args[1]) return message.reply('please specify the amount you want to pay.');
 
-        //else if(!money[message.author.id]) message.reply('sorry you have no money, you are poor.' );
 
-        //else if(parseInt(args[1]) > money[message.author.id].money) message.reply('you do not have that much money, stop daydreaming!' );
-
-        //else if(parseInt(args[1]) < 1) message.reply('you cannot pay less than 1' + currency +  ', you greedy little potato!' );
 
 
         else{
@@ -25,7 +21,7 @@ module.exports = {
             {
                 money[user.id] = {
                     name: client.users.cache.get(user.id).tag,
-                    money: parseInt(args[1])
+                    money: parseInt(args[1]),
                 };
     
 

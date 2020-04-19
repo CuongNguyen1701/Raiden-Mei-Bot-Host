@@ -73,14 +73,14 @@ module.exports = {
             {
                 case 1: base = 1; break;
                 case 2: base = 1; break;
-                case 3: base = 1.1; break;
-                case 4: base = 1.15; break;
-                case 5: base = 1.2; break;
-                case 6: base = 1.25; break;
-                case 7: base = 1.3; break;
-                case 8: base = 1.35; break;
-                case 9: base = 1.4; break;
-                case 10: base = 1.5; break;
+                case 3: base = 1.01; break;
+                case 4: base = 1.015; break;
+                case 5: base = 1.02; break;
+                case 6: base = 1.025; break;
+                case 7: base = 1.03; break;
+                case 8: base = 1.035; break;
+                case 9: base = 1.04; break;
+                case 10: base = 1.05; break;
                 case 0: base = 1; break;
             }
 
@@ -123,7 +123,7 @@ module.exports = {
                     interest = 0.07;
                     break;
                 case 9:
-                    interest = 0.05;
+                    interest = 0.0005;
                     break;
             }
 
