@@ -1,9 +1,20 @@
-const Discord = require('discord.js');
-const fs = require('fs');
-const money = require('../money.json');
-const { currency } = require('../config.json');
+
+
+const { mongoPass, currency } = require('../config.json');
 const role = require('../roles.json');
 
+const mongoose = require('mongoose');
+
+
+//CONNECT TO DATABASE
+mongoose.connect(mongoPass, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+
+//MODELS
+const Data = require('../models/data.js');
 
 
 module.exports = {
@@ -33,53 +44,63 @@ module.exports = {
             case 0: base = 1; break;
         }//var base is based on the user role
 
-
-
         var maxBet = 1000 * base;
 
 
         if (!args[0] || isNaN(args[0])) return message.reply('please specify the number of money you want to bet');//if the input is NaN or no input
-        if (!money[message.author.id] || money[message.author.id].money <= 0) message.reply('you have no money!');//if author has no positive balance or have no account
-
-        else {
-            try {
-                var bet = parseInt(args[0]);
+        
+        
+        try {
+            var bet = parseInt(args[0]);
+        }
+        catch
+        {
+            return message.reply('you can only enter intergers');
+        }
+        
+        
+        if (bet > maxBet) return message.reply('you cannot bet more than ' + maxBet + currency + '!');
+        
+        Data.findOne({
+            userID: message.author.id
+        }, (err, data) => {
+            if(err) console.log(err);
+            if(!data){ //check if user has no data on database
+                return message.reply('please use ' + prefix + 'create first');
             }
-            catch
+            else
             {
-                return message.reply('you can only enter intergers');
-            }
-
-            if (money[message.author.id].money < bet) message.reply('you do not have enough money');
-
-            else if (bet > maxBet) message.reply('you cannot bet more than ' + maxBet + currency + '!');
-
-            else {
+                if (data.money < bet) return message.reply('you do not have enough money');
+                if (data.money <= 0) return message.reply('you have no money!');//if author has no positive balance or have no account
                 let chances = ['win', 'lose', 'lose', 'lose'];
                 var pick = chances[Math.floor(Math.random() * chances.length)];
-
+                
                 if (pick == 'lose') {
-                    money[message.author.id].money -= Math.floor(bet * (base + 1) / (base + 3));
-
-                    fs.writeFile('./money.json', JSON.stringify(money), (err) => {
-                        if (err) console.log('error', err);
-                    });//just write in the values into database
-
-                    message.reply('you lose... New balance: ' + money[message.author.id].money + currency);
+                    data.money -= Math.floor(bet * (base + 1) / (base + 3));
+        
+                    data.save().catch(err => console.log(err));
+                    //write in the values into database
+        
+                    message.reply('you lose... New balance: ' + data.money + currency);
                 }
                 else {
-                    money[message.author.id].money += Math.floor((4 * bet * (base + 1)) / (5 * (base + 3)));
-
-                    fs.writeFile('./money.json', JSON.stringify(money), (err) => {
-                        if (err) console.log('error', err);
-                    });
-
-                    message.reply('you win!! New balance: ' + money[message.author.id].money + currency);
+                    data.money += Math.floor((4 * bet * (base + 1)) / (5 * (base + 3)));
+                    
+                    data.save().catch(err => console.log(err));
+                    //write in the values into database
+                    
+        
+                    message.reply('you win!! New balance: ' + data.money + currency);
                 }
-
+                
             }
+        })
+
+       
 
 
-        }
+
+
+
     },
 };

@@ -1,156 +1,131 @@
 const Discord = require('discord.js');
-const fs = require ('fs'); 
-const money = require('../money.json');
 const ms = require('parse-ms');
-const cooldowns = require('../cooldowns.json');
-const {currency, pCurrency} = require('../config.json');
 const role = require('../roles.json');
 
+const { mongoPass, currency, pCurrency } = require('../config.json');
+const mongoose = require('mongoose');
 
 
+//CONNECT TO DATABASE
+mongoose.connect(mongoPass, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+//MODELS
+const Data = require('../models/data.js');
 
 module.exports = {
-	name: 'daily',
-	description: 'get daily rewards',
-	execute(client, message, args) {
+    name: 'daily',
+    description: 'get daily rewards',
+    execute(client, message, args) {
 
         //the cooldowns (in milisecond)
-        let timeout = 86400000;  
+        let timeout = 86400000;
 
         //multiplier based on role
         let base = 1;
 
         let roleMember = message.guild.member(message.author);
         let embed = new Discord.MessageEmbed();
+        embed.setTitle('Daily Reward!');
 
         //check if the user has the role
-        function hasTier(tier) {return roleMember.roles.cache.has(tier.id)}
+        function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }
 
-        function writeDaily()
-        {
-            money[message.author.id].money += reward;
-            if(!money[message.author.id].pMoney) money[message.author.id].pMoney = 0;
-            money[message.author.id].pMoney += pReward;
-            fs.writeFile('./money.json', JSON.stringify(money),(err) => {
-                if(err) console.log('error', err);
-              });
+        //check role => base
+        switch (hasTier(role.tier1) ? 1 : hasTier(role.tier2) ? 2 :
+            hasTier(role.tier3) ? 3 : hasTier(role.tier4) ? 4 :
+                hasTier(role.tier5) ? 5 : hasTier(role.tier6) ? 6 :
+                    hasTier(role.tier7) ? 7 : hasTier(role.tier8) ? 8 :
+                        hasTier(role.tier9) ? 9 : hasTier(role.tier10) ? 10 : 0) {
+            case 1: base = 1.5; break;
+            case 2: base = 3; break;
+            case 3: base = 7; break;
+            case 4: base = 50; break;
+            case 5: base = 70; break;
+            case 6: base = 80; break;
+            case 7: base = 100; break;
+            case 8: base = 150; break;
+            case 9: base = 300; break;
+            case 10: base = 500; break;
+            case 0: base = 1; break;
         }
-        
+
+        let reward = 100 * base; //normal currency
+        let pReward = 100; //premium currency
 
         //send the embed message that provide the info about daily reward
-        function sendDaily()
-        {
+        function sendDaily(data) {
 
             embed.setDescription('You collected your daily reward of ' + reward + currency + ' and ' + pReward + pCurrency + '!');
-            embed.addField('Current balance is ' + money[message.author.id].money + currency + ', ' + money[message.author.id].pMoney + pCurrency)
+            embed.addField('Current balance is ' + data.money + currency + ', ' + data.pMoney + pCurrency)
             embed.setColor('00ff00');
             embed.setFooter(' ');
             message.channel.send(embed);
         }
-   
-        //check role => base
-    switch(hasTier(role.tier1) ? 1 : hasTier(role.tier2) ? 2 :
-            hasTier(role.tier3) ? 3 : hasTier(role.tier4) ? 4 :
-            hasTier(role.tier5) ? 5 : hasTier(role.tier6) ? 6 :
-            hasTier(role.tier7) ? 7 : hasTier(role.tier8) ? 8 :
-            hasTier(role.tier9) ? 9 : hasTier(role.tier10) ? 10 : 0)
-            {
-                case 1: base = 1.5; break;
-                case 2: base = 3; break;
-                case 3: base = 7; break;
-                case 4: base = 50; break;
-                case 5: base = 70; break;
-                case 6: base = 80; break;
-                case 7: base = 100; break;
-                case 8: base = 150; break;
-                case 9: base = 300; break;
-                case 10: base = 500; break;
-                case 0: base = 1; break;
-            }
 
-        
-        
-        let reward = 100*base; //normal currency
-        let pReward = 100; //premium currency
+        Data.findOne({
+            userID: message.author.id
+        }, (err, data) => {
+            if (err) console.log(err);
+            if (!data) { //check if user has no data on database
+                const newData = new Data({
+                    name: message.author.username,
+                    userID: message.author.id,
+                    lb: 'all',
+                    money: reward,
+                    pMoney: pReward,
+                    faction: null,
+                    daily: Date.now(),
+                    investMoney: null,
+                    investTime: null,
+                    investCD: false,
+                    investStonks: true,
 
-        embed.setTitle('Daily Reward!');
+                })
+                newData.save().catch(err => console.log(err));
+                return sendDaily(newData);
 
-        if(!money[message.author.id])
-        {
-            //create a money account
-            money[message.author.id] = {
-                name: client.users.cache.get(message.author.id).tag,
-                money: reward,
-                pMoney: pReward
-            };
-            fs.writeFile('./money.json', JSON.stringify(money), (err) => {
-                if(err) console.log('error', err);
-              });
-
-              //if there is no cooldowns
-              if(!cooldowns[message.author.id]){
-                cooldowns[message.author.id] = {
-                    name: client.users.cache.get(message.author.id).tag,
-                    daily: Date.now()
-                };
-                fs.writeFile('./cooldowns.json', JSON.stringify(cooldowns),(err) => {
-                    if(err) console.log('error', err);
-                  });
-
-
-              }
-              else 
-              {
-                  cooldowns[message.author.id].daily = Date.now();
-                  fs.writeFile('./cooldowns.json', JSON.stringify(cooldowns),(err) => {
-                      if(err) console.log('error', err);
-                  });
-              }
-
-            sendDaily();
-                
-            
-        } 
-        else 
-        {
-            if(!cooldowns[message.author.id]){
-                cooldowns[message.author.id] = {
-                    name: client.users.cache.get(message.author.id).tag,
-                    daily: Date.now()
-                };
-
-                fs.writeFile('./cooldowns.json', JSON.stringify(cooldowns),(err) => {
-                    if(err) console.log('error', err);
-                  });
-
-                writeDaily();
-                sendDaily();
-
-
-            } 
-            else //there is a cooldowns
-            {
-                if(timeout - (Date.now() - cooldowns[message.author.id].daily) > 0) //cooldowns has not reached 0
+            } else {
+                if (timeout - (Date.now() - data.daily) > 0)// if still cd
                 {
-                    time = ms(timeout - (Date.now() - cooldowns[message.author.id].daily))
+                    let time = ms(timeout - (Date.now() - data.daily))
 
                     embed.setColor('ff0000');
                     embed.setDescription('you already collected your daily reward');
                     embed.addField('collect again in ' + time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
                     embed.setFooter(' ');
 
-                    message.channel.send(embed);
+                    return message.channel.send(embed);
                 }
-                else //cooldowns has reached 0 or below
-                {
-                    cooldowns[message.author.id].daily = Date.now();
-                  fs.writeFile('./cooldowns.json', JSON.stringify(cooldowns),(err) => {
-                      if(err) console.log('error', err);
-                  });
-                    writeDaily();
-                    sendDaily();
+                else {
+                    data.daily = Date.now();//set new CD
+                    data.money += reward;
+                    data.pMoney += pReward;
+                    data.save().catch(err => console.log(err));
+
+
+                    return sendDaily(data);
                 }
             }
-        }
-	},
+        })
+
+    },
 };
+
+/*
+            data.findOne({
+                userID: message.author.id
+            }, (err, data) => {
+                if(err) console.log(err);
+                if(!data){ //check if user has no data on database
+                return message.reply('please use ' + prefix + 'create first');
+                }
+                else
+                {
+                    data.save().catch(err => console.log(err));
+                    
+                }
+            })
+*/

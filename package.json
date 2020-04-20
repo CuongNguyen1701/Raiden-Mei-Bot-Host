@@ -12,6 +12,7 @@
     "discord.js": "^12.1.1",
     "fs": "0.0.1-security",
     "giphy-js-sdk-core": "^1.0.6",
+    "mongoose": "^5.9.9",
     "parse-ms": "^2.1.0"
   }
 }
