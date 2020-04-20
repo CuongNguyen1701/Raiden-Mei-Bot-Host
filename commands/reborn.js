@@ -1,5 +1,4 @@
-const fs = require('fs');
-const money = require('../money.json');
+
 const { currency, pCurrency, mongoPass } = require('../config.json');
 const role = require('../roles.json');
 

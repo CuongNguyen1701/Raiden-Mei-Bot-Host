@@ -1,9 +1,8 @@
-const fs = require('fs');
-const money = require('../money.json');
+
 const {currency, mongoPass} = require('../config.json');
 const Discord = require('discord.js');
 const role = require('../roles.json');
-const faction = require('../faction.json');
+
 
 const mongoose = require('mongoose');
 
