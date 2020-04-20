@@ -6,10 +6,9 @@ const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect(mongoPass, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect( mongoPass, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+.then(() => console.log( 'Database Connected' ))
+.catch(err => console.log( err ));
 
 //MODELS
 const Data = require('../models/data.js');
