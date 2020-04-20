@@ -21,7 +21,7 @@ module.exports = {
 	name: 'invest',
 	description: 'đầu tư, thay số bằng max hoặc all để đầu tư tối đa' ,
 	execute(client, message, args) {
-        let timeout = 18000;  //time until author can receive the money
+        let timeout = 1800000;  //time until author can receive the money
         let roleMember = message.guild.member(message.author);
         let embed = new Discord.MessageEmbed();
         let user = message.author;

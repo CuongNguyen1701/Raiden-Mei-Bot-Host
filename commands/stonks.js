@@ -21,7 +21,7 @@ module.exports = {
     name: 'stonks',
 	description: 'stonks',
 	execute(client, message, args) {
-        let timeout = 18000;  
+        let timeout = 1800000;  
         let interest = 0;
         let embed = new Discord.MessageEmbed();
         let roleMember = message.guild.member(message.author);
