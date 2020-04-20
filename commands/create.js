@@ -16,13 +16,13 @@ module.exports = {
 	description: 'tạo thông tin trên database',
 	execute(client, message, args) {
         Data.findOne({
-            userID: user.id
+            userID: message.author.id
         }, (err, data) => {
             if(err) console.log(err);
             if(!data){ //check if user has no data on database
                 const newData = new Data({
                     name: client.users.cache.get(message.author.id).username,
-                    userID: user.id,
+                    userID: message.author.id,
                     lb: 'all',
                     money: 0,
                     pMoney: 0,
