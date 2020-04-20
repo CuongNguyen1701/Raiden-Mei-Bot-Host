@@ -1,5 +1,4 @@
 
-const money = require('../money.json');
 const {currency, mongoPass} = require('../config.json');
 const role = require('../roles.json');
 const mongoose = require('mongoose');

@@ -1,5 +1,4 @@
-const fs = require('fs');
-const money = require('../money.json');
+
 const {currency} = require('../config.json');
 
 module.exports = {
