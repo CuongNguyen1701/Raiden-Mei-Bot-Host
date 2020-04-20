@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( mongoPass, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log( 'Database Connected' ))
 .catch(err => console.log( err ));
 //MODELS
