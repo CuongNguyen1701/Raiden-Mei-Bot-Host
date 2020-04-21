@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const ms = require('parse-ms');
 const { currency, prefix, mongoPass } = require('../config.json');
 const role = require('../roles.json');
 const color = require('../color.json');
@@ -49,14 +48,7 @@ module.exports = {
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
 
-        if (isNaN(args[0]) || !args[0]) {//avoid errors
-            message.reply('please specify the amount of coupon you wanna buy. Current value per coupon: ' + coupData.coupValue + currency)
-        }
-
-        buyAmount = parseInt(args[0]);
-
-        if (buyAmount <= 0) return message.reply('please use a positive number!');//prevent selling coupon using this command
-
+        
         Data.findOne({
             userID: message.author.id
         }, (err, data) => {
@@ -65,16 +57,25 @@ module.exports = {
                 return message.reply('please use ' + prefix + 'create first');
             }
             else {
+                let availCoup = maxCoup - data.coup;//maximum number of coupons the user can buy
+                if(args[0] == 'max' || args[0] == 'all') args[0] = availCoup;
+                else if (isNaN(args[0]) || !args[0]) {//avoid errors
+                   return message.reply('please specify the number of coupons you wanna buy. Current value per coupon: ' + coupData.coupValue + currency)
+                }
+        
+                let buyNumber = parseInt(args[0]);
+        
+                if (buyNumber <= 0) return message.reply('please use a positive number!');//prevent selling coupon using this command
+                
                 if (!data.coup) data.coup = 0;
                 if(data.coup >= maxCoup) return message.reply('you can only own up to ' + maxCoup + 'coupons!');
-                let availCoup = maxCoup - data.coup;//maximum number of coupons the user can buy
-                if((data.coup + buyAmount) > maxCoup) return message.reply('you can only buy ' +  availCoup + ' more coupons!')
-                if (data.money < coupData.coupValue * buyAmount) return message.reply("you don't have enough money");
+                if((data.coup + buyNumber) > maxCoup) return message.reply('you can only buy ' +  availCoup + ' more coupons!')
+                if (data.money < coupData.coupValue * buyNumber) return message.reply("you don't have enough money");
 
-                data.money -= coupData.coupValue * buyAmount;
-                data.coup += buyAmount;
+                data.money -= coupData.coupValue * buyNumber;
+                data.coup += buyNumber;
                 SaveData(data);
-                embed.setTitle('you bought ' + buyAmount + ' coupons!');
+                embed.setTitle('you bought ' + buyNumber + ' coupons!');
                 embed.setDescription('current coupons: ' + data.coup);
                 embed.addField('current balance: ' + data.money + currency);
                 message.channel.send(embed);

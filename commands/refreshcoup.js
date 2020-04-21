@@ -40,7 +40,7 @@ module.exports = {
         {
             let time = ms(timeout - (Date.now() - coupData.refreshTime))
 
-            return message.reply('Coupon value has already been been refreshed by someone, able to refresh in ' + time.minutes + 'm'
+            return message.reply('Coupon value has already been refreshed by someone, able to refresh in ' + time.minutes + 'm'
              + time.seconds + 's')
         }
         
