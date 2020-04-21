@@ -55,7 +55,7 @@ module.exports = {
             }
             else {
                 coupData.refreshTime = Date.now();
-                coupData.coupValue = Math.floor(Math.random() * 100) + 100 //random from 100-200
+                coupData.coupValue = Math.floor(Math.random() * 190) + 10 //random from 10-200
                 Write();
                 message.channel.send('Coupon value refreshed! New value per Coupon: ' + coupData.coupValue + currency);
             }
