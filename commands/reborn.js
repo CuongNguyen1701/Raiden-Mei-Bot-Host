@@ -21,7 +21,7 @@ module.exports = {
         function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
-        function Reborn(rMoney) {
+        function Reborn(rMoney, data) {
             try//remove all role
             {
                 roleMember.roles.remove(role.tier1.id);
@@ -68,10 +68,10 @@ module.exports = {
 
                     case 10:
                         data.pMoney += 5000;//add premium currency 
-                        Reborn(10000);
+                        Reborn(10000, data);
                         SaveData(data);
                         break;
-                    case 0: Reborn(100); break;
+                    case 0: Reborn(100, data); break;
 
                     
                 }
