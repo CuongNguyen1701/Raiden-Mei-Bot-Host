@@ -12,6 +12,7 @@ const dataSchema = mongoose.Schema({
     investTime: Number,
     investCD: Boolean,
     investStonks: Boolean,
+    coup: Number,
 })
 
 module.exports = mongoose.model('Data', dataSchema);

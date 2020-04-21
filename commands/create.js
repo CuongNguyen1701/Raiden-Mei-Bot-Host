@@ -30,6 +30,7 @@ module.exports = {
                     investMoney: null,
                     investCD: false,
                     investStonks: true,
+                    coup: 0,
 
                 })
                 newData.save().catch(err => console.log(err));
