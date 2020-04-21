@@ -5,7 +5,6 @@ const role = require('../roles.json');
 const color = require('../color.json');
 const { coupData } = require('../coup.json');
 
-
 const mongoose = require('mongoose');
 
 
