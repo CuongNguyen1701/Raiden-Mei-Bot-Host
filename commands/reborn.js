@@ -38,6 +38,11 @@ module.exports = {
             catch{ }
 
             data.money = rMoney;//reborn money
+            data.coup = 0;
+            data.faction = null;
+            data.investMoney = null;
+            data.investCD = false;
+            data.investStonks = true;
             SaveData(data);
 
             message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
@@ -59,7 +64,7 @@ module.exports = {
                     case 1: message.reply('khôn như đồng chí quê tôi xích đầy. Không làm mà đòi có ăn...'); break;
 
                     case 6: 
-                    data.money = role.tier3.cost;
+                    Reborn(role.tier3.cost, data);
                     SaveData(data);
                     roleMember.roles.add(role.tier7.id);
                     roleMember.roles.remove(role.tier6.id);
