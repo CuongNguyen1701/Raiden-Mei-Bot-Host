@@ -129,7 +129,7 @@ module.exports = {
                 else
                 {
 
-                    let investNum = parseInt(args[0]);
+                    var investNum = parseInt(args[0]);
                 
                     data.money -= investNum;//take the money to invest
 
