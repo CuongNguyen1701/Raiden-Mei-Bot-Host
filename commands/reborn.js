@@ -57,9 +57,9 @@ module.exports = {
             }
             else {
 
-                if(!hasTier(role.tier1) || !hasTier(role.tier2) || !hasTier(role.tier3)|| !hasTier(role.tier4)
-                || !hasTier(role.tier5)|| !hasTier(role.tier6)|| !hasTier(role.tier7)|| !hasTier(role.tier8)
-                || !hasTier(role.tier9)|| !hasTier(role.tier10))
+                if(!hasTier(role.tier1) && !hasTier(role.tier2) && !hasTier(role.tier3)&& !hasTier(role.tier4)
+                && !hasTier(role.tier5)&& !hasTier(role.tier6)&& !hasTier(role.tier7)&& !hasTier(role.tier8)
+                && !hasTier(role.tier9)&& !hasTier(role.tier10))
                 {
                     return message.reply('Golden Experience Requiem just said NO');
                 }

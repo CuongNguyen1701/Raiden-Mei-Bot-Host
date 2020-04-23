@@ -27,7 +27,7 @@ module.exports = {
 
         let roleMember = message.guild.member(message.author);
         function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }//check tier
-        if (!hasTier(role.tier5) || !hasTier(role.tier6) || !hasTier(role.tier7) || !hasTier(role.tier8) || !hasTier(role.tier9)  || !hasTier(role.tier10)  ) {
+        if (!hasTier(role.tier5) && !hasTier(role.tier6) && !hasTier(role.tier7) && !hasTier(role.tier8) && !hasTier(role.tier9)  && !hasTier(role.tier10)  ) {
             return message.reply('you have to be at least a ' + role.tier5.name + ' to refresh coupon value!')
         }
         let timeout = 3600000;  //time until author can receive the money
