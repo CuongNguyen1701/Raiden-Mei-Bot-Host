@@ -72,9 +72,9 @@ module.exports = {
                             (coupData.coupValue < 200 && coupData.coupValue >= 100) ? 2 :
                             (coupData.coupValue < 100 && coupData.coupValue >=50) ? 3 : 0)
                         {
-                            case 1: coupData.coupValue += RandInt(-30, 20); break;
+                            case 1: coupData.coupValue += RandInt(-100, 50); break;
                             case 2: coupData.coupValue += RandInt(-50, 50); break;
-                            case 3: coupData.coupValue += RandInt(-20, 30); break;
+                            case 3: coupData.coupValue += RandInt(-50, 100); break;
                             case 0: coupData.coupValue = RandInt(25, 75); break;
                         }
                         SaveData(coupData);
