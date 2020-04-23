@@ -26,7 +26,8 @@ module.exports = {
         let maxCoup = 100;//max coup user can own
 
         function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }
-
+        function SaveData(d) { d.save().catch(err => console.log(err)); }
+        
         switch (hasTier(role.tier1) ? 1 : hasTier(role.tier2) ? 2 :
             hasTier(role.tier3) ? 3 : hasTier(role.tier4) ? 4 :
                 hasTier(role.tier5) ? 5 : hasTier(role.tier6) ? 6 :
@@ -45,7 +46,6 @@ module.exports = {
             case 0: maxCoup = 2; break;
         }
 
-        function SaveData(data) { data.save().catch(err => console.log(err)); }
 
 
         
@@ -57,7 +57,6 @@ module.exports = {
                 return message.reply('please use ' + prefix + 'create first');
             }
             else {
-                SaveData(data);
 
                 CoupData.findOne({
                     coupID: 'RaidenMei',
@@ -94,7 +93,9 @@ module.exports = {
         
                         data.money -= coupData.coupValue * buyNumber;
                         data.coup += buyNumber;
+
                         SaveData(data);
+
                         embed.setTitle('you bought ' + buyNumber + ' coupons!');
                         embed.setDescription('current coupons: ' + data.coup);
                         embed.addField('current balance: ' + data.money + currency);

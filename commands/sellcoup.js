@@ -26,7 +26,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed();
 
 
-        function SaveData(data) { data.save().catch(err => console.log(err)); }
+        function SaveData(d) { d.save().catch(err => console.log(err)); }
 
         
         Data.findOne({
@@ -63,7 +63,9 @@ module.exports = {
         
                         data.money += coupData.coupValue * sellNumber;
                         data.coup -= sellNumber;
+
                         SaveData(data);
+
                         embed.setTitle('you sold ' + sellNumber + ' coupons!');
                         embed.setDescription('current coupons: ' + data.coup);
                         embed.addField('current balance: ' + data.money + currency);
