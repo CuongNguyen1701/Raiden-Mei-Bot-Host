@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { currency, prefix, mongoPass } = require('../config.json');
 const role = require('../roles.json');
 const color = require('../color.json');
-const { coupData } = require('../coup.json');
+
 
 const mongoose = require('mongoose');
 
