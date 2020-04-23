@@ -12,9 +12,9 @@ const Data = require('../models/data.js');
 
 
 module.exports = {
-    name: 'leaderboard',
-    description: 'xem BXH',
-    aliases:['lb', 'top'],
+    name: 'lbweo',
+    description: 'xem BXH' + config.pCurrency,
+
     execute(client, message, args) {
         Data.find({
             lb: 'all',
@@ -26,8 +26,8 @@ module.exports = {
             var page = Math.ceil(res.length / 10 )
 
             let embed = new Discord.MessageEmbed();
-            embed.setTitle('LEADERBOARD');
-            embed.setThumbnail('https://i.kym-cdn.com/photos/images/newsfeed/001/499/826/2f0.png');
+            embed.setTitle('LEADERBOARD' + config.pCurrency);
+            embed.setThumbnail('https://vignette.wikia.nocookie.net/surrealmemes/images/6/64/20200124_165642.JPG/revision/latest?cb=20200124222426');
             let pg = parseInt(args[0])
             if(pg != Math.floor(pg) || !pg) pg = 1;
             let end = pg*10;
@@ -38,7 +38,7 @@ module.exports = {
                 embed.setFooter('page ' + pg + ' of ' + page);
                 for(i = start; i < res.length; i++)
                 {
-                    embed.addField((i + 1) + '. ' + res[i].name, res[i].pMoney.toLocaleString() + res.pCurrency)
+                    embed.addField((i + 1) + '. ' + res[i].name, res[i].pMoney.toLocaleString() + config.pCurrency)
                 }
             }
             else{
