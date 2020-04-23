@@ -27,17 +27,17 @@ module.exports = {
             }
             else
             {
-                let faction = args[0].toLowercase();
                 if(data.faction) return message.reply('you have already joined a faction!');
-        
+                
                 if( data.money >= role.tier2.cost && (roleMember.roles.cache.has(role.tier2.id) 
                 || roleMember.roles.cache.has( role.tier3.id)|| roleMember.roles.cache.has( role.tier4.id)|| roleMember.roles.cache.has( role.tier5.id)
                 || roleMember.roles.cache.has( role.tier6.id)|| roleMember.roles.cache.has( role.tier7.id)|| roleMember.roles.cache.has( role.tier8.id)
                 || roleMember.roles.cache.has( role.tier9.id)|| roleMember.roles.cache.has( role.tier10.id)))
                 {
+                    var faction = args[0].toLowercase();
                     switch(faction)
                     {
-                        case 'lighting': case 'fire': case 'ice': case 'physical':
+                        case 'lightning': case 'fire': case 'ice': case 'physical':
                             data.faction = faction;
                             break;
         
