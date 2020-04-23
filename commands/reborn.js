@@ -16,6 +16,7 @@ const Data = require('../models/data.js');
 module.exports = {
     name: 'reborn',
     description: 'tái sinh bằng mazik, tiền về 100' + currency,
+    cooldown: 7200,
     execute(client, message, args) {
         let roleMember = message.guild.member(message.author);
         function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }
@@ -45,9 +46,8 @@ module.exports = {
             data.investStonks = true;
             SaveData(data);
 
-            message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
         }
-
+        
         Data.findOne({
             userID: message.author.id
         }, (err, data) => {
@@ -56,13 +56,21 @@ module.exports = {
                 return message.reply('please use ' + prefix + 'create first');
             }
             else {
-                switch ((hasTier(role.tier1) && data.money <= 100) ? 1
-                    : (hasTier(role.tier6) && data.money >= role.tier7.cost) ? 6
-                        : hasTier(role.tier10) ? 10 : 0) {
 
+                if(!hasTier(role.tier1) || !hasTier(role.tier2) || !hasTier(role.tier3)|| !hasTier(role.tier4)
+                || !hasTier(role.tier5)|| !hasTier(role.tier6)|| !hasTier(role.tier7)|| !hasTier(role.tier8)
+                || !hasTier(role.tier9)|| !hasTier(role.tier10))
+                {
+                    return message.reply('Golden Experience Requiem just said NO');
+                }
+
+                switch ((hasTier(role.tier1) && data.money <= 100) ? 1
+                : (hasTier(role.tier6) && data.money >= role.tier7.cost) ? 6
+                : hasTier(role.tier10) ? 10 : 0) {
+                    
                     //prevent exploiting the reborn command        
                     case 1: message.reply('khôn như đồng chí quê tôi xích đầy. Không làm mà đòi có ăn...'); break;
-
+                    
                     case 6: 
                     Reborn(role.tier3.cost, data);
                     SaveData(data);
@@ -70,13 +78,17 @@ module.exports = {
                     roleMember.roles.remove(role.tier6.id);
                     message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency +  ' and ' + data.pMoney + pCurrency + "... Wait, that's unusual...");
                     break;
-
+                    
                     case 10:
                         data.pMoney += 5000;//add premium currency 
                         Reborn(10000, data);
                         SaveData(data);
+                        message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
                         break;
-                    case 0: Reborn(100, data); break;
+                    case 0: 
+                    Reborn(100, data);
+                    message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
+                    break;
 
                     
                 }

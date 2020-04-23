@@ -17,7 +17,8 @@ const Data = require('../models/data.js');
 
 module.exports = {
 	name: 'gatcha',
-	description: 'tiêu 100' + currency + ' đổi thưởng',
+    description: 'tiêu 100' + currency + ' đổi thưởng',
+    cooldown: 10,
 	execute(client, message, args) {
         Data.findOne({
             userID: message.author.id

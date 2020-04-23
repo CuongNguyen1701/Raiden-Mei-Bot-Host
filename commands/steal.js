@@ -17,6 +17,7 @@ const Data = require('../models/data.js');
 module.exports = {
     name: 'steal',
     description: 'cướp tiền, tỉ lệ 67%',
+    cooldown: 30,
     execute(client, message, args) {
         let user = message.mentions.members.first() || client.users.cache.get(args[0]);
         var base = 1;

@@ -17,6 +17,7 @@ const Data = require('../models/data.js');
 module.exports = {
     name: 'pay',
     description: 'trả tiền',
+    cooldown: 1800,
     execute(client, message, args) {
         let user = message.mentions.members.first() || client.users.cache.get(args[0]);
         let roleMember = message.guild.member(message.author);
@@ -43,16 +44,16 @@ module.exports = {
                             hasTier(role.tier5) ? 5 : hasTier(role.tier6) ? 6 :
                                 hasTier(role.tier7) ? 7 : hasTier(role.tier8) ? 8 :
                                     hasTier(role.tier9) ? 9 : hasTier(role.tier10) ? 10 : 0) {
-                        case 1: base = 1.5; break;
-                        case 2: base = 2; break;
-                        case 3: base = 2.5; break;
-                        case 4: base = 3; break;
-                        case 5: base = 4; break;
-                        case 6: base = 5; break;
-                        case 7: base = 10; break;
-                        case 8: base = 20; break;
-                        case 9: base = 50; break;
-                        case 10: base = 70; break;
+                        case 1: base = 15; break;
+                        case 2: base = 20; break;
+                        case 3: base = 25; break;
+                        case 4: base = 30; break;
+                        case 5: base = 40; break;
+                        case 6: base = 50; break;
+                        case 7: base = 100; break;
+                        case 8: base = 200; break;
+                        case 9: base = 500; break;
+                        case 10: base = 700; break;
                         case 0: base = 1; break;
                     }
                     let maxPay = 100 * base;
