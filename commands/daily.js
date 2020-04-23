@@ -15,7 +15,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
     name: 'daily',
-    description: 'nhận thưởng hàng ngày, ice faction nhận gấp 5 lần',
+    description: 'nhận thưởng hàng ngày, ice faction nhận gấp 10 lần',
     execute(client, message, args) {
 
         //the cooldowns (in milisecond)
@@ -101,7 +101,7 @@ module.exports = {
                 else {
                     if(data.faction == 'ice')
                     {
-                        reward *= 5;
+                        reward *= 10;
                         embed.setTitle('Ice faction boosted Daily Reward!')
                     }
 
