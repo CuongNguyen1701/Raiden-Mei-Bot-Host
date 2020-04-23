@@ -25,7 +25,7 @@ module.exports = {
 
         let maxCoup = 100;//max coup user can own
 
-        function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }
+        function hasTier(tier) { return roleMember.roles.cache.has(tier.id); }
         function SaveData(d) { d.save().catch(err => console.log(err)); }
         
         switch (hasTier(role.tier1) ? 1 : hasTier(role.tier2) ? 2 :

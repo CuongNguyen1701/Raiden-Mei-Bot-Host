@@ -9,21 +9,7 @@ mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopo
 .catch(err => console.log( err ));
 //MODELS
 const Data = require('../models/data.js');
-/*
-data.findOne({
-    userID: message.author.id
-}, (err, data) => {
-    if(err) console.log(err);
-    if(!data){ //check if user has no data on database
-    return message.reply('please use ' + prefix + 'create first');
-    }
-    else
-    {
-        data.save().catch(err => console.log(err));
-        
-    }
-})
-*/
+
 module.exports = {
 	name: 'balance',
 	description: 'tài khoản',
