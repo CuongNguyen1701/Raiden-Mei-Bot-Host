@@ -58,14 +58,14 @@ module.exports = {
                     }
                     else {
                         if (timeout - (Date.now() - coupData.refreshTime) > 0)//if last refresh cd has not been over
-                        {
+                      {
                             let time = ms(timeout - (Date.now() - coupData.refreshTime))
                 
                             return message.reply('Coupon value has already been refreshed by someone, able to refresh in ' + time.minutes + 'm'
                                 + time.seconds + 's')
                         }
                         coupData.refreshTime = Date.now();
-                        function RandInt(min, max) { Math.floor(Math.random() * (max - min)) - min;}
+                        function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min;}
 
 
                         switch(coupData.coupValue >= 200 ? 1 : 
