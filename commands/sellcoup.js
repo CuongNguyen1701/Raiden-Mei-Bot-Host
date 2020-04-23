@@ -51,14 +51,13 @@ module.exports = {
                         SaveData(newCoupData);
                     }
                     else {
-                        if (!data.coup) data.coup = 0;
                         if(args[0] == 'all' || args[0] == 'max') args[0] = data.coup;
                         else if (isNaN(args[0]) || !args[0]) {//avoid errors
                            return message.reply('please specify the number of coupons you wanna sell. Current value per coupon: ' + coupData.coupValue + currency)
                         }
                 
                         let sellNumber = parseInt(args[0]);
-                        if(sellNumber > data.coup) return message.reply("you don't have enough coupons!");
+                        if(sellNumber > data.coup || !data.coup) return message.reply("you don't have enough coupons!");
                         if (sellNumber <= 0) return message.reply('please use a positive number!');//prevent buying coupon using this command
         
         

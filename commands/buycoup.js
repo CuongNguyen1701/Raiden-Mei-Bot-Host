@@ -57,7 +57,6 @@ module.exports = {
                 return message.reply('please use ' + prefix + 'create first');
             }
             else {
-                if (!data.coup) data.coup = 0;
                 SaveData(data);
 
                 CoupData.findOne({
@@ -74,6 +73,7 @@ module.exports = {
                     }
                     else
                     {
+                        if (!data.coup) data.coup = 0;
                         let availCoup = maxCoup - data.coup;//maximum number of coupons the user can buy
         
                         if(args[0] == 'max' || args[0] == 'all'){
@@ -88,7 +88,6 @@ module.exports = {
                 
                         if (buyNumber <= 0) return message.reply('please use a positive number!');//prevent selling coupon using this command
                         
-                        if (!data.coup) data.coup = 0;
                         if(data.coup >= maxCoup) return message.reply('you can only own up to ' + maxCoup + 'coupons!');
                         if((data.coup + buyNumber) > maxCoup) return message.reply('you can only buy ' +  availCoup + ' more coupons!')
                         if (data.money < coupData.coupValue * buyNumber) return message.reply("you don't have enough money");
