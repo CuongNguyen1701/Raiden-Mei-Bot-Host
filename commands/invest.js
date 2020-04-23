@@ -128,11 +128,11 @@ module.exports = {
                 }
                 else
                 {
-                    data.money -= parseInt(args[0]);
 
                     let investNum = parseInt(args[0]);
                 
                     data.money -= investNum;//take the money to invest
+
                     if(data.faction == 'lightning' || investNum > 0)
                     {
                         let extraPool = [true, false]
