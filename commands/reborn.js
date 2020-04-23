@@ -81,6 +81,8 @@ module.exports = {
                     
                     case 10:
                         data.pMoney += 5000;//add premium currency 
+                        if(data.money > 2 * role.tier10.cost) data.money = 2 * role.tier10,cost;
+                        data.pMoney += Math.floor(data.money / 100)
                         Reborn(10000, data);
                         SaveData(data);
                         message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
