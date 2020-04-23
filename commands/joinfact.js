@@ -43,7 +43,7 @@ module.exports = {
         
                         default:
                             message.reply('please enter a valid faction');
-                            return message.reply('valid factions: ');
+                            return message.reply('valid factions: lightning, fire, ice, physical');
             
                     }
                     data.money -= role.tier2.cost;
