@@ -13,7 +13,7 @@ mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopo
 const Data = require('../models/data.js');
 module.exports = {
 	name: 'leavefact',
-	description: 'rời nhóm',
+	description: 'rời nhóm(nhưng phải trả tiền, rất nhiều tiền)',
 	execute(client, message, args) {
         let roleMember = message.guild.member(message.author);
         let user = message.author;
