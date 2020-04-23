@@ -18,7 +18,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
 	name: 'invest',
-	description: 'đầu tư, thay số bằng max hoặc all để đầu tư tối đa, lightning faction có cơ hội vốn đầu tư tăng 50%' ,
+	description: 'đầu tư, thay số bằng max hoặc all để đầu tư tối đa, lightning faction có 33% cơ hội vốn đầu tư tăng 50%' ,
 	execute(client, message, args) {
         let timeout = 1800000;  //time until author can receive the money
         let roleMember = message.guild.member(message.author);
@@ -80,7 +80,7 @@ module.exports = {
                     var extra = extraPool[Math.floor(Math.random()* extraPool.length)];
                     if(extra)
                     {
-                        investNum *= 1.5;
+                        investNum *= 1.3;
                         embed.setTitle('you got a lightning faction boost, extra investment!');
                     } 
                     else investNum *= 1;
@@ -139,7 +139,7 @@ module.exports = {
                         var extra = extraPool[Math.floor(Math.random()* extraPool.length)];
                         if(extra)
                         {
-                            investNum *= 1.5;
+                            investNum *= 1.3;
                             embed.setTitle('you got a lightning faction boost, extra investment!');
                         } 
                         else investNum *= 1;
