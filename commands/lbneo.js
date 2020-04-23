@@ -19,7 +19,7 @@ module.exports = {
         Data.find({
             lb: 'all',
         }).sort([
-            ['pMoney', 'descending']
+            ['money', 'descending']
         ]).exec((err, res) => {
             if(err) console.log(err);
 
