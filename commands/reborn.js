@@ -80,13 +80,16 @@ module.exports = {
                     break;
                     
                     case 10:
-                        data.pMoney += 5000;//add premium currency 
-                        if(data.money > 2 * role.tier10.cost) data.money = 2 * role.tier10,cost;
-                        data.pMoney += Math.floor(data.money / 100)
+                        if(data.money > 5 * role.tier10.cost) data.money = 5 * role.tier10,cost;//cap the covertable money
+                        
+                        data.pMoney += 5000;//add premium money
+                        data.pMoney += Math.floor(data.money / 1000); //increase premium money base on the current money
+                        
                         Reborn(10000, data);
                         SaveData(data);
                         message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
                         break;
+
                     case 0: 
                     Reborn(100, data);
                     message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);

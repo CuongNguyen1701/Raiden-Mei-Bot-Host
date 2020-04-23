@@ -30,7 +30,7 @@ module.exports = {
         if (!hasTier(role.tier5) && !hasTier(role.tier6) && !hasTier(role.tier7) && !hasTier(role.tier8) && !hasTier(role.tier9)  && !hasTier(role.tier10)  ) {
             return message.reply('you have to be at least a ' + role.tier5.name + ' to refresh coupon value!')
         }
-        let timeout = 3600000;  //time until author can receive the money
+        let timeout = 1800000;  //time until author can refresh again
         ;
         
         
@@ -72,9 +72,9 @@ module.exports = {
                             (coupData.coupValue < 200 && coupData.coupValue >= 100) ? 2 :
                             (coupData.coupValue < 100 && coupData.coupValue >=50) ? 3 : 0)
                         {
-                            case 1: coupData.coupValue += RandInt(-20, 10); break;
-                            case 2: coupData.coupValue += RandInt(-25, 25); break;
-                            case 3: coupData.coupValue += RandInt(-10, 20); break;
+                            case 1: coupData.coupValue += RandInt(-30, 20); break;
+                            case 2: coupData.coupValue += RandInt(-50, 50); break;
+                            case 3: coupData.coupValue += RandInt(-20, 30); break;
                             case 0: coupData.coupValue = RandInt(25, 75); break;
                         }
                         SaveData(coupData);
