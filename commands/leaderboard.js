@@ -45,7 +45,7 @@ module.exports = {
                 embed.setFooter('page ' + pg + ' of ' + page);
                 for(i = start; i < end; i++)
                 {
-                    embed.addField((i + 1) + '. ' + res[i].name, res[i].pMoney.toLocaleString() + res.pCurrency)
+                    embed.addField((i + 1) + '. ' + res[i].name, res[i].pMoney.toLocaleString() + config.pCurrency)
                 }
             }
             message.channel.send(embed);
