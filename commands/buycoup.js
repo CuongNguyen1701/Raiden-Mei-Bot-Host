@@ -57,6 +57,8 @@ module.exports = {
                 return message.reply('please use ' + prefix + 'create first');
             }
             else {
+                if (!data.coup) data.coup = 0;
+                SaveData(data);
 
                 CoupData.findOne({
                     coupID: 'RaidenMei',

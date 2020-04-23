@@ -3,6 +3,7 @@ const { currency, mongoPass } = require('../config.json');
 const Discord = require('discord.js');
 const role = require('../roles.json');
 const mongoose = require('mongoose');
+const color = require('../color.json');
 
 //CONNECT TO DATABASE
 mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -108,7 +109,8 @@ module.exports = {
                 
                             SaveData(userData);
                             SaveData(authorData);
-                
+                            
+                            embed.setColor(color.green);
                 
                             embed.setTitle(message.author.username + ' successfully stealed ' + parseInt(args[1]) + currency + ' from '
                                 + client.users.cache.get(user.id).username + '. ' + message.author.username + "'s new balance: " + authorData.money + currency);
@@ -132,7 +134,8 @@ module.exports = {
                             SaveData(userData);
                             SaveData(authorData);
                 
-                
+                            embed.setColor(color.red);
+
                             embed.setTitle(message.author.username + ' failed and received a fine of ' + 3 * parseInt(args[1]) + currency + '. '
                                 + message.author.username + "'s new balance: " + authorData.money + currency);
                 
