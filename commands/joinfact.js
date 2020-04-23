@@ -34,7 +34,7 @@ module.exports = {
                 || roleMember.roles.cache.has( role.tier6.id)|| roleMember.roles.cache.has( role.tier7.id)|| roleMember.roles.cache.has( role.tier8.id)
                 || roleMember.roles.cache.has( role.tier9.id)|| roleMember.roles.cache.has( role.tier10.id)))
                 {
-                    var faction = args[0].toLowercase();
+                    var faction = args[0].toLowerCase();
                     switch(faction)
                     {
                         case 'lightning': case 'fire': case 'ice': case 'physical':
