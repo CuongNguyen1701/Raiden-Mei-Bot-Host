@@ -18,7 +18,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
 	name: 'invest',
-	description: 'đầu tư, thay số bằng max hoặc all để đầu tư tối đa' ,
+	description: 'đầu tư, thay số bằng max hoặc all để đầu tư tối đa, lightning faction có cơ hội vốn đầu tư tăng 50%' ,
 	execute(client, message, args) {
         let timeout = 1800000;  //time until author can receive the money
         let roleMember = message.guild.member(message.author);
@@ -70,9 +70,23 @@ module.exports = {
             if(parseInt(args[0]) == 0) return message.reply('you cannot invest nothing UwU');
             if(!data.investMoney)//no past investments
             {
-                data.money -= parseInt(args[0]);//take the money to invest
+
+                let investNum = parseInt(args[0]);
                 
-                data.investMoney = parseInt(args[0]);
+                data.money -= investNum;//take the money to invest
+                if(data.faction == 'lightning' || investNum > 0)
+                {
+                    let extraPool = [true, false]
+                    var extra = extraPool[Math.floor(Math.random()* extraPool.length)];
+                    if(extra)
+                    {
+                        investNum *= 1.5;
+                        embed.setTitle('you got a lightning faction boost, extra investment!');
+                    } 
+                    else investNum *= 1;
+                }
+                
+                data.investMoney = Math.ceil(investNum);
                 data.investTime = Date.now();
                 data.investCD = true;//having a cooldowns
                 data.investStonks = false;//has not used stonks command yet
@@ -81,7 +95,8 @@ module.exports = {
                 
                 
                 embed.setColor(color.green);
-                embed.setDescription(user.username + ' invested ' + args[0] + currency + '! Balance: ' +  data.money + currency );
+            
+                embed.setDescription(user.username + ' invested ' + data.investMoney + currency + '! Balance: ' +  data.money + currency );
                 embed.setFooter(' ');
                 message.channel.send(embed);
                 
@@ -100,7 +115,7 @@ module.exports = {
                     time = ms(timeout -(Date.now() - data.investTime));
             
                     embed.setColor(color.red);
-                    embed.setTitle(user.username +', you are already investing!');
+                    embed.setTitle(user.username +', you are already investing ' + data.investMoney + currency + '!');
                     embed.setDescription('able to stonks in ' + time.minutes + 'm' + time.seconds + 's');
                     embed.setFooter(' ');
             
@@ -114,8 +129,24 @@ module.exports = {
                 else
                 {
                     data.money -= parseInt(args[0]);
+
+                    let investNum = parseInt(args[0]);
+                
+                    data.money -= investNum;//take the money to invest
+                    if(data.faction == 'lightning' || investNum > 0)
+                    {
+                        let extraPool = [true, false]
+                        var extra = extraPool[Math.floor(Math.random()* extraPool.length)];
+                        if(extra)
+                        {
+                            investNum *= 1.5;
+                            embed.setTitle('you got a lightning faction boost, extra investment!');
+                        } 
+                        else investNum *= 1;
+                    }
                     
-                    data.investMoney = parseInt(args[0]);
+                    
+                    data.investMoney = Math.ceil(investNum);
                     data.investTime = Date.now();
                     data.investCD = true;//having cooldown
                     data.investStonks = false;//has not used stonks yet
@@ -123,7 +154,7 @@ module.exports = {
 
         
                     embed.setColor(color.green);
-                    embed.setTitle(user.username + ' invested ' + args[0] + currency + '! Balance: ' +  data.money + currency );
+                    embed.setDescription(user.username + ' invested ' + data.investMoney + currency + '! Balance: ' +  data.money + currency );
                     embed.setFooter(' ');
                     message.channel.send(embed);
         

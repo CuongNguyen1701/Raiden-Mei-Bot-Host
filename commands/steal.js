@@ -17,7 +17,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
     name: 'steal',
-    description: 'cướp tiền, tỉ lệ 67%',
+    description: 'cướp tiền, tỉ lệ 67%, physical faction có khả năng crit, cướp gấp đôi số tiền(tiền phạt giảm 33%)',
     cooldown: 30,
     execute(client, message, args) {
         let user = message.mentions.members.first() || client.users.cache.get(args[0]);
@@ -99,22 +99,38 @@ module.exports = {
                         if (authorData.money < 0) return message.reply('you are too poor to steal!');
                         let chances = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                         var pick = chances[Math.floor(Math.random() * chances.length)];
-                
+                        
+                        let stealNumber = parseInt(args[1]);
+
+                        if(authorData.faction == 'physical')
+                        {
+                            let critPool = [true, false]
+                            var crit = critPool[Math.floor(Math.random() * critPool.length)] ;
+                            if(crit) stealNumber *= 2;
+                            else stealNumber *= 1; 
+                        }
                 
                         if (pick >= 4) {
+                            
+
+                            userData.money -= stealNumber;
                 
-                            userData.money -= parseInt(args[1]);
-                
-                            authorData.money += parseInt(args[1]);
+                            authorData.money += stealNumber;
                 
                             SaveData(userData);
                             SaveData(authorData);
                             
                             embed.setColor(color.green);
-                
-                            embed.setTitle(message.author.username + ' successfully stealed ' + parseInt(args[1]) + currency + ' from '
+                            if(crit)
+                            {
+                                embed.setTitle(message.author.username + ' got a physical faction boost and successfully CRIT stealed ' + stealNumber + currency + ' from '
                                 + client.users.cache.get(user.id).username + '. ' + message.author.username + "'s new balance: " + authorData.money + currency);
-                
+                            }
+                            else{
+                                embed.setTitle(message.author.username + ' successfully stealed ' + stealNumber + currency + ' from '
+                                    + client.users.cache.get(user.id).username + '. ' + message.author.username + "'s new balance: " + authorData.money + currency);     
+
+                            }
                             embed.setDescription(client.users.cache.get(user.id).username + ' lost their money. ' + client.users.cache.get(user.id).username
                                 + "'s new balance: " + userData.money + currency);
                 
@@ -123,23 +139,33 @@ module.exports = {
                 
                         }
                         else {
-                
-                
-                
-                            authorData.money -= 3 * parseInt(args[1]);
-                
-                            userData.money += parseInt(args[1] * 1.5);
+                            let fine = 3 * parseInt(args[1])
+                            
+                            if(authorData.faction == 'physical') fine = 2 * parseInt(args[1]);
+  
+                            authorData.money -= fine;
+                            userData.money += parseInt(fine/2);
                 
                 
                             SaveData(userData);
                             SaveData(authorData);
                 
                             embed.setColor(color.red);
-
-                            embed.setTitle(message.author.username + ' failed and received a fine of ' + 3 * parseInt(args[1]) + currency + '. '
+                            if(authorData.faction == 'physical') 
+                            {
+                                embed.setTitle(message.author.username + ' failed but only received a fine of ' + fine + currency + ' thanks to physical faction boost. '
                                 + message.author.username + "'s new balance: " + authorData.money + currency);
                 
-                            embed.setDescription(client.users.cache.get(user.id).username + ' was compensated ' + parseInt(args[1] * 1.5) + currency + '. '
+                            }
+                            else
+                            {
+                                
+                                embed.setTitle(message.author.username + ' failed and received a fine of ' + fine + currency + '. '
+                                    + message.author.username + "'s new balance: " + authorData.money + currency);
+                    
+                            }
+
+                            embed.setDescription(client.users.cache.get(user.id).username + ' was compensated ' + parseInt(fine/2) + currency + '. '
                                 + client.users.cache.get(user.id).username + "'s new balance: " + userData.money + currency);
                             embed.setFooter('');
                             message.channel.send(embed);

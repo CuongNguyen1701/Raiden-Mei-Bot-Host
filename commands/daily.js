@@ -15,7 +15,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
     name: 'daily',
-    description: 'get daily rewards',
+    description: 'nhận thưởng hàng ngày, ice faction nhận gấp 5 lần',
     execute(client, message, args) {
 
         //the cooldowns (in milisecond)
@@ -49,6 +49,7 @@ module.exports = {
             case 10: base = 500; break;
             case 0: base = 1; break;
         }
+
 
         let reward = 100 * base; //normal currency
         let pReward = 100; //premium currency
@@ -98,6 +99,12 @@ module.exports = {
                     return message.channel.send(embed);
                 }
                 else {
+                    if(data.faction == 'ice')
+                    {
+                        reward *= 5;
+                        embed.setTitle('Ice faction boosted Daily Reward!')
+                    }
+
                     data.daily = Date.now();//set new CD
                     data.money += reward;
                     data.pMoney += pReward;

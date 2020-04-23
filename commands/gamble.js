@@ -2,6 +2,8 @@
 
 const { mongoPass, currency } = require('../config.json');
 const role = require('../roles.json');
+const color = require('../color.json');
+
 
 const mongoose = require('mongoose');
 
@@ -18,12 +20,15 @@ const Data = require('../models/data.js');
 
 module.exports = {
     name: 'gamble',
-    description: 'hên xui tỉ lệ 25%',
+    description: 'hên xui tỉ lệ 25%, với fire faction là 75%',
+    cooldown: 600,
     execute(client, message, args) {
         var base = 1;
 
         let roleMember = message.guild.member(message.author);
         function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }
+        let embed = new Discord.MessageEmbed();
+
 
         switch (hasTier(role.tier1) ? 1 : hasTier(role.tier2) ? 2 :
             hasTier(role.tier3) ? 3 : hasTier(role.tier4) ? 4 :
@@ -72,6 +77,9 @@ module.exports = {
                 if (data.money < bet) return message.reply('you do not have enough money');
                 if (data.money <= 0) return message.reply('you have no money!');//if author has no positive balance or have no account
                 let chances = ['win', 'lose', 'lose', 'lose'];
+                if(data.faction == 'fire') chances = ['win', 'win','win', 'lose'];
+              
+
                 var pick = chances[Math.floor(Math.random() * chances.length)];
                 
                 if (pick == 'lose') {
@@ -79,17 +87,19 @@ module.exports = {
         
                     data.save().catch(err => console.log(err));
                     //write in the values into database
-        
-                    message.reply('you lose... New balance: ' + data.money + currency);
+                    embed.setColor(color.red);
+                    embed.setDescription('you lose... New balance: ' + data.money + currency);
+                    message.channel.send(embed);
                 }
                 else {
                     data.money += Math.floor((4 * bet * (base + 1)) / (5 * (base + 3)));
                     
                     data.save().catch(err => console.log(err));
                     //write in the values into database
-                    
-        
-                    message.reply('you win!! New balance: ' + data.money + currency);
+                    if(data.faction == 'fire') embed.setTitle('you got a fire faction boost!')
+                    embed.setColor(color.green);
+                    embed.setDescription('you win!! New balance: ' + data.money + currency);
+                    message.channel.send(embed);
                 }
                 
             }

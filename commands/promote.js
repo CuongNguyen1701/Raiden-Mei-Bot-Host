@@ -18,7 +18,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
 	name: 'promote',
-	description: 'thăng chức',
+	description: 'thăng chức, fire faction chỉ cần 75% lượng tiền để thăng chức',
 	execute(client, message, args) {
         let roleMember = message.guild.member(message.author);
         let embed = new Discord.MessageEmbed;
@@ -28,6 +28,7 @@ module.exports = {
 
         function Promote(currentTier, promoteTier, data)
         {
+            if(data.faction == 'fire') promoteTier.cost *= 0.75
             //check if the balance have enough money to promote
             if(data.money < promoteTier.cost) return message.reply('you do not have enough money, you need at least ' + promoteTier.cost + currency + ' to become a ' + promoteTier.name);
 

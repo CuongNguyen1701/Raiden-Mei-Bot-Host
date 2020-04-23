@@ -27,6 +27,7 @@ module.exports = {
             }
             else
             {
+                let faction = args[0].toLowercase();
                 if(data.faction) return message.reply('you have already joined a faction!');
         
                 if( data.money >= role.tier2.cost && (roleMember.roles.cache.has(role.tier2.id) 
@@ -34,58 +35,15 @@ module.exports = {
                 || roleMember.roles.cache.has( role.tier6.id)|| roleMember.roles.cache.has( role.tier7.id)|| roleMember.roles.cache.has( role.tier8.id)
                 || roleMember.roles.cache.has( role.tier9.id)|| roleMember.roles.cache.has( role.tier10.id)))
                 {
-                    switch(args[0])
+                    switch(faction)
                     {
-                        case 'Mei':
-                            data.faction = args[0];
+                        case 'lighting': case 'fire': case 'ice': case 'physical':
+                            data.faction = faction;
                             break;
-                        case 'Kiana':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Bronya':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Himeko':
-                            data.faction = args[0];
-
-                            break;   
-                        case 'Teri':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Fuhua':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Sakura':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Kallen':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Rita':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Seele':
-                            data.faction = args[0];
-
-                            break;    
-                        case 'RozaLili':
-                            data.faction = args[0];
-
-                            break;
-                        case 'Durandal':
-                            data.faction = args[0];
-
-                            break;    
+        
                         default:
                             message.reply('please enter a valid faction');
-                            return message.reply('valid factions: Mei, Bronya, Kiana, Himeko, Teri, Fuhua, Sakura, Kallen, Rita, Seele, RozaLili, Durandal');
+                            return message.reply('valid factions: ');
             
                     }
                     data.money -= role.tier2.cost;
