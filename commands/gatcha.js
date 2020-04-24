@@ -84,7 +84,7 @@ module.exports = {
                 message.channel.send(embed);
         
                 //if user has role tier 8, the balance >= tier 9 cost, get one of the last two item in gatcha pool
-                if(roleMember.roles.cache.has(role.tier8.id) && data.money >= role.tier9.cost && index >= (gatchaPool.length - 1))
+                if(roleMember.roles.cache.has(role.tier8.id) && data.money >= role.tier9.cost && result > 90)
                 {
                   data.money -= role.tier9.cost;//user pay the money
         
