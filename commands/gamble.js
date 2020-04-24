@@ -1,4 +1,4 @@
-
+const Discord = require('discord.js');
 
 const { mongoPass, currency } = require('../config.json');
 const role = require('../roles.json');
@@ -20,7 +20,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
     name: 'gamble',
-    description: 'hên xui tỉ lệ 25%, với fire faction là 75%',
+    description: 'hên xui tỉ lệ 25%, với fire faction là 50%',
     cooldown: 600,
     execute(client, message, args) {
         var base = 1;
@@ -77,7 +77,7 @@ module.exports = {
                 if (data.money < bet) return message.reply('you do not have enough money');
                 if (data.money <= 0) return message.reply('you have no money!');//if author has no positive balance or have no account
                 let chances = ['win', 'lose', 'lose', 'lose'];
-                if(data.faction == 'fire') chances = ['win', 'win','win', 'lose'];
+                if(data.faction == 'fire') chances = ['win', 'win','lose', 'lose'];
               
 
                 var pick = chances[Math.floor(Math.random() * chances.length)];

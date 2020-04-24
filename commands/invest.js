@@ -74,7 +74,7 @@ module.exports = {
                 let investNum = parseInt(args[0]);
                 
                 data.money -= investNum;//take the money to invest
-                if(data.faction == 'lightning' || investNum > 0)
+                if(data.faction == 'lightning' && investNum > 0)
                 {
                     let extraPool = [true, false]
                     var extra = extraPool[Math.floor(Math.random()* extraPool.length)];
@@ -129,7 +129,7 @@ module.exports = {
                 else
                 {
 
-                    var investNum = parseInt(args[0]);
+                    let investNum = parseInt(args[0]);
                 
                     data.money -= investNum;//take the money to invest
 
