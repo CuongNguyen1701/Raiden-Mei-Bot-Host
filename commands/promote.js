@@ -28,11 +28,15 @@ module.exports = {
 
         function Promote(currentTier, promoteTier, data)
         {
-            if(data.faction == 'fire') promoteTier.cost *= 0.6;
+            let cost = promoteTier.cost;
+            if(data.faction === 'fire')
+            {
+                cost *= 0.6; 
+            }
             //check if the balance have enough money to promote
-            if(data.money < promoteTier.cost) return message.reply('you do not have enough money, you need at least ' + promoteTier.cost + currency + ' to become a ' + promoteTier.name);
-
-            data.money -= promoteTier.cost;
+            if(data.money < cost) return message.reply('you do not have enough money, you need at least ' + cost + currency + ' to become a ' + promoteTier.name);
+ 
+            data.money -= cost;
             SaveData(data);
             if (currentTier != null) roleMember.roles.remove(currentTier.id);//use for cases when user has no eco role
             

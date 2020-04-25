@@ -34,6 +34,10 @@ module.exports = {
                 || roleMember.roles.cache.has( role.tier6.id)|| roleMember.roles.cache.has( role.tier7.id)|| roleMember.roles.cache.has( role.tier8.id)
                 || roleMember.roles.cache.has( role.tier9.id)|| roleMember.roles.cache.has( role.tier10.id)))
                 {
+                    if(!args[0])
+                    {
+                        return message.reply('valid factions: lightning, fire, ice, physical');
+                    }
                     var faction = args[0].toLowerCase();
                     switch(faction)
                     {
@@ -42,7 +46,6 @@ module.exports = {
                             break;
         
                         default:
-                            message.reply('please enter a valid faction');
                             return message.reply('valid factions: lightning, fire, ice, physical');
             
                     }

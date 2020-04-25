@@ -38,8 +38,8 @@ module.exports = {
                     hasTier(role.tier7) ? 7 : hasTier(role.tier8) ? 8 :
                         hasTier(role.tier9) ? 9 : hasTier(role.tier10) ? 10 : 0) {
             case 1: base = 1.5; break;
-            case 2: base = 3; break;
-            case 3: base = 7; break;
+            case 2: base = 5; break;
+            case 3: base = 10; break;
             case 4: base = 50; break;
             case 5: base = 70; break;
             case 6: base = 80; break;
