@@ -41,7 +41,7 @@ module.exports = {
             if(err) console.log(err);
             if (!rpgData)
             {
-                 const newData = new RpgData({
+                 var newData = new RpgData({
                     name: client.users.cache.get(user.id).username,
                     userID: user.id,
                     posX: RandInt(1,10),
