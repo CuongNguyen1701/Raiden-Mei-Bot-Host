@@ -54,8 +54,8 @@ module.exports = {
             embed.addField('abc');
             for(var i = 1; i <= size; i++)
             {
-                if(i == data.posY) embed.fields[1].name += ('\n' + mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX));
-                else embed.fields[1].name +=  ( '\n' + mapTiles.repeat(size));
+                if(i == data.posY) embed.fields[0].name += ('\n' + mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX));
+                else embed.fields[0].name +=  ( '\n' + mapTiles.repeat(size));
             }
             message.channel.send(embed);
 
