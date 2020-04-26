@@ -30,7 +30,8 @@ module.exports = {
         //check if no first argument is provided(user mentioned) 
         let user = message.author;
 
-        if (args[0] != 'north' && args[0] != 'south' && args[0] != 'west' && args[0] != 'east') {
+        if (args[0] != 'north' && args[0] != 'south' && args[0] != 'west' && args[0] != 'east' &&
+            args[0] != 'n' && args[0] != 's' && args[0] != 'w' && args[0] != 'e') {
             return message.reply('please provide a specific direction(north, south, west, east)')
         }
         let dir = args[0];
@@ -42,35 +43,35 @@ module.exports = {
         }, (err, rpgData) => {
             if (err) console.log(err);
             if (!rpgData) {
-                message.reply('please declare your position using ' + prefix + 'position first!')
+               return message.reply('please declare your position using ' + prefix + 'position first!')
             }
-            data = rpgData;
+            let data = rpgData;
             switch (dir) {
-                case 'north':
+                case 'north': case 'n':
                     if (data.posY == 1) return message.reply('you cannot move in that direction!');
                     data.posY--;
                     SaveData(data);
                     break;
-                case 'south':
+                case 'south': case 's':
                     if (data.posY == 10) return message.reply('you cannot move in that direction!');
                     data.posY++;
                     SaveData(data);
                     break;
-                case 'east':
+                case 'east': case 'e':
                     if (data.posX == 10) return message.reply('you cannot move in that direction!');
                     data.posX++;
                     SaveData(data);
                     break;
-                case 'west':
+                case 'west': case 'w':
                     if (data.posX == 1) return message.reply('you cannot move in that direction!');
                     data.posX--;
                     SaveData(data);
                     break;
             }
 
-            let msg = client.users.cache.get(user.id).username + 'moved ' + dir;
+            let msg = client.users.cache.get(user.id).username + ' moved ' + dir;
 
-            msg += '\n' + client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY;
+            msg += '\n' + client.users.cache.get(user.id).username + "'s new position: " + data.posX + ',' + data.posY;
             for (var i = 1; i <= size; i++) {
                 //on the correct row, draw player in the respective column 
                 if (i == data.posY) msg += ('\n' + mapTiles.repeat(data.posX - 1) + player + mapTiles.repeat(size - data.posX));

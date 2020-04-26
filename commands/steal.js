@@ -12,14 +12,18 @@ mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopo
 
 //MODELS
 const Data = require('../models/data.js');
+const RpgData = require('../models/rpgdata.js');
+
 
 
 
 module.exports = {
     name: 'steal',
     description: 'cướp tiền, tỉ lệ 67%, physical faction có khả năng crit, cướp gấp đôi số tiền(tiền phạt giảm 33%)',
-    cooldown: 30,
+    cooldown: 5,
     execute(client, message, args) {
+
+
         let user = message.mentions.members.first() || client.users.cache.get(args[0]);
         var base = 1;
         let roleMember = message.guild.member(message.author);
@@ -49,6 +53,28 @@ module.exports = {
         let embed = new Discord.MessageEmbed;
         let steal = 500 * base;
         
+        RpgData.findOne({
+            userID: message.author.id
+        }, (err, author_rpgData) => {
+            if (err) console.log(err);
+            if (!author_rpgData) {
+               return message.reply('please declare your position using ' + prefix + 'position first!')
+            }
+            RpgData.findOne({
+                userID: user.id
+            }, (err, user_rpgData)=> {
+                if (err) console.log(err);
+                if (!user_rpgData) {
+                   return message.reply('user has not enter the map yet!')
+                }
+                if((Math.abs(author_rpgData.posY - user_rpgData.posY) > 1) && (Math.abs(author_rpgData.posX - user_rpgData.posX) > 1) )
+                {
+                    return message.reply('user is too far away!');
+                }
+
+            })
+        })
+
         Data.findOne({//find author data
             userID: message.author.id
         }, (err, authorData) => {
