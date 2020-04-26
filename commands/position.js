@@ -51,10 +51,11 @@ module.exports = {
             }
             data = newData || rpgData;
             embed.setTitle(client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY);
+            embed.fields[1].name = '';
             for(var i = 1; i <= size; i++)
             {
-                if(i == data.posY) embed.addField(mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX), ' ');
-                else embed.addField(mapTiles.repeat(size), ' ');
+                if(i == data.posY) embed.fields[1].name += mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX) + '\n';
+                else embed.fields[1].name +=  mapTiles.repeat(size);
             }
             message.channel.send(embed);
 
