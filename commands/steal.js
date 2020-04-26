@@ -85,11 +85,11 @@ module.exports = {
                                 }
                                 let range = 1;
                                 //both directions' distance is larger than 1
-                                if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) && (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
+                                if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
                                     return message.reply('user is too far away!');
                                 }
                                 //else the player is nearby
-                                
+
                                 try {// same faction -> cannot steal
                                     if (userData.faction == null) { }
                                     else if (userData.faction == authorData.faction) return message.reply('you cannot steal a person in your faction!');
