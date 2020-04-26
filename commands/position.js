@@ -51,13 +51,16 @@ module.exports = {
             }
             data = newData || rpgData;
             embed.setTitle(client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY);
-            embed.addField('abc');
+            
+            msg = client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY;
             for(var i = 1; i <= size; i++)
             {
-                if(i == data.posY) embed.fields[0].name += ('\n' + mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX));
-                else embed.fields[0].name +=  ( '\n' + mapTiles.repeat(size));
+                //on the correct row, draw player in the respective column 
+                if(i == data.posY) msg += ('\n' + mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX));
+
+                else msg +=  ( '\n' + mapTiles.repeat(size));
             }
-            message.channel.send(embed);
+            message.channel.send(msg);
 
 
 
