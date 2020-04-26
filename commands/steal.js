@@ -93,13 +93,13 @@ module.exports = {
 
                             })
                         })
-                        try {// same faction -> cannot steal
+                        // try {// same faction -> cannot steal
                             if (userData.faction == null) { }
                             else if (userData.faction == authorData.faction) return message.reply('you cannot steal a person in your faction!');
                             else { };
-                        }
-                        catch
-                        { }
+                        // }
+                        // catch
+                        // { }
                         //if author doesnt provide any number of currency to steal
                         if (!args[1] || !parseInt(args[1])) {
                             if (userData.money > steal) args[1] = Math.floor(Math.random() * steal + 1);
