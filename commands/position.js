@@ -19,8 +19,8 @@ module.exports = {
     execute(client, message, args) {
         if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
-        let mapTiles = '[ ]';
-        let player = '[*]';
+        let mapTiles = '[ ] ';
+        let player = 'X ';
         let size = 10;//map size
         let embed = new Discord.MessageEmbed();
 
@@ -51,7 +51,7 @@ module.exports = {
             }
             data = newData || rpgData;
             embed.setTitle(client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY);
-            
+
             msg = client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY;
             for(var i = 1; i <= size; i++)
             {
