@@ -53,8 +53,8 @@ module.exports = {
             embed.setTitle(client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY);
             for(var i = 1; i <= size; i++)
             {
-                if(i == data.posY) embed.addField(mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX));
-                else embed.addField(mapTiles.repeat(size));
+                if(i == data.posY) embed.addField(' ' , mapTiles.repeat(data.posX -1) + player + mapTiles.repeat(size - data.posX));
+                else embed.addField(' ', mapTiles.repeat(size));
             }
             message.channel.send(embed);
 
