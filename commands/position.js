@@ -17,7 +17,7 @@ module.exports = {
     name: 'position',
     description: 'vị trí hiện tại của bạn',
     execute(client, message, args) {
-        if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
+       // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
         let mapTiles = ':palm_tree:';
         let player = ':whale:';
@@ -52,7 +52,7 @@ module.exports = {
             data = newData || rpgData;
             embed.setTitle(client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY);
 
-            msg = client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY;
+            let msg = client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY;
             for(var i = 1; i <= size; i++)
             {
                 //on the correct row, draw player in the respective column 
