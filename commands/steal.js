@@ -1,5 +1,5 @@
 
-const { currency, mongoPass } = require('../config.json');
+const { currency, mongoPass, prefix } = require('../config.json');
 const Discord = require('discord.js');
 const role = require('../roles.json');
 const mongoose = require('mongoose');
