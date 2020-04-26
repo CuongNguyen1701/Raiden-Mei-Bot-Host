@@ -19,7 +19,7 @@ const RpgData = require('../models/rpgdata.js');
 
 module.exports = {
     name: 'steal',
-    description: 'cướp tiền, tỉ lệ 67%, physical faction có khả năng crit, cướp gấp đôi số tiền(tiền phạt giảm 33%)',
+    description: 'cướp tiền, tỉ lệ 80%, physical faction có khả năng crit, cướp gấp đôi số tiền(tiền phạt giảm)',
     cooldown: 5,
     execute(client, message, args) {
 
@@ -122,19 +122,19 @@ module.exports = {
         
                                 //check if the author has negative balance 
                                 if (authorData.money < 0) return message.reply('you are too poor to steal!');
-                                let chances = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+                                let chances = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
                                 var pick = chances[Math.floor(Math.random() * chances.length)];
         
                                 let stealNumber = parseInt(args[1]);
         
-                                if (authorData.faction == 'physical') {
+                                if (authorData.faction == 'physical') {//if phys have chance to increase steal
                                     let critPool = [true, false]
                                     var crit = critPool[Math.floor(Math.random() * critPool.length)];
                                     if (crit) stealNumber *= 2;
                                     else stealNumber *= 1;
                                 }
         
-                                if (pick >= 4) {
+                                if (pick >= 3) {
         
         
                                     userData.money -= stealNumber;
@@ -162,9 +162,9 @@ module.exports = {
         
                                 }
                                 else {
-                                    let fine = 3 * parseInt(args[1])
+                                    let fine = 2 * parseInt(args[1])
         
-                                    if (authorData.faction == 'physical') fine = 2 * parseInt(args[1]);
+                                    if (authorData.faction == 'physical') fine = parseInt(args[1]);
         
                                     authorData.money -= fine;
                                     userData.money += parseInt(fine / 2);
