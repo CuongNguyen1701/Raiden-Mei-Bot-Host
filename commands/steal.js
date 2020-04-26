@@ -66,32 +66,33 @@ module.exports = {
                 Data.findOne({//findf user data
                     userID: user.id
                 }, (err, userData) => {
-                    RpgData.findOne({
-                        userID: message.author.id
-                    }, (err, author_rpgData) => {
-                        if (err) console.log(err);
-                        if (!author_rpgData) {
-                            return message.reply('please declare your position using ' + prefix + 'position first!')
-                        }
-                        RpgData.findOne({
-                            userID: user.id
-                        }, (err, user_rpgData) => {
-                            if (err) console.log(err);
-                            if (!user_rpgData) {
-                                return message.reply('user has not enter the map yet!')
-                            }
-                            let range = 1;
-                            //both directions' distance is larger than 1
-                            if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) && (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) 
-                            {
-                                return message.reply('user is too far away!');
-                            }
-
-                        })
-                    })
                     if (err) console.log(err);
                     if (!userData) return message.reply('user has no money!')
                     else {
+                        RpgData.findOne({//find author rpg data
+                            userID: message.author.id
+                        }, (err, author_rpgData) => {
+                            if (err) console.log(err);
+                            if (!author_rpgData) {
+                                return message.reply('please declare your position using ' + prefix + 'position first!')
+                            }
+                            RpgData.findOne({//find user rpg data
+                                userID: user.id
+                            }, (err, user_rpgData) => {
+                                if (err) console.log(err);
+                                if (!user_rpgData) {
+                                    return message.reply('user has not enter the map yet!');
+                                }
+                                let range = 1;
+                                //both directions' distance is larger than 1
+                                if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) && (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
+                                    return message.reply('user is too far away!');
+                                }
+
+                                //else the player is nearby
+
+                            })
+                        })
                         try {// same faction -> cannot steal
                             if (userData.faction == null) { }
                             else if (userData.faction == authorData.faction) return message.reply('you cannot steal a person in your faction!');
