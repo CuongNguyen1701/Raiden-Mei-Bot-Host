@@ -47,7 +47,7 @@ module.exports = {
             data = rpgData;
             switch (dir) {
                 case 'north':
-                    if (data.posY == 0) return message.reply('you cannot move in that direction!');
+                    if (data.posY == 1) return message.reply('you cannot move in that direction!');
                     data.posY--;
                     SaveData(data);
                     break;
@@ -62,7 +62,7 @@ module.exports = {
                     SaveData(data);
                     break;
                 case 'west':
-                    if (data.posX == 0) return message.reply('you cannot move in that direction!');
+                    if (data.posX == 1) return message.reply('you cannot move in that direction!');
                     data.posX--;
                     SaveData(data);
                     break;
