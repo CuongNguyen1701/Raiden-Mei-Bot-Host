@@ -19,8 +19,8 @@ module.exports = {
     execute(client, message, args) {
         if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
-        let mapTiles = '[ ] ';
-        let player = 'X ';
+        let mapTiles = ':palm_tree:';
+        let player = ':wutdoge:';
         let size = 10;//map size
         let embed = new Discord.MessageEmbed();
 
