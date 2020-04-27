@@ -46,13 +46,13 @@ module.exports = {
                 for (i = start; i < res.length; i++) {
                     switch (stat) {
                         case 'atk':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].atk.toLocaleString())
+                            embed.addField((i + 1) + '. ' + res[i].name,  res[i].atk.toLocaleString()+' ' + stat)
                             break;
                         case 'def':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString())
+                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString() +' ' + stat)
                             break;
                         case 'level':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].level.toLocaleString())
+                            embed.addField((i + 1) + '. ' + res[i].name, stat + ' ' + res[i].level.toLocaleString())
                             break;
 
                     }
@@ -63,13 +63,13 @@ module.exports = {
                 for (i = start; i < end; i++) {
                     switch (stat) {
                         case 'atk':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].atk.toLocaleString())
+                            embed.addField((i + 1) + '. ' + res[i].name, res[i].atk.toLocaleString()+ ' ' +stat)
                             break;
                         case 'def':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString())
+                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString()+ ' ' +stat)
                             break;
                         case 'level':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].level.toLocaleString())
+                            embed.addField((i + 1) + '. ' + res[i].name, stat +' ' + res[i].level.toLocaleString())
                             break;
 
                     }
