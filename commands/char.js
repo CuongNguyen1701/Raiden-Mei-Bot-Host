@@ -55,7 +55,10 @@ module.exports = {
                  })
                  SaveData(newData); 
             }
+            
             let data = newData || rpgData;
+            data.lb = 'all';
+            SaveData(data);
 
             embed.setTitle(client.users.cache.get(user.id).username + "'s stats");
             embed.setThumbnail(user.avatarURL);

@@ -45,6 +45,7 @@ module.exports = {
                         message.reply('please use ' + prefix + 'char command first!' ) 
                          
                     }
+                    rpgData.lb = 'all';
                     let cost = Math.pow(rpgData.level, 2) * 100;
                     if(data.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency + 'to level up!')
                     data.pMoney -= cost;
@@ -62,7 +63,7 @@ module.exports = {
                     SaveData(rpgData);
 
 
-                    message.channel.send(user.username + 'leveled up to level ' + rpgData.level + '! current balance: ' + data.pMoney + pCurrency);
+                    message.channel.send(user.username + ' leveled up to level ' + rpgData.level + '! current balance: ' + data.pMoney + pCurrency);
         
         
         
