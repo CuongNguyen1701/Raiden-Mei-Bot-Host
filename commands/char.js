@@ -41,6 +41,7 @@ module.exports = {
                     name: client.users.cache.get(user.id).username,
                     userID: user.id,
                     level: 1,
+                    lb: 'all',
                     class: 'newbie',
                     posX: RandInt(1,10),
                     posY: RandInt(1,10),
@@ -60,7 +61,7 @@ module.exports = {
             embed.setThumbnail(user.avatarURL);
             embed.addField('Level: ', data.level, true);
             embed.addField('Class: ', data.class, true);
-            embed.addField(':heart: HP:  ', data.hp + '/' + data.maxHp, true);
+            embed.addField(':heart: HP:  ', data.hp + '/' + data.maxHp);
             embed.addField(':star2: MP: ', data.mp + '/' + data.maxMp);
             embed.addField(':crossed_swords: ATK: ', data.atk, true); 
             embed.addField(':shield: DEF: ', data.def, true);
