@@ -80,7 +80,7 @@ module.exports = {
                     break;
                     
                     case 10:
-                        if(data.money > 2.5 * role.tier10.cost) data.money = 2.5 * role.tier10,cost;//cap the covertable money
+                        if(data.money > 2.5 * role.tier10.cost) data.money = 2.5 * role.tier10.cost;//cap the covertable money
                         
                         data.pMoney += 2500;//add premium money
                         data.pMoney += Math.floor(data.money / 1000); //increase premium money base on the current money
