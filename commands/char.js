@@ -60,7 +60,7 @@ module.exports = {
             embed.addField('MP: ', data.mp + '/' + data.maxMp, true);
             embed.addField('ATK: ', data.atk, true); 
             embed.addField('DEF: ', data.def, true);
-
+            message.channel.send(embed);
 
 
 
