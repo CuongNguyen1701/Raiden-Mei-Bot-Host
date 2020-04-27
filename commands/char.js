@@ -60,10 +60,10 @@ module.exports = {
             embed.setThumbnail(user.avatarURL);
             embed.addField('Level: ', data.level, true);0
             embed.addField('Class: ', data.class);
-            embed.addField(':heart: :  ', data.hp + '/' + data.maxHp, true);
-            embed.addField(':star2: : ', data.mp + '/' + data.maxMp);
-            embed.addField(':crossed_swords: : ', data.atk, true); 
-            embed.addField(':shield: : ', data.def, true);
+            embed.addField(':heart: HP:  ', data.hp + '/' + data.maxHp, true);
+            embed.addField(':star2: MP: ', data.mp + '/' + data.maxMp);
+            embed.addField(':crossed_swords: ATK: ', data.atk, true); 
+            embed.addField(':shield: DEF: ', data.def, true);
             message.channel.send(embed);
 
 
