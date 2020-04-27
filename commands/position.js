@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const role = require('../roles.json');
 
-const { mongoPass, currency, pCurrency } = require('../config.json');
+const { mongoPass, currency, pCurrency, prefix } = require('../config.json');
 const mongoose = require('mongoose');
 
 
@@ -41,15 +41,9 @@ module.exports = {
             if(err) console.log(err);
             if (!rpgData)
             {
-                 var newData = new RpgData({
-                    name: client.users.cache.get(user.id).username,
-                    userID: user.id,
-                    posX: RandInt(1,10),
-                    posY: RandInt(1,10),
-                 })
-                 SaveData(newData); 
+                 message.reply('please use ' + prefix + 'char command first!' ) 
             }
-            data = newData || rpgData;
+            data = rpgData;
             embed.setTitle(client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY);
 
             let msg = client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY;

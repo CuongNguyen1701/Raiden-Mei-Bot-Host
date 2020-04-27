@@ -40,6 +40,8 @@ module.exports = {
                  var newData = new RpgData({
                     name: client.users.cache.get(user.id).username,
                     userID: user.id,
+                    level: 1,
+                    class: 'newbie',
                     posX: RandInt(1,10),
                     posY: RandInt(1,10),
                     hp: 100,
@@ -56,6 +58,8 @@ module.exports = {
 
             embed.setTitle(client.users.cache.get(user.id).username + "'s stats");
             embed.setImage(user.avatarURL);
+            embed.addField('Level: ', data.level, true);0
+            embed.addField('Class: ', data.class, true);
             embed.addField('HP: ', data.hp + '/' + data.maxHp, true);
             embed.addField('MP: ', data.mp + '/' + data.maxMp, true);
             embed.addField('ATK: ', data.atk, true); 

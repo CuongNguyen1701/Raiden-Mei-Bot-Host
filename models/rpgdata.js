@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dataSchema = mongoose.Schema({
     name: String,
     userID: String,
+    level: Number,
     class: String,
     posX: Number,
     posY: Number,
