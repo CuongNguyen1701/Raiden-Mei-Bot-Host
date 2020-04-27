@@ -33,7 +33,7 @@ module.exports = {
             var page = Math.ceil(res.length / 10)
 
             let embed = new Discord.MessageEmbed();
-            embed.setTitle('LEADERBOARD' + stat.toUpperCase());
+            embed.setTitle('LEADERBOARD' + ' ' + stat.toUpperCase());
             embed.setThumbnail('https://wompampsupport.azureedge.net/fetchimage?siteId=7575&v=2&jpgQuality=100&width=700&url=https%3A%2F%2Fi.kym-cdn.com%2Fentries%2Ficons%2Ffacebook%2F000%2F033%2F303%2Fpanki.jpg');
             let pg = parseInt(args[0])
             if (pg != Math.floor(pg) || !pg) pg = 1;
@@ -46,10 +46,10 @@ module.exports = {
                 for (i = start; i < res.length; i++) {
                     switch (stat) {
                         case 'atk':
-                            embed.addField((i + 1) + '. ' + res[i].name,  res[i].atk.toLocaleString()+' ' + stat)
+                            embed.addField((i + 1) + '. ' + res[i].name, res[i].atk.toLocaleString() + ' ' + stat)
                             break;
                         case 'def':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString() +' ' + stat)
+                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString() + ' ' + stat)
                             break;
                         case 'level':
                             embed.addField((i + 1) + '. ' + res[i].name, stat + ' ' + res[i].level.toLocaleString())
@@ -63,13 +63,13 @@ module.exports = {
                 for (i = start; i < end; i++) {
                     switch (stat) {
                         case 'atk':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].atk.toLocaleString()+ ' ' +stat)
+                            embed.addField((i + 1) + '. ' + res[i].name, res[i].atk.toLocaleString() + ' ' + stat)
                             break;
                         case 'def':
-                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString()+ ' ' +stat)
+                            embed.addField((i + 1) + '. ' + res[i].name, res[i].def.toLocaleString() + ' ' + stat)
                             break;
                         case 'level':
-                            embed.addField((i + 1) + '. ' + res[i].name, stat +' ' + res[i].level.toLocaleString())
+                            embed.addField((i + 1) + '. ' + res[i].name, stat + ' ' + res[i].level.toLocaleString())
                             break;
 
                     }
