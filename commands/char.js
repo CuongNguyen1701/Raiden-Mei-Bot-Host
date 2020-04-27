@@ -57,7 +57,7 @@ module.exports = {
             let data = newData || rpgData;
 
             embed.setTitle(client.users.cache.get(user.id).username + "'s stats");
-            embed.setImage(user.avatarURL);
+            embed.setThumbnail(user.avatarURL);
             embed.addField('Level: ', data.level, true);0
             embed.addField('Class: ', data.class, true);
             embed.addField('HP: ', data.hp + '/' + data.maxHp);
