@@ -62,7 +62,7 @@ module.exports = {
             embed.addField('Class: ', data.class, true);
             embed.addField('HP: ', data.hp + '/' + data.maxHp);
             embed.addField('MP: ', data.mp + '/' + data.maxMp);
-            embed.addField('ATK: ', data.atk); 
+            embed.addField('ATK: ', data.atk, true); 
             embed.addField('DEF: ', data.def, true);
             message.channel.send(embed);
 
