@@ -52,12 +52,12 @@ module.exports = {
                     let level = rpgData.level;
                     let multiplier = Math.sin(level)/5 + 1.2;
                     let increment = RandInt(100,150);
-                    rpgData.hp = rpgData.hp + increment;
-                    rpgData.maxHp = rpgData.maxHp * multiplier + increment;
-                    rpgData.mp = rpgData.mp + increment;
-                    rpgData.maxMp = rpgData.maxMp * multiplier + increment;
-                    rpgData.atk = rpgData.atk * multiplier + RandInt(10,20);
-                    rpgData.def = rpgData.def * multiplier + RandInt(15,20);
+                    rpgData.hp = parseInt(rpgData.hp + increment);
+                    rpgData.maxHp = parseInt(rpgData.maxHp * multiplier + increment);
+                    rpgData.mp = parseInt(rpgData.mp + increment);
+                    rpgData.maxMp = parseInt(rpgData.maxMp * multiplier + increment);
+                    rpgData.atk = parseInt(rpgData.atk * multiplier + RandInt(10,20));
+                    rpgData.def = parseInt(rpgData.def * multiplier + RandInt(15,20));
                     SaveData(data);
                     SaveData(rpgData);
 
