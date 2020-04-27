@@ -60,6 +60,7 @@ module.exports = {
         }
         else
         {
+            if(data.money > 10*role.tier10.cost) return message.reply("you have capped your money, please spend it!")
             if(data.money <= - 5000) return message.reply("there's no hope for you, get someone to pay your debt!")
             let maxInvest = Math.ceil((base/100)*data.money);
             if(!args[0]) return message.reply('please specify the amount you want to invest or borrow.');//no number after invest

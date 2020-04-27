@@ -55,6 +55,8 @@ module.exports = {
                         else if (isNaN(args[0]) || !args[0]) {//avoid errors
                            return message.reply('please specify the number of coupons you wanna sell. Current value per coupon: ' + coupData.coupValue + currency)
                         }
+                        if(data.money > 10*role.tier10.cost) return message.reply("you have capped your money, please spend it!")
+
                 
                         let sellNumber = parseInt(args[0]);
                         if(sellNumber > data.coup || !data.coup) return message.reply("you don't have enough coupons!");
