@@ -58,8 +58,8 @@ module.exports = {
 
             embed.setTitle(client.users.cache.get(user.id).username + "'s stats");
             embed.setThumbnail(user.avatarURL);
-            embed.addField('Level: ', data.level, true);0
-            embed.addField('Class: ', data.class);
+            embed.addField('Level: ', data.level, true);
+            embed.addField('Class: ', data.class, true);
             embed.addField(':heart: HP:  ', data.hp + '/' + data.maxHp, true);
             embed.addField(':star2: MP: ', data.mp + '/' + data.maxMp);
             embed.addField(':crossed_swords: ATK: ', data.atk, true); 
