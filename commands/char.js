@@ -14,15 +14,20 @@ const RpgData = require('../models/rpgdata.js');
 
 
 module.exports = {
-    name: 'position',
-    description: 'vị trí hiện tại của bạn',
+    name: 'char',
+    description: 'xem nhân vật rpg của bạn',
     execute(client, message, args) {
        // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
-
+       let embed = new Discord.MessageEmbed();
+        
 
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min;}
 
+        if(!args[0]){
             var user = message.author;
+        }else{
+            var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
+        }
 
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
@@ -30,17 +35,33 @@ module.exports = {
             userID: user.id
         }, (err, rpgData)=>{
             if(err) console.log(err);
-            if (!rpgData)
+            if (!rpgData || !rpgData.hp)
             {
                  var newData = new RpgData({
                     name: client.users.cache.get(user.id).username,
                     userID: user.id,
                     posX: RandInt(1,10),
                     posY: RandInt(1,10),
+                    hp: 100,
+                    maxHp: 100,
+                    mp: 100, 
+                    maxMp: 100,
+                    atk: 10,
+                    def: 10,
+
                  })
                  SaveData(newData); 
             }
-            data = newData || rpgData;
+            let data = newData || rpgData;
+
+            embed.setTitle(client.users.cache.get(user.id).username + "'s stats");
+            embed.setImage(user.avatarURL);
+            embed.addField('HP: ', data.hp + '/' + data.maxHp, true);
+            embed.addField('MP: ', data.mp + '/' + data.maxMp, true);
+            embed.addField('ATK: ', data.atk, true); 
+            embed.addField('DEF: ', data.def, true);
+
+
 
 
         })
