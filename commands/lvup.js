@@ -49,6 +49,7 @@ module.exports = {
                     if(data.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency + 'to level up!')
                     data.pMoney -= cost;
                     rpgData.level++;
+                    let level = rpgData.level;
                     let multiplier = Math.sin(level)/5 + 1.2;
                     let increment = RandInt(100,150);
                     rpgData.hp = rpgData.hp + increment;
