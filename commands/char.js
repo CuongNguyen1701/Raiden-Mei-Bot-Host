@@ -59,11 +59,11 @@ module.exports = {
             embed.setTitle(client.users.cache.get(user.id).username + "'s stats");
             embed.setThumbnail(user.avatarURL);
             embed.addField('Level: ', data.level, true);0
-            embed.addField('Class: ', data.class, true);
-            embed.addField('HP: ', data.hp + '/' + data.maxHp);
-            embed.addField('MP: ', data.mp + '/' + data.maxMp);
-            embed.addField('ATK: ', data.atk, true); 
-            embed.addField('DEF: ', data.def, true);
+            embed.addField('Class: ', data.class);
+            embed.addField(':heart: :  ', data.hp + '/' + data.maxHp, true);
+            embed.addField(':star2: : ', data.mp + '/' + data.maxMp);
+            embed.addField(':crossed_swords: : ', data.atk, true); 
+            embed.addField(':shield: : ', data.def, true);
             message.channel.send(embed);
 
 
