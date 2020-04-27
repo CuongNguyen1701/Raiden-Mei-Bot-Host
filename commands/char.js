@@ -60,9 +60,9 @@ module.exports = {
             embed.setImage(user.avatarURL);
             embed.addField('Level: ', data.level, true);0
             embed.addField('Class: ', data.class, true);
-            embed.addField('HP: ', data.hp + '/' + data.maxHp, true);
-            embed.addField('MP: ', data.mp + '/' + data.maxMp, true);
-            embed.addField('ATK: ', data.atk, true); 
+            embed.addField('HP: ', data.hp + '/' + data.maxHp);
+            embed.addField('MP: ', data.mp + '/' + data.maxMp);
+            embed.addField('ATK: ', data.atk); 
             embed.addField('DEF: ', data.def, true);
             message.channel.send(embed);
 
