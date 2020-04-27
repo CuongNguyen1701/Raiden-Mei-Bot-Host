@@ -11,6 +11,8 @@ mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopo
 .catch(err => console.log( err ));
 //MODELS
 const RpgData = require('../models/rpgdata.js');
+const Data = require('../models/data.js');
+
 
 
 module.exports = {
