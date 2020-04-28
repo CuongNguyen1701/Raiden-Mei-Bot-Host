@@ -61,9 +61,12 @@ module.exports = {
                     }
                     var firstTier = ['healer', 'archer', 'swordman'];
 
+       
+                    upClass = args[0].toString().toLowerCase();
+
                     switch (rpgData.class) {
                         case 'newbie':
-                            switch (args[0].toLowerCase()) {
+                            switch (upClass) {
                                 case firstTier[0]:
                                     CheckMoney(data, 100);
                                     ChangeStats(rpgData, 1.5, 1.3, 1, 1.2)
