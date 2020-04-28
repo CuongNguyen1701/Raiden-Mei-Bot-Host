@@ -46,8 +46,8 @@ module.exports = {
 					return message.reply('user is too far away!');//out of 3x3 square
 				}
 				//else the player is nearby
-				if(author_rpgData.hp <= 0) return message.reply('you are already dead!')
-				if(user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!')
+				if(author_rpgData.hp <= 0) return message.reply('you are already dead!');
+				if(user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
 				let dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 50) + RandInt(1, 10);
 				user_rpgData.hp -= dmg;
 
