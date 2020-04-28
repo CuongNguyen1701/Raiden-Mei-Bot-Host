@@ -26,8 +26,10 @@ module.exports = {
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; }
 
         var user = message.author;
-        var cost = 100;
-
+        var cost;
+        
+        var firstTier = ['healer', 'archer', 'swordman'];
+        var secondTier = [ 'elf','priest', 'paladin', 'knight','ranger','sniper'];
         function SaveData(data) { data.save().catch(err => console.log(err)); }
         function ChangeStats(data, maxHp, maxMp, atk, def) {
             data.class = args[0].toLowerCase();
@@ -38,7 +40,7 @@ module.exports = {
             SaveData(data);
             message.reply('you have successfully become a ' + data.class + '!')
         }
-        function CheckMoney(data, value) {
+        function CheckMoney(data, value) {//if author has enough money
             cost = value;
             if (data.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency);
             data.pMoney -= cost;
@@ -60,7 +62,6 @@ module.exports = {
                         message.reply('please use ' + prefix + 'char command first!');
 
                     }
-                    var firstTier = ['healer', 'archer', 'swordman'];
 
                     if(!args[0]) return message.reply('please provide the class you wanna upgrade to');
                     upClass = args[0].toLowerCase();
@@ -70,27 +71,90 @@ module.exports = {
                             switch (upClass) {
                                 case firstTier[0]:
                                     CheckMoney(data, 100);
-                                    ChangeStats(rpgData, 1.5, 1.3, 1, 1.2)
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.5, 1.3, 1, 1.2);
                                     break;
                                 case firstTier[1]:
                                     CheckMoney(data, 100);
-                                    ChangeStats(rpgData, 1.1, 1.7, 1.2, 1)
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.1, 1.7, 1.2, 1);
                                     break;
                                 case firstTier[2]:
                                     CheckMoney(data, 100);
-                                    ChangeStats(rpgData, 1.4, 1, 1.6, 1)
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.4, 1, 1.6, 1);
                                     break;
                                 default:
                                     message.reply('you can only change your class to ' + firstTier)
                                     break;
                             }
                             break;
-                        // case 'healer':
-                        //     break;
-                        // case 'archer':
-                        //     break;
-                        // case 'swordman':
-                        //     break;
+                        case 'healer':
+                            switch (upClass) {
+                                case secondTier[0]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1, 1.6, 1.3, 1.1);
+                                    break;
+                                case secondTier[1]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.2, 1.7, 1, 1.1);
+                                    break;
+                                case secondTier[2]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.2, 1, 1.3, 1.5);
+                                    break;
+                                default:
+                                    message.reply('you can only change your class to ' + secondTier.subArray(0, -4))
+                                    break;
+                            }
+                            break;
+                        case 'swordman':
+                            switch (upClass) {
+                                case secondTier[2]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.2, 1, 1.3, 1.5);
+                                    break;
+                                case secondTier[3]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.3, 1, 1.1, 1.6);
+                                    break;
+                                case secondTier[4]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1, 1.3, 1.6, 1.1);
+                                    break;
+                                default:
+                                    message.reply('you can only change your class to ' + secondTier.subArray(2, -2))
+                                    break;
+                            }
+                            break;
+                        case 'archer':
+                            switch (upClass) {
+                                case secondTier[4]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1, 1.3, 1.6, 1.1);
+                                    break;
+                                case secondTier[5]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.1, 1.2, 1.7, 1);
+                                    break;
+                                case secondTier[0]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1, 1.6, 1.3, 1.1);
+                                    break;
+                                default:
+                                    message.reply('you can only change your class to ' + secondTier.subArray(4) + ','+ secondTier[0])
+                                    break;
+                            }
+                            break;
                         default:
                             message.reply('you cannot upgrade your class anymore');
                             break
