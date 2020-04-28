@@ -64,7 +64,7 @@ module.exports = {
 
                 embed.setTitle(author_rpgData.name + ' heal!')
                 embed.setDescription(user_rpgData.name + ' is healed by ' + healAmount + '!');
-                embed.addField(user_rpgData.name + ':heart: HP:  ', author_rpgData.hp + '/' + author_rpgData.maxHp);
+                embed.addField(user_rpgData.name + ':heart: HP:  ', user_rpgData.hp + '/' + user_rpgData.maxHp);
                 
                 SaveData(user_rpgData);
                 SaveData(author_rpgData);

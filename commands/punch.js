@@ -63,7 +63,7 @@ module.exports = {
 					
 				}else{
 
-					embed.addField(user_rpgData.name + ':heart: HP:  ', author_rpgData.hp + '/' + author_rpgData.maxHp);
+					embed.addField(user_rpgData.name + ':heart: HP:  ', user_rpgData.hp + '/' + user_rpgData.maxHp);
 				}
 				SaveData(user_rpgData);
 				message.channel.send(embed);
