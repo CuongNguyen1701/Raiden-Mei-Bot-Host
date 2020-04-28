@@ -36,6 +36,7 @@ module.exports = {
             data.atk = parseInt(data.atk * atk);
             data.def = parseInt(data.def * def);
             SaveData(data);
+            message.reply('you have successfully become a ' + data.class + '!')
         }
         function CheckMoney(data, value) {
             cost = value;
