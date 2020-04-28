@@ -36,7 +36,7 @@ module.exports = {
 			}
 			RpgData.findOne({//find user rpg data
 				userID: user.id
-			}, (xczerr, user_rpgData) => {
+			}, (err, user_rpgData) => {
 				if (err) console.log(err);
 				if (!user_rpgData) {
 					return message.reply('user has not enter the map yet!');
@@ -51,9 +51,10 @@ module.exports = {
 				if(user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
 
 				let dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 50) + RandInt(1, 10);
+
 				user_rpgData.hp -= dmg;
 
-				embed.setTitle(author_rpgData.name + 'attack!')
+				embed.setTitle(author_rpgData.name + ' attack!')
 				embed.setDescription(author_rpgData.name + ' deal ' + dmg + ' damage to ' + user_rpgData.name + '!')
 				if(user_rpgData.hp <= 0) 
 				{
