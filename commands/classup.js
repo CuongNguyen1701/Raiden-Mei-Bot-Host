@@ -85,12 +85,12 @@ module.exports = {
                                     break;
                             }
                             break;
-                        case 'healer':
-                            break;
-                        case 'archer':
-                            break;
-                        case 'swordman':
-                            break;
+                        // case 'healer':
+                        //     break;
+                        // case 'archer':
+                        //     break;
+                        // case 'swordman':
+                        //     break;
                         default:
                             message.reply('you cannot upgrade your class anymore');
                             break
