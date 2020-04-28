@@ -92,7 +92,7 @@ module.exports = {
                         case 'swordman':
                             break;
                         default:
-                            message.reply('Error');
+                            message.reply('you cannot upgrade your class anymore');
                             break
 
                     }

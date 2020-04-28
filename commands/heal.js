@@ -46,9 +46,11 @@ module.exports = {
                 if (!user_rpgData) {
                     return message.reply('user has not enter the map yet!');
                 }
-                let range = 1;
-                if(user_rpgData.class == 'healer') range = 2;
-                //both directions' distance is larger than 1
+                
+                if(author_rpgData.class == 'healer') var range = 2;
+                else var range = 1;
+
+                //both directions' distance is larger than range
                 if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
                     return message.reply('user is too far away!');//out of 3x3 square
                 }
@@ -59,7 +61,7 @@ module.exports = {
 
                 let healAmount = Math.ceil((user_rpgData.maxHp * 0.3) + (mpCost*2)) + RandInt(10, 50);
 
-                if(user_rpgData.class == 'healer') healAmount = Math.ceil(healAmount*1.2);
+                if(author_rpgData.class == 'healer') healAmount = Math.ceil(healAmount*1.2);
 
 
                 author_rpgData.mp -= mpCost;
