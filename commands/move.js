@@ -16,7 +16,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'move',
     description: 'di chuyển, 4 hướng đông tây nam bắc',
-    cooldown: 60,
+    cooldown: 30,
     execute(client, message, args) {
         //if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
@@ -29,6 +29,7 @@ module.exports = {
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; }
 
         //check if no first argument is provided(user mentioned) 
+
         let user = message.author;
 
         if (args[0] != 'north' && args[0] != 'south' && args[0] != 'west' && args[0] != 'east' &&
@@ -47,6 +48,7 @@ module.exports = {
                return message.reply('please declare your position using ' + prefix + 'position first!')
             }
             let data = rpgData;
+            if(data.hp <= 0) return message.reply("ded pipol can't move" )
             switch (dir) {
                 case 'north': case 'n':
                     if (data.posY == 1) return message.reply('you cannot move in that direction!');
