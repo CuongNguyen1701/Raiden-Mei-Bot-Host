@@ -46,6 +46,10 @@ module.exports = {
             data.pMoney -= cost;
             SaveData(data);
         }
+        Array.prototype.subArray = function(start, end) {
+            if (!end) { end = -1; } 
+            return this.slice(start, this.length + 1 - (end * -1));
+        };
 
         Data.findOne({
             userID: user.id
