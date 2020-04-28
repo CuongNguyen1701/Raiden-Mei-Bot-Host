@@ -61,8 +61,8 @@ module.exports = {
                     }
                     var firstTier = ['healer', 'archer', 'swordman'];
 
-       
-                    upClass = args[0].toString().toLowerCase();
+                    if(!args[0]) return message.reply('please provide the class you wanna upgrade to');
+                    upClass = args[0].toLowerCase();
 
                     switch (rpgData.class) {
                         case 'newbie':
