@@ -53,7 +53,7 @@ module.exports = {
                 }
                 //else the player is nearby
 
-                let mpCost = author_rpgData.maxMp*0.1;
+                let mpCost = Math.floor(author_rpgData.maxMp*0.1);
                 if(author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
 
                 let healAmount = Math.ceil((user_rpgData.maxHp * 0.3) + (mpCost*2)) + RandInt(10, 50);
