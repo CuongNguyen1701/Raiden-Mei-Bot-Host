@@ -40,7 +40,7 @@ module.exports = {
                     userID: user.id
                 }, (err, rpgData)=>{
                     if(err) console.log(err);
-                    if (!rpgData || !rpgData.hp)
+                    if (!rpgData)
                     {
                         message.reply('please use ' + prefix + 'char command first!' ) 
                          

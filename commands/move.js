@@ -48,7 +48,7 @@ module.exports = {
                return message.reply('please declare your position using ' + prefix + 'position first!')
             }
             let data = rpgData;
-            if(data.hp <= 0) return message.reply("ded pipol can't move" )
+            if(data.hp <= 0) return message.reply("you can't move" )
             switch (dir) {
                 case 'north': case 'n':
                     if (data.posY == 1) return message.reply('you cannot move in that direction!');

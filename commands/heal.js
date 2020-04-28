@@ -17,7 +17,7 @@ const RpgData = require('../models/rpgdata.js');
 
 module.exports = {
     name: 'heal',
-    description: 'tự hồi máu',
+    description: 'hồi máu',
     cooldown: 15,
     execute(client, message, args) {
 
@@ -47,6 +47,7 @@ module.exports = {
                     return message.reply('user has not enter the map yet!');
                 }
                 let range = 1;
+                if(user_rpgData.class == 'healer') range = 2;
                 //both directions' distance is larger than 1
                 if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
                     return message.reply('user is too far away!');//out of 3x3 square
@@ -57,6 +58,9 @@ module.exports = {
                 if(author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
 
                 let healAmount = Math.ceil((user_rpgData.maxHp * 0.3) + (mpCost*2)) + RandInt(10, 50);
+
+                if(user_rpgData.class == 'healer') healAmount = Math.ceil(healAmount*1.2);
+
 
                 author_rpgData.mp -= mpCost;
                 user_rpgData.hp += healAmount;
