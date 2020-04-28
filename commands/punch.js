@@ -24,6 +24,7 @@ module.exports = {
 		if (user.id == message.author.id) return message.reply("don't hit yourself please");
 		let embed = new Discord.MessageEmbed();
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min;}
+        function SaveData(data) { data.save().catch(err => console.log(err)); }
 
 
 		RpgData.findOne({//find author rpg data
@@ -48,6 +49,7 @@ module.exports = {
 				//else the player is nearby
 				if(author_rpgData.hp <= 0) return message.reply('you are already dead!');
 				if(user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
+
 				let dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 50) + RandInt(1, 10);
 				user_rpgData.hp -= dmg;
 
@@ -62,6 +64,7 @@ module.exports = {
 
 					embed.addField(user_rpgData.name + ':heart: HP:  ', author_rpgData.hp + '/' + author_rpgData.maxHp);
 				}
+				SaveData(user_rpgData);
 				message.channel.send(embed);
 
 
