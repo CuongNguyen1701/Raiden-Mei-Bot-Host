@@ -44,6 +44,10 @@ module.exports = {
             data.pMoney -= cost;
             SaveData(data);
         }
+        Array.prototype.subArray = function(start, end) {
+            if (!end) { end = -1; } 
+            return this.slice(start, this.length + 1 - (end * -1));
+        };
 
         Data.findOne({
             userID: user.id
@@ -61,6 +65,7 @@ module.exports = {
 
                     }
                     var firstTier = ['healer', 'archer', 'swordman'];
+                    var secondTier = [ 'priest','knight', 'paladin', '','','']
 
                     if(!args[0]) return message.reply('please provide the class you wanna upgrade to');
                     upClass = args[0].toLowerCase();
@@ -70,14 +75,17 @@ module.exports = {
                             switch (upClass) {
                                 case firstTier[0]:
                                     CheckMoney(data, 100);
+                                    if (data.pMoney < cost) return;
                                     ChangeStats(rpgData, 1.5, 1.3, 1, 1.2)
                                     break;
                                 case firstTier[1]:
                                     CheckMoney(data, 100);
+                                    if (data.pMoney < cost) return;
                                     ChangeStats(rpgData, 1.1, 1.7, 1.2, 1)
                                     break;
                                 case firstTier[2]:
                                     CheckMoney(data, 100);
+                                    if (data.pMoney < cost) return;
                                     ChangeStats(rpgData, 1.4, 1, 1.6, 1)
                                     break;
                                 default:
@@ -85,12 +93,72 @@ module.exports = {
                                     break;
                             }
                             break;
-                        // case 'healer':
-                        //     break;
-                        // case 'archer':
-                        //     break;
-                        // case 'swordman':
-                        //     break;
+                        case 'healer':
+                            switch (upClass) {
+                                case secondTier[0]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.5, 1.3, 1, 1.2)
+                                    break;
+                                case secondTier[1]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.1, 1.7, 1.2, 1)
+                                    break;
+                                case secondTier[2]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.4, 1, 1.6, 1)
+                                    break;
+                                default:
+                                    message.reply('you can only change your class to ' + secondTier.subArray(0, -4))
+                                    break;
+                            }
+                            break;
+                        case 'archer':
+                            switch (upClass) {
+                                case secondTier[2]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.5, 1.3, 1, 1.2)
+                                    break;
+                                case secondTier[3]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.1, 1.7, 1.2, 1)
+                                    break;
+                                case secondTier[4]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.4, 1, 1.6, 1)
+                                    break;
+                                default:
+                                    message.reply('you can only change your class to ' + secondTier.subArray(2, -2))
+                                    break;
+                            }
+                            break;
+                        case 'swordman':
+                            switch (upClass) {
+                                case secondTier[4]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.5, 1.3, 1, 1.2)
+                                    break;
+                                case secondTier[5]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.1, 1.7, 1.2, 1)
+                                    break;
+                                case secondTier[0]:
+                                    CheckMoney(data, 1000);
+                                    if (data.pMoney < cost) return;
+                                    ChangeStats(rpgData, 1.4, 1, 1.6, 1)
+                                    break;
+                                default:
+                                    message.reply('you can only change your class to ' + secondTier.subArray(4) + ','+ secondTier[0])
+                                    break;
+                            }
+                            break;
                         default:
                             message.reply('you cannot upgrade your class anymore');
                             break
