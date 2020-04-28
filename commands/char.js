@@ -35,7 +35,7 @@ module.exports = {
             userID: user.id
         }, (err, rpgData)=>{
             if(err) console.log(err);
-            if (!rpgData || !rpgData.hp)
+            if (!rpgData)
             {
                  var newData = new RpgData({
                     name: client.users.cache.get(user.id).username,
