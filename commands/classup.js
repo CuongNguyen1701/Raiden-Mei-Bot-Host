@@ -161,7 +161,7 @@ module.exports = {
                             break;
                         default:
                             message.reply('you cannot upgrade your class anymore');
-                            break
+                            break;
 
                     }
 

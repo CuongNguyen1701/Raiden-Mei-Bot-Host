@@ -15,9 +15,9 @@ const RpgData = require('../models/rpgdata.js');
 
 
 module.exports = {
-	name: 'punch',
-	description: 'đấm luôn',
-	cooldown: 15,
+	name: 'shoot',
+	description: 'bắn luôn(50 MP)',
+	cooldown: 30,
 	execute(client, message, args) {
 		let user = message.mentions.members.first() || client.users.cache.get(args[0]);
 		if (!user) return message.reply('cannot find that user!');
@@ -40,8 +40,21 @@ module.exports = {
 				if (err) console.log(err);
 				if (!user_rpgData) {
 					return message.reply('user has not enter the map yet!');
-				}
-				let range = 1;
+                }
+                var rangedType = ['archer', 'elf', 'ranger', 'sniper'];
+                if(!rangedType.includes(author_rpgData.class))
+                {
+                    return message.reply('you have to be a ranged type to use this command! ranged type classes: ' + rangedType)
+                }
+
+                let range = 2;
+                switch(author_rpgData.class)
+                {
+                    case rangedType[3]:
+                        range++;
+                        break;
+                }
+                
 				//both directions' distance is larger than 1
 				if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
 					return message.reply('user is too far away!');//out of 3x3 square
@@ -50,11 +63,17 @@ module.exports = {
 				if(author_rpgData.hp <= 0) return message.reply('you are already dead!');
 				if(user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
 
-				let dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 50) + RandInt(1, 10);
-
+				let dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 100) + RandInt(10, 50);
+                let mpCost =50;
+                if( author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
+                switch(author_rpgData.class)
+                {
+                    case rangedType[3]:
+                        dmg *= 1.3
+                        break;
+                }
+                author_rpgData.mp -= mpCost;
 				user_rpgData.hp -= dmg;
-				author_rpgData.mp += 10;
-				if(author_rpgData.mp > author_rpgData.maxMp) author_rpgData.mp = author_rpgData.maxMp;
 
 				embed.setTitle(author_rpgData.name + ' attack!')
 				embed.setDescription(author_rpgData.name + ' deal ' + dmg + ' damage to ' + user_rpgData.name + '!')

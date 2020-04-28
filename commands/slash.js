@@ -14,19 +14,14 @@ const RpgData = require('../models/rpgdata.js');
 
 
 
-
 module.exports = {
-    name: 'heal',
-    description: 'hồi máu',
+    name: 'slash',
+    description: 'chém luôn(20 MP)',
     cooldown: 15,
     execute(client, message, args) {
-
-        if (!args[0]) {
-            var user = message.author;
-        } else {
-            var user = message.mentions.users.first() || client.users.cache.get(args[0]);
-        }
+        let user = message.mentions.members.first() || client.users.cache.get(args[0]);
         if (!user) return message.reply('cannot find that user!');
+        if (user.id == message.author.id) return message.reply("don't hit yourself please");
         let embed = new Discord.MessageEmbed();
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
@@ -46,50 +41,56 @@ module.exports = {
                 if (!user_rpgData) {
                     return message.reply('user has not enter the map yet!');
                 }
-                var range = 1;
-                
-                switch(author_rpgData.class)
-                {
-                    case 'healer': case 'elf': case 'paladin': case 'priest':
-                        range++;
-                        break;
-                    default:
-                        break;
-                }
-
-                //both directions' distance is larger than range
+                var meleeType = ['swordman', 'paladin', 'knight', 'ranger']
+                let range = 1;
+                //both directions' distance is larger than 1
                 if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
                     return message.reply('user is too far away!');//out of 3x3 square
                 }
                 //else the player is nearby
-
-                let mpCost = Math.floor(author_rpgData.maxMp*0.1);
+                if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
+                if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
+                let mpCost = 20;
                 if(author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
+                let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 75) + RandInt(1, 10);
+                let crit = false;
+                function CritRate(critRate) {
+                    let chance = RandInt(1, 100);
+                    if (chance <= critRate) dmg *= 2;
+                    crit =true;
 
-                let healAmount = Math.ceil((user_rpgData.maxHp * 0.3) + (mpCost*2)) + RandInt(10, 50);
+                }
 
 
-                switch(author_rpgData.class)
-                {
-                    case 'healer': case 'elf': case 'paladin': 
-                        healAmount = Math.ceil(healAmount*1.2);
+
+                switch (author_rpgData.class) {
+                    case meleeType[2]:
+                        dmg *= 3;
+                        CritRate(60)
                         break;
-                    case 'priest':
-                        healAmount = Math.ceil(healAmount*1.5);
-                        break;
-                    default:
+                    case meleeType[0]: case meleeType[1]: case meleeType[3]:
+                        dmg *= 2;
+                        CritRate(50);
                         break;
                 }
-                author_rpgData.mp -= mpCost;
-                user_rpgData.hp += healAmount;
-                if(user_rpgData.hp > user_rpgData.maxHp) user_rpgData.hp = user_rpgData.maxHp;
 
-                embed.setTitle(author_rpgData.name + ' heal!')
-                embed.setDescription(user_rpgData.name + ' is healed by ' + healAmount + '!');
-                embed.addField(user_rpgData.name + ':heart: HP:  ', user_rpgData.hp + '/' + user_rpgData.maxHp);
+
+                if(crit) embed.setTitle( 'CRIT!! ' + author_rpgData.name + ' attack!');
+                else embed.setTitle(author_rpgData.name + ' attack!');
+                user_rpgData.hp -= dmg;
+                author_rpgData.mp -= mpCost;
+
                 
+                embed.setDescription(author_rpgData.name + ' deal ' + dmg + ' damage to ' + user_rpgData.name + '!')
+                if (user_rpgData.hp <= 0) {
+                    user_rpgData.hp = 0;
+                    embed.addField(user_rpgData.name + ' is ded!', ' :skull: :skull: :skull:');
+
+                } else {
+
+                    embed.addField(user_rpgData.name + ':heart: HP:  ', user_rpgData.hp + '/' + user_rpgData.maxHp);
+                }
                 SaveData(user_rpgData);
-                SaveData(author_rpgData);
                 message.channel.send(embed);
 
 
