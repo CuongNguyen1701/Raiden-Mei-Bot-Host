@@ -1,6 +1,6 @@
 module.exports = {
 
     execute() {
-        console.log('test success!');
+       return console.log('test success!');
     },
 };

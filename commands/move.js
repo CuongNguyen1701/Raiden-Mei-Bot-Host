@@ -14,7 +14,7 @@ const abc = require('./rpgfiles/test.js');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => abc)
+    .then(() => abc())
     .catch(err => console.log(err));
 //MODELS
 const RpgData = require('../models/rpgdata.js');
