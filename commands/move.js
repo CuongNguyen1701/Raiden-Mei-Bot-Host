@@ -4,6 +4,8 @@ const role = require('../roles.json');
 const { prefix } = require('../config.json');
 const mongoose = require('mongoose');
 
+const bossAttack = require('./rpgfiles/boss');
+
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -82,6 +84,7 @@ module.exports = {
                 else msg += ('\n' + mapTiles.repeat(size));
             }
             message.channel.send(msg);
+            bossAttack.execute(message);
 
 
 

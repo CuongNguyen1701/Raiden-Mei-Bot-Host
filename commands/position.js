@@ -30,7 +30,12 @@ module.exports = {
         //check if no first argument is provided(user mentioned) 
         if(!args[0]){
             var user = message.author;
-        }else{
+        }
+        else if(args[0] == 'boss'){
+            var user = new Object();
+            user.id = 1;
+        }
+        else{
             var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
         }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
@@ -41,12 +46,12 @@ module.exports = {
             if(err) console.log(err);
             if (!rpgData)
             {
-                 message.reply('please use ' + prefix + 'char command first!' ) 
+                 message.reply('cannot find user' ) 
             }
             data = rpgData;
-            embed.setTitle(client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY);
+            embed.setTitle(rpgData.name + "'s position: " + data.posX + ',' + data.posY);
 
-            let msg = client.users.cache.get(user.id).username + "'s position: " + data.posX + ',' + data.posY;
+            let msg = rpgData.name + "'s position: " + data.posX + ',' + data.posY;
             for(var i = 1; i <= size; i++)
             {
                 //on the correct row, draw player in the respective column 
