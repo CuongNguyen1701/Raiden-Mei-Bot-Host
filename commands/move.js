@@ -4,16 +4,17 @@ const role = require('../roles.json');
 const { prefix } = require('../config.json');
 const mongoose = require('mongoose');
 const fs = require ('fs');
-const rpgFiles = fs.readdirSync('./rpgfiles').filter(file => file.endsWith('.js'));
-for(const file of rpgFiles){
-    const test =  require('./rpgfiles/' + file);
-    console.log(file + 'loaded!');
+const abc = require('./rpgfiles/test.js');
+// const rpgFiles = fs.readdirSync('rpgfiles').filter(file => file.endsWith('.js'));
+// for(const file of rpgFiles){
+//     const test =  require('./rpgfiles/' + file);
+//     console.log(file + 'loaded!');
 
-}
+//}
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
+    .then(() => abc)
     .catch(err => console.log(err));
 //MODELS
 const RpgData = require('../models/rpgdata.js');
