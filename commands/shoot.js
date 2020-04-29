@@ -2,6 +2,9 @@
 const mongoose = require('mongoose');
 const Discord = require('discord.js');
 
+const bossAttack = require('../rpgfiles/boss');
+
+
 
 
 //CONNECT TO DATABASE
@@ -19,7 +22,13 @@ module.exports = {
 	description: 'bắn luôn(50 MP)',
 	cooldown: 30,
 	execute(client, message, args) {
-		let user = message.mentions.members.first() || client.users.cache.get(args[0]);
+		if(args[0] == 'boss'){
+            var user = new Object();
+            user.id = 1;
+        }
+        else{
+            var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
+		}
 		if (!user) return message.reply('cannot find that user!');
 		if (user.id == message.author.id) return message.reply("don't hit yourself please");
 		// if(user.presence.status != 'online' &&user.presence.status != 'idle') 
@@ -99,6 +108,7 @@ module.exports = {
 				SaveData(author_rpgData);
 
 				message.channel.send(embed);
+                bossAttack.execute(message);
 
 
 			})

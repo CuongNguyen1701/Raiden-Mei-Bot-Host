@@ -25,9 +25,13 @@ module.exports = {
 
         if(!args[0]){
             var user = message.author;
-        }else{
-            var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
+        }else if(args[0] == 'boss'){
+            var user = new Object();
+            user.id = 1;
         }
+        else{
+            var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
+		}
 
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
