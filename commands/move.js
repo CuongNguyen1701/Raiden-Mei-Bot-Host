@@ -4,9 +4,9 @@ const role = require('../roles.json');
 const { prefix } = require('../config.json');
 const mongoose = require('mongoose');
 const fs = require ('fs');
-const rpgFiles = fs.readdirSync('../rpgfiles', (err, files) =>{
+const rpgFiles = fs.readdir('../rpgfiles', (err, files) =>{
     if(err) console.log(err)
-    files.foreach(file => {
+    files.forEach(file => {
         console.log(file + 'loaded');
     })
 })
