@@ -23,7 +23,7 @@ module.exports = {
             },(err, authorData) => { 
                 if(!authorData) return;
                 RpgData.findOne({
-                    userID = 1//boss ID
+                    userID: 1//boss ID
                 }, (err, bossData) => {
                     if(!bossData) return;//return nothing if there is no boss
                     if(bossData.hp == 0) return;//also if boss is dead

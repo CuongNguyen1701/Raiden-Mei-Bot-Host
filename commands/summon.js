@@ -35,7 +35,7 @@ module.exports = {
 				return message.reply('please declare your existence using ' + prefix + 'char first!');
             }
             RpgData.findOne({
-                userID = 1,//boss ID
+                userID: 1,//boss ID
             }, (err, bossData) => {
                 if(!bossData)
                 {
