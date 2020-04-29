@@ -27,6 +27,14 @@ module.exports = {
             var user = message.mentions.users.first() || client.users.cache.get(args[0]);
         }
         if (!user) return message.reply('cannot find that user!');
+        if(user.presence.status != 'online' ||user.presence.status != 'idle') 
+		{
+			return message.reply('user is not online or idle !');
+		}
+		if(message.author.presence.status != 'online' || message.author.presence.status != 'online')
+		{
+			return message.reply('please set your status to online or idle !');
+		}
         let embed = new Discord.MessageEmbed();
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
