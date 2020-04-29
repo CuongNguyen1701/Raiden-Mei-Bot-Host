@@ -54,7 +54,7 @@ module.exports = {
 
 				user_rpgData.hp -= dmg; //HP loses = dmg
 
-                let mpCost = - parseInt(0.01 * author_rpgData.mp) - 20;
+                let mpCost = - parseInt(0.05 * author_rpgData.mp) - 20;
 
                 author_rpgData.mp -= mpCost;//actually add MP
 
