@@ -20,7 +20,7 @@ module.exports = {
        // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
         let mapTiles = ':palm_tree:';
-        let player = ':whale:';
+        var player = ':whale:';
         let size = 10;//map size
         let embed = new Discord.MessageEmbed();
 
@@ -34,6 +34,7 @@ module.exports = {
         else if(args[0] == 'boss'){
             var user = new Object();
             user.id = 1;
+            player = ':japanese_ogre:'
         }
         else{
             var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
