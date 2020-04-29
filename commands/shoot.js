@@ -22,11 +22,11 @@ module.exports = {
 		let user = message.mentions.members.first() || client.users.cache.get(args[0]);
 		if (!user) return message.reply('cannot find that user!');
 		if (user.id == message.author.id) return message.reply("don't hit yourself please");
-		if(user.presence.status != 'online' ||user.presence.status != 'idle') 
+		if(user.presence.status != 'online' &&user.presence.status != 'idle') 
 		{
 			return message.reply('user is not online or idle !');
 		}
-		if(message.author.presence.status != 'online' || message.author.presence.status != 'online')
+		if(message.author.presence.status != 'online' && message.author.presence.status != 'online')
 		{
 			return message.reply('please set your status to online or idle !');
 		}
