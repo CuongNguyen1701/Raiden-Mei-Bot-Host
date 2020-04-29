@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const Discord = require('discord.js');
-const bossAttack = require('../rpgfiles/boss');
+const bossAttack = require('../rpgfiles/bossAttack');
 
 
 
@@ -56,7 +56,7 @@ module.exports = {
 				if (!user_rpgData) {
 					return message.reply('user has not enter the map yet!');
 				}
-				let range = 1;
+				let range = 3;
 				//both directions' distance is larger than 1
 				if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
 					return message.reply('user is too far away!');//out of 3x3 square
@@ -69,7 +69,7 @@ module.exports = {
 
 				user_rpgData.hp -= dmg; //HP loses = dmg
 
-                let mpCost = - parseInt(0.05 * author_rpgData.mp) - 20;
+                let mpCost = - parseInt(0.05 * author_rpgData.mp) - 30;
 
                 author_rpgData.mp -= mpCost;//actually add MP
 

@@ -4,7 +4,7 @@ const role = require('../roles.json');
 const { prefix } = require('../config.json');
 const mongoose = require('mongoose');
 
-const bossAttack = require('../rpgfiles/boss');
+const bossAttack = require('../rpgfiles/bossAttack');
 
 
 //CONNECT TO DATABASE

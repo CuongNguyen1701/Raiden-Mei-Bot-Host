@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Discord = require('discord.js');
 
-const bossAttack = require('../rpgfiles/boss');
+const bossAttack = require('../rpgfiles/bossAttack');
 
 
 
