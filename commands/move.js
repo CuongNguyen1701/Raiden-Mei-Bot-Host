@@ -4,14 +4,12 @@ const role = require('../roles.json');
 const { prefix } = require('../config.json');
 const mongoose = require('mongoose');
 const fs = require ('fs');
-const rpgFiles = fs.readdir('../rpgfiles', (err, files) =>{
-    if(err) console.log(err)
-    files.forEach(file => {
-        console.log(file + 'loaded');
-    })
-})
+const rpgFiles = fs.readdirSync('../rpgfiles').filter(file => file.endsWith('.js'));
+for(const file of rpgFiles){
+    const test =  require('../rpgfiles/' + file);
+    console.log(file + 'loaded!');
 
-
+}
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
