@@ -17,7 +17,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'slash',
     description: 'chém luôn(20 MP)',
-    cooldown: 15,
+    cooldown: 20,
     execute(client, message, args) {
         let user = message.mentions.members.first() || client.users.cache.get(args[0]);
         if (!user) return message.reply('cannot find that user!');

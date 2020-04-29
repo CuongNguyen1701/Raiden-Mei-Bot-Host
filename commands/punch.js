@@ -16,7 +16,7 @@ const RpgData = require('../models/rpgdata.js');
 
 module.exports = {
 	name: 'punch',
-	description: 'đấm luôn',
+	description: 'đấm luôn(hồi MP)',
 	cooldown: 15,
 	execute(client, message, args) {
 		let user = message.mentions.members.first() || client.users.cache.get(args[0]);
@@ -52,8 +52,12 @@ module.exports = {
 
 				let dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 50) + RandInt(1, 10);
 
-				user_rpgData.hp -= dmg;
-				author_rpgData.mp += 10;
+				user_rpgData.hp -= dmg; //HP loses = dmg
+
+                let mpCost = - parseInt(0.01 * author_rpgData.mp) - 20;
+
+                author_rpgData.mp -= mpCost;//actually add MP
+
 				if(author_rpgData.mp > author_rpgData.maxMp) author_rpgData.mp = author_rpgData.maxMp;
 
 				embed.setTitle(author_rpgData.name + ' attack!')

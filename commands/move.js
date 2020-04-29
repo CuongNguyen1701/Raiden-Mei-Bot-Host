@@ -49,30 +49,29 @@ module.exports = {
             }
             let data = rpgData;
             if(data.hp <= 0) return message.reply("you can't move" );
+
             
             switch (dir) {
                 case 'north': case 'n':
                     if (data.posY == 1) return message.reply('you cannot move in that direction!');
                     data.posY--;
-                    SaveData(data);
                     break;
                 case 'south': case 's':
                     if (data.posY == 10) return message.reply('you cannot move in that direction!');
                     data.posY++;
-                    SaveData(data);
                     break;
                 case 'east': case 'e':
                     if (data.posX == 10) return message.reply('you cannot move in that direction!');
                     data.posX++;
-                    SaveData(data);
                     break;
                 case 'west': case 'w':
                     if (data.posX == 1) return message.reply('you cannot move in that direction!');
                     data.posX--;
-                    SaveData(data);
                     break;
-            }
-
+                }
+                data.mp += 20;
+                
+                SaveData(data);
             let msg = client.users.cache.get(user.id).username + ' moved ' + dir;
 
             msg += '\n' + client.users.cache.get(user.id).username + "'s new position: " + data.posX + ',' + data.posY;
