@@ -24,11 +24,11 @@ module.exports = {
 		if (user.id == message.author.id) return message.reply("don't hit yourself please");
 		if(user.presence.status != 'online' &&user.presence.status != 'idle') 
 		{
-			return message.reply('user is not online or idle !');
+			return message.reply('user is not online!');
 		}
-		if(message.author.presence.status != 'online' && message.author.presence.status != 'online')
+		if(message.author.presence.status != 'online' && message.author.presence.status != 'idle')
 		{
-			return message.reply('please set your status to online or idle !');
+			return message.reply('please set your status to online!');
 		}
 		
 		let embed = new Discord.MessageEmbed();
