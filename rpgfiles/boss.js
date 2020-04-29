@@ -13,7 +13,7 @@ const Data = require('../models/data.js');
 module.exports = {
 
     execute(message) {
-        function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min;}
+        function RandInt(min, max) { return Math.round(Math.random() * (max - min)) + min;}
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 		let embed = new Discord.MessageEmbed();
 

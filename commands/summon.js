@@ -34,14 +34,15 @@ module.exports = {
             {
 				return message.reply('please declare your existence using ' + prefix + 'char first!');
             }
+            var id = 1 
             RpgData.findOne({
-                userID: 1,//boss ID
+                userID: id,//boss ID
             }, (err, bossData) => {
                 if(!bossData)
                 {
                     var newData = new RpgData({
                         name: 'BOSS',
-                        userID: 1,
+                        userID: id,
                         level: authorData.level,
                         lb: 'boss',
                         class: 'boss',
