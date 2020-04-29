@@ -18,7 +18,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'move',
     description: 'di chuyển, 4 hướng đông tây nam bắc',
-    cooldown: 30,
+    cooldown: 15,
     execute(client, message, args) {
         //if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
