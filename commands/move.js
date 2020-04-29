@@ -3,6 +3,13 @@ const role = require('../roles.json');
 
 const { prefix } = require('../config.json');
 const mongoose = require('mongoose');
+const fs = require ('fs');
+const rpgFiles = fs.readdirSync('../rpgfiles', (err, files) =>{
+    files.foreach(file => {
+        console.log(file + 'loaded');
+    })
+})
+
 
 
 //CONNECT TO DATABASE
