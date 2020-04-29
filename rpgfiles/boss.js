@@ -19,7 +19,7 @@ module.exports = {
 
 
             RpgData.findOne({
-                userID = message.author.id,
+                userID: message.author.id,
             },(err, authorData) => { 
                 if(!authorData) return;
                 RpgData.findOne({
