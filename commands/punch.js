@@ -22,6 +22,7 @@ module.exports = {
 		let user = message.mentions.members.first() || client.users.cache.get(args[0]);
 		if (!user) return message.reply('cannot find that user!');
 		if (user.id == message.author.id) return message.reply("don't hit yourself please");
+		if(user.presence.status != 'online') return message.reply('user is not online!');
 		let embed = new Discord.MessageEmbed();
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min;}
         function SaveData(data) { data.save().catch(err => console.log(err)); }
