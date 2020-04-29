@@ -4,9 +4,9 @@ const role = require('../roles.json');
 const { prefix } = require('../config.json');
 const mongoose = require('mongoose');
 const fs = require ('fs');
-const rpgFiles = fs.readdirSync('../rpgfiles').filter(file => file.endsWith('.js'));
+const rpgFiles = fs.readdirSync('./rpgfiles').filter(file => file.endsWith('.js'));
 for(const file of rpgFiles){
-    const test =  require('../rpgfiles/' + file);
+    const test =  require('./rpgfiles/' + file);
     console.log(file + 'loaded!');
 
 }
