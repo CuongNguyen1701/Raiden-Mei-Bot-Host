@@ -47,10 +47,10 @@ module.exports = {
                         class: 'boss',
                         posX: RandInt(1,10),
                         posY: RandInt(1,10),
-                        hp: authorData.hp*100,
-                        maxHp: authorData.hp*100,
-                        atk: authorData.atk*2,
-                        def: authorData.def*2,
+                        hp: authorData.hp*10,
+                        maxHp: authorData.hp*10,
+                        atk: authorData.atk,
+                        def: authorData.def/2,
                     })
                     SaveData(newData);
                 }
@@ -59,10 +59,10 @@ module.exports = {
                     bossData.level = authorData.level,
                     bossData.posX =  RandInt(1,10);
                     bossData.posY = RandInt(1, 10);
-                    bossData.hp = authorData.hp*100,
-                    bossData.maxHp = authorData.hp*100,
-                    bossData.atk = authorData.atk*2,
-                    bossData.def = authorData.def*2,
+                    bossData.hp = authorData.hp*10,
+                    bossData.maxHp = authorData.hp*10,
+                    bossData.atk = authorData.atk,
+                    bossData.def = authorData.def/2,
                     SaveData(bossData);
                 }
                 let data = newData || bossData;

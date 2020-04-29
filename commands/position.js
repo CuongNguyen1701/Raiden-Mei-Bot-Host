@@ -51,8 +51,9 @@ module.exports = {
             }
             data = rpgData;
             embed.setTitle(rpgData.name + "'s position: " + data.posX + ',' + data.posY);
-
+            
             let msg = rpgData.name + "'s position: " + data.posX + ',' + data.posY;
+            if(data.class == 'boss' && data.hp <= 0) msg += '\nthe boss is already dead!';
             for(var i = 1; i <= size; i++)
             {
                 //on the correct row, draw player in the respective column 
