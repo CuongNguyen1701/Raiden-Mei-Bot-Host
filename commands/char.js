@@ -64,8 +64,7 @@ module.exports = {
             data.lb = 'all';
             SaveData(data);
 
-            embed.setTitle(client.users.cache.get(user.id).username + "'s stats");
-            embed.setThumbnail(user.avatarURL);
+            embed.setTitle(data.name + "'s stats");
             embed.addField('Level: ', data.level, true);
             embed.addField('Class: ', data.class, true);
             embed.addField(':heart: HP:  ', data.hp + '/' + data.maxHp);
