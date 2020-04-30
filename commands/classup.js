@@ -36,7 +36,7 @@ module.exports = {
         var priestTier = ['cleric', 'exorcist'];
         var paladinTier = ['valkyrie', 'crusader'];
         var knightTier = ['gladiator', 'samurai']
-        var rangerTier = ['ninja', 'samurai']
+        var rangerTier = ['ninja', 'vampire']
         var sniperTier = ['commander', 'cyborg']
 
         function SaveData(data) { data.save().catch(err => console.log(err)); }
