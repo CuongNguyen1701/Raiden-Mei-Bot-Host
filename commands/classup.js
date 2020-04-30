@@ -32,7 +32,7 @@ module.exports = {
 
         var secondTier = ['elf', 'priest', 'paladin', 'knight', 'ranger', 'sniper'];
 
-        var elfTier = ['dark elf', 'avariel'];
+        var elfTier = ['darkelf', 'avariel'];
         var priestTier = ['cleric', 'exorcist'];
         var paladinTier = ['valkyrie', 'crusader'];
         var knightTier = ['gladiator', 'samurai']
