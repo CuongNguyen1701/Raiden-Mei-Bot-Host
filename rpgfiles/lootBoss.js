@@ -45,7 +45,7 @@ module.exports = {
                     if(!moneyData) return;
                     moneyData.pMoney += reward;
                     SaveData(moneyData);
-                    message.channel.send(":moneybag: :moneybag: :moneybag: " +moneyData.id + ' received: ' , reward + pCurrency + '!');
+                    message.channel.send(":moneybag: :moneybag: :moneybag: " +moneyData.name + ' received: ' + reward + pCurrency + '!');
 
                 })
 
