@@ -75,7 +75,14 @@ module.exports = {
                  if(authorData.mp > authorData.maxMp) authorData.mp = authorData.maxMp;
                  SaveData(moneyData);
                  SaveData(authorData);
+                embed.setTitle(author_rpgData.name + ' had a noice sleep')
+                embed.setDescription(author_rpgData.name + ' recovered a little!');
+                embed.addField(author_rpgData.name + ':heart: HP:  ', author_rpgData.hp + '/' + author_rpgData.maxHp);
+                embed.addField(author_rpgData.name + ':star2: MP:  ', author_rpgData.mp + '/' + author_rpgData.maxMp);
 
+
+                SaveData(author_rpgData);
+                message.channel.send(embed);
 
 
                 })
