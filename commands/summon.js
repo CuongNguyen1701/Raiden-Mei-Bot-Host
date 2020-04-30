@@ -61,8 +61,8 @@ module.exports = {
                     bossData.level = authorData.level,
                     bossData.posX =  RandInt(1,10);
                     bossData.posY = RandInt(1, 10);
-                    bossData.hp = authorData.hp*10,
-                    bossData.maxHp = authorData.hp*10,
+                    bossData.hp = authorData.maxHp*10,
+                    bossData.maxHp = authorData.maxHp*10,
                     bossData.atk = authorData.atk,
                     bossData.def = authorData.def/2,
                     SaveData(bossData);
