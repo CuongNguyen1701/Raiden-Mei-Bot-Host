@@ -61,9 +61,9 @@ module.exports = {
                 var healClasses3 = ['cleric'];
 
 
-                switch (healClasses1.includes(user_rpgData.class) ? 1
-                    : healClasses2.includes(user_rpgData.class) ? 2
-                        : healClasses3.includes(user_rpgData.class) ? 3 : 0) {
+                switch (healClasses1.includes(author_rpgData.class) ? 1
+                    : healClasses2.includes(author_rpgData.class) ? 2
+                        : healClasses3.includes(author_rpgData.class) ? 3 : 0) {
                     case 1: case 2:
                         range++;
                         break;
@@ -86,9 +86,9 @@ module.exports = {
                 let healAmount = Math.ceil((user_rpgData.maxHp * 0.1) + (mpCost * 2)) + RandInt(10, 50);
 
 
-                switch (healClasses1.includes(user_rpgData.class) ? 1
-                    : healClasses2.includes(user_rpgData.class) ? 2
-                        : healClasses3.includes(user_rpgData.class) ? 3 : 0) {
+                switch (healClasses1.includes(author_rpgData.class) ? 1
+                    : healClasses2.includes(author_rpgData.class) ? 2
+                        : healClasses3.includes(author_rpgData.class) ? 3 : 0) {
                     case 1:
                         healAmount *= 2;
                         break;
