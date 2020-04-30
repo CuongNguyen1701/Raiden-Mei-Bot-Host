@@ -47,7 +47,7 @@ module.exports = {
                 }
                 else if (chance <= critRate) {
                     embed.setColor(color.red);
-                    dmg *= 1.5;
+                    dmg = parseInt(dmg*1.5);
                     embed.setDescription('in fact, ' + bossData.name + ' turned on fury mode and deal ' + dmg + ' damage to ' + authorData.name + '!!!');
 
                 }
