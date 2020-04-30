@@ -16,6 +16,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'summon',
     description: 'triệu hồi boss',
+    cooldown: 3600,
     execute(client, message, args) {
        // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
        let embed = new Discord.MessageEmbed();
