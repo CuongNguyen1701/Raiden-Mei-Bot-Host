@@ -36,7 +36,7 @@ module.exports = {
             }
             if(author_rpgData.hp > 0 ) return message.reply('you have not dead yet!');
             let timeout = 18000000;
-            if (timeout - (Date.now() - author_rpgData.dateSummoned > 0)) {
+            if (timeout - (Date.now() - author_rpgData.dateSummoned) > 0) {
                 let time = ms(timeout - (Date.now() - author_rpgData.dateSummoned))
                 embed.setColor('ff0000');
                 embed.setDescription('you cannot revive yet!');

@@ -69,8 +69,8 @@ module.exports = {
                 }
                 if(moneyData.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency + ' to activate the checkpoint!')
                  moneyData.pMoney -= cost;
-                 authorData.hp += (1/10)*(authorData.maxHp);
-                 authorData.mp += (1/10)*(authorData.maxMp);
+                 authorData.hp += Math.round((1/10)*(authorData.maxHp));
+                 authorData.mp += Math.round((1/10)*(authorData.maxMp));
                  if(authorData.hp > authorData.maxHp) authorData.hp = authorData.maxHp;
                  if(authorData.mp > authorData.maxMp) authorData.mp = authorData.maxMp;
                  SaveData(moneyData);

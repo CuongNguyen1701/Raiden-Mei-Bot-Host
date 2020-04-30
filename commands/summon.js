@@ -58,7 +58,7 @@ module.exports = {
                 }
                 else {
                     if (bossData.hp > 0) return message.reply('current boss has not dead yet!');
-                    if (timeout - (Date.now() - bossData.dateSummoned > 0)) {
+                    if (timeout - (Date.now() - bossData.dateSummoned) > 0) {
                         let time = ms(timeout - (Date.now() - bossData.dateSummoned))
                         embed.setColor('ff0000');
                         embed.setDescription('the boss summon is under cooldowns!');
@@ -66,13 +66,20 @@ module.exports = {
                         return message.channel.send(embed);
                     }
                     bossData.level = authorData.level,
-                        bossData.posX = RandInt(4, 10);
-                    bossData.posY = RandInt(4, 10);
+                    bossData.posX = RandInt(1, 10);
+                    bossData.posY = RandInt(1, 10);
+
+                    if(bossData.posX < 4 && bossData.posY < 4) //if the boss is near the checkpoint
+                    {
+                        bossData.posX = RandInt(5, 10);
+                        bossData.posY = RandInt(5, 10);
+                    }
+
                     bossData.hp = authorData.maxHp * 10,
-                        bossData.maxHp = authorData.maxHp * 10,
-                        bossData.atk = authorData.atk / 2,
-                        bossData.def = authorData.def / 2,
-                        bossData.dateSummoned = Date.now();
+                    bossData.maxHp = authorData.maxHp * 10,
+                    bossData.atk = authorData.atk / 2,
+                    bossData.def = authorData.def / 2,
+                    bossData.dateSummoned = Date.now();
                     SaveData(bossData);
                 }
                 let data = newData || bossData;
