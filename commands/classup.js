@@ -44,6 +44,7 @@ module.exports = {
             cost = value;
             if (data.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency);
             data.pMoney -= cost;
+            cost = 0;
             SaveData(data);
         }
         Array.prototype.subArray = function(start, end) {
