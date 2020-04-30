@@ -14,6 +14,8 @@ const dataSchema = mongoose.Schema({
     maxMp: Number,
     atk: Number,
     def: Number,
+    dateSummoned: Number,
+
 
 })
 

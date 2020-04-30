@@ -93,8 +93,8 @@ module.exports = {
 
                     embed.setColor('ff0000');
                     embed.setDescription('you already collected your daily reward');
-                    embed.addField('collect again in ' + time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
-                    embed.setFooter(' ');
+                    embed.addField('collect again in: ', time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
+               
 
                     return message.channel.send(embed);
                 }
