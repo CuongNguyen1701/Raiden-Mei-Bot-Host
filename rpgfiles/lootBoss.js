@@ -15,7 +15,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
 
-    execute(message, dmg, embed) {
+    execute(message, dmg) {
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min+1)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
         var reward = 0;
@@ -45,7 +45,7 @@ module.exports = {
                     if(!moneyData) return;
                     moneyData.pMoney += reward;
                     SaveData(moneyData);
-                    embed.addField(":moneybag: :moneybag: :moneybag: " +moneyData.id + ' received: ' , reward + pCurrency + '!');
+                    message.channel.send(":moneybag: :moneybag: :moneybag: " +moneyData.id + ' received: ' , reward + pCurrency + '!');
 
                 })
 

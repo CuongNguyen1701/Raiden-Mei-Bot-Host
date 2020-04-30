@@ -14,7 +14,7 @@ const Data = require('../models/data.js');
 
 module.exports = {
 
-    execute(message) {
+    execute(message, range) {
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min+1)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
         let embed = new Discord.MessageEmbed();
@@ -29,8 +29,8 @@ module.exports = {
             }, (err, bossData) => {
                 if (!bossData) return;//return nothing if there is no boss
                 if (bossData.hp == 0) return;//also if boss is dead
-                let range = 3;
-                if ((Math.abs(authorData.posY - bossData.posY) > range) || (Math.abs(authorData.posX - bossData.posX) > range)) {
+                let bossRange = range;
+                if ((Math.abs(authorData.posY - bossData.posY) > bossRange) || (Math.abs(authorData.posX - bossData.posX) > bossRange)) {
                     return;// not in range => does not attack
                 }
                 if (authorData.hp <= 0) return; //does not attack dead player
