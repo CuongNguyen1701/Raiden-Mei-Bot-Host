@@ -56,6 +56,9 @@ module.exports = {
                     embed.setDescription(bossData.name + ' deal ' + dmg + ' damage to ' + authorData.name + '!!');
                 }
                 authorData.hp -= dmg;
+                authorData.hp = Math.round(authorData.hp)
+                authorData.mp = Math.round(authorData.mp)
+
                 embed.setTitle(bossData.name + ' attack!');
                 if (authorData.hp <= 0) {
                     authorData.hp = 0;
