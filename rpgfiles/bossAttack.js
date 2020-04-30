@@ -15,7 +15,7 @@ const Data = require('../models/data.js');
 module.exports = {
 
     execute(message) {
-        function RandInt(min, max) { return Math.round(Math.random() * (max - min)) + min; }
+        function RandInt(min, max) { return Math.floor(Math.random() * (max - min+1)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
         let embed = new Discord.MessageEmbed();
 
@@ -47,7 +47,7 @@ module.exports = {
                 }
                 else if (chance <= critRate) {
                     embed.setColor(color.red);
-                    dmg = parseInt(dmg*1.5);
+                    dmg = Math.round(dmg*1.5);
                     embed.setDescription('in fact, ' + bossData.name + ' turned on fury mode and deal ' + dmg + ' damage to ' + authorData.name + '!!!');
 
                 }

@@ -21,7 +21,7 @@ module.exports = {
        let embed = new Discord.MessageEmbed();
         
 
-        function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min;}
+        function RandInt(min, max) { return Math.floor(Math.random() * (max - min+1)) + min;}
 
         if(!args[0]){
             var user = message.author;
