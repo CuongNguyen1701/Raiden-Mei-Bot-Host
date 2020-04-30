@@ -61,7 +61,7 @@ module.exports = {
                 //else the player is nearby
                 if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
                 if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
-                let mpCost = 0;
+                let mpCost = 20;
                 let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 75) + RandInt(1, 10);
                 let crit = false;
                 function CritRate(critRate) {
