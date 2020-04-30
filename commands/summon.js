@@ -77,7 +77,7 @@ module.exports = {
 
                     bossData.hp = authorData.maxHp * 10,
                     bossData.maxHp = authorData.maxHp * 10,
-                    bossData.atk = authorData.atk / 2,
+                    bossData.atk = authorData.atk ,
                     bossData.def = authorData.def / 2,
                     bossData.dateSummoned = Date.now();
                     SaveData(bossData);
