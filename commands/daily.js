@@ -101,7 +101,7 @@ module.exports = {
                 else {
                     if(data.faction == 'ice')
                     {
-                        reward *= 5;
+                        reward *= 10;
                         embed.setTitle('Ice faction boosted Daily Reward!')
                     }
 
