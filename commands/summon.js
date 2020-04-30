@@ -75,10 +75,10 @@ module.exports = {
                         bossData.posY = RandInt(5, 10);
                     }
 
-                    bossData.hp = authorData.maxHp * 10,
-                    bossData.maxHp = authorData.maxHp * 10,
-                    bossData.atk = authorData.atk ,
-                    bossData.def = authorData.def / 2,
+                    bossData.hp = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(1000, 1500) + 8000,
+                    bossData.maxHp = bossData.hp,
+                    bossData.atk = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40 ,
+                    bossData.def = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40,
                     bossData.dateSummoned = Date.now();
                     SaveData(bossData);
                 }
