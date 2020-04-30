@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Discord = require('discord.js');
 
 const bossAttack = require('../rpgfiles/bossAttack');
+const lootBoss = require('../rpgfiles/lootBoss');
 
 
 
@@ -106,7 +107,9 @@ module.exports = {
 				}
 				SaveData(user_rpgData);
 				SaveData(author_rpgData);
-
+				if(args[0] == 'boss'){//if user attack the boss
+					lootBoss.execute(message, dmg, embed);
+				}
 				message.channel.send(embed);
                 bossAttack.execute(message);
 

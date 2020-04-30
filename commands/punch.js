@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 const Discord = require('discord.js');
 const bossAttack = require('../rpgfiles/bossAttack');
+const lootBoss = require('../rpgfiles/lootBoss');
 
 
 
@@ -65,7 +66,7 @@ module.exports = {
 				if(author_rpgData.hp <= 0) return message.reply('you are already dead!');
 				if(user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
 
-				let dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 50) + RandInt(1, 10);
+				var dmg = parseInt(Math.log(author_rpgData.atk)/Math.log(user_rpgData.def) * 50) + RandInt(1, 10);
 
 				user_rpgData.hp -= dmg; //HP loses = dmg
 
@@ -88,8 +89,11 @@ module.exports = {
 				}
 				SaveData(user_rpgData);
 				SaveData(author_rpgData);
+				if(args[0] == 'boss'){//if user attack the boss
+					lootBoss.execute(message, dmg, embed);
+				}
 				message.channel.send(embed);
-                bossAttack.execute(message);
+				bossAttack.execute(message);
 
 
 			})
