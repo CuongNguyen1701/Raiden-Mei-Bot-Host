@@ -81,7 +81,7 @@ module.exports = {
                 embed.addField(authorData.name + ':star2: MP:  ', authorData.mp + '/' + authorData.maxMp);
                 embed.addField('balance: ', moneyData.pMoney + pCurrency)
 
-                SaveData(author_rpgData);
+
                 message.channel.send(embed);
 
 
