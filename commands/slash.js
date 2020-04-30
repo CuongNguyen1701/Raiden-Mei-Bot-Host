@@ -94,6 +94,7 @@ module.exports = {
                 else embed.setTitle(author_rpgData.name + ' attack!');
                 user_rpgData.hp -= dmg;
                 author_rpgData.mp -= mpCost;
+				if(author_rpgData.mp > author_rpgData.maxMp) author_rpgData.mp = author_rpgData.maxMp;
 
                 
                 embed.setDescription(author_rpgData.name + ' deal ' + dmg + ' damage to ' + user_rpgData.name + '!')

@@ -49,8 +49,8 @@ module.exports = {
                         class: 'boss',
                         posX: RandInt(1,10),
                         posY: RandInt(1,10),
-                        hp: authorData.hp*10,
-                        maxHp: authorData.hp*10,
+                        hp: authorData.maxHp*10,
+                        maxHp: authorData.maxHp*10,
                         atk: authorData.atk,
                         def: authorData.def/2,
                     })

@@ -72,6 +72,7 @@ module.exports = {
                     break;
                 }
                 data.mp += 20;
+				if(data.mp > data.maxMp) data.mp = data.maxMp;
                 
                 SaveData(data);
             let msg = client.users.cache.get(user.id).username + ' moved ' + dir;

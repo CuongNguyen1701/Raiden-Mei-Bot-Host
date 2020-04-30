@@ -17,7 +17,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'revive',
     description: 'hồi sinh',
-    cooldown: 3600,
+    cooldown: 7200,
     execute(client, message, args) {
 
 
