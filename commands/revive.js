@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Discord = require('discord.js');
+const ms = require('parse-ms');
 
 
 
@@ -17,7 +18,6 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'revive',
     description: 'hồi sinh',
-    cooldown: 7200,
     execute(client, message, args) {
 
 
@@ -34,7 +34,16 @@ module.exports = {
             if (!author_rpgData) {
                 return message.reply('please declare your existence using ' + prefix + 'char first!')
             }
-
+            if(author_rpgData.hp > 0 ) return message.reply('you have not dead yet!');
+            let timeout = 18000000;
+            if (timeout - (Date.now() - author_rpgData.dateSummoned > 0)) {
+                let time = ms(timeout - (Date.now() - author_rpgData.dateSummoned))
+                embed.setColor('ff0000');
+                embed.setDescription('you cannot revive yet!');
+                embed.addField('able to summon in: ', time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
+                return message.channel.send(embed);
+            }
+                author_rpgData.dateSummoned = Date.now();
                 author_rpgData.mp = author_rpgData.maxMp;
                 author_rpgData.hp = author_rpgData.maxHp;
         

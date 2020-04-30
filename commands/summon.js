@@ -49,7 +49,7 @@ module.exports = {
                         posY: RandInt(4, 10),
                         hp: authorData.maxHp * 10,
                         maxHp: authorData.maxHp * 10,
-                        atk: authorData.atk,
+                        atk: authorData.atk / 2,
                         def: authorData.def / 2,
                         dateSummoned: Date.now(),
 
@@ -70,7 +70,7 @@ module.exports = {
                     bossData.posY = RandInt(4, 10);
                     bossData.hp = authorData.maxHp * 10,
                         bossData.maxHp = authorData.maxHp * 10,
-                        bossData.atk = authorData.atk,
+                        bossData.atk = authorData.atk / 2,
                         bossData.def = authorData.def / 2,
                         bossData.dateSummoned = Date.now();
                     SaveData(bossData);
