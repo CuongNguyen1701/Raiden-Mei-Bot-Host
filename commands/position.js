@@ -32,14 +32,27 @@ module.exports = {
         if(!args[0]){
             var user = message.author;
         }
-        else if(args[0] == 'boss'){
-            var user = new Object();
-            user.id = 1;
-            player = ':japanese_ogre:'
-        }
         else{
-            var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
-        }
+            switch(args[0])
+            {
+                case 'boss':
+                    var user = new Object();
+                    user.id = 1;
+                    player = ':japanese_ogre:'
+                    break;
+                case 'checkpoint': case 'cp':
+                    var user = new Object();
+                    user.id = 2;
+                    player = ':flag_vn:'
+                    break;
+                default:
+                    var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
+                    break;
+            }
+        } 
+        if(!user) return message.reply('cannot find the user');
+        
+        
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
         RpgData.findOne({
