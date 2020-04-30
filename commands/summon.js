@@ -47,10 +47,10 @@ module.exports = {
                         class: 'boss',
                         posX: RandInt(4, 10),
                         posY: RandInt(4, 10),
-                        hp: authorData.maxHp * 10,
-                        maxHp: authorData.maxHp * 10,
-                        atk: authorData.atk / 2,
-                        def: authorData.def / 2,
+                        hp: Math.round(Math.pow(authorData.level, 1.3)) * RandInt(1000, 1200),
+                        maxHp: Math.round(Math.pow(authorData.level, 1.3)) * RandInt(1000, 1500) + 8000,
+                        atk: Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40,
+                        def: Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40,
                         dateSummoned: Date.now(),
 
                     })
@@ -66,20 +66,20 @@ module.exports = {
                         return message.channel.send(embed);
                     }
                     bossData.level = authorData.level,
-                    bossData.posX = RandInt(1, 10);
+                        bossData.posX = RandInt(1, 10);
                     bossData.posY = RandInt(1, 10);
 
-                    if(bossData.posX < 4 && bossData.posY < 4) //if the boss is near the checkpoint
+                    if (bossData.posX < 4 && bossData.posY < 4) //if the boss is near the checkpoint
                     {
                         bossData.posX = RandInt(5, 10);
                         bossData.posY = RandInt(5, 10);
                     }
 
                     bossData.hp = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(1000, 1500) + 8000,
-                    bossData.maxHp = bossData.hp,
-                    bossData.atk = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40 ,
-                    bossData.def = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40,
-                    bossData.dateSummoned = Date.now();
+                        bossData.maxHp = bossData.hp,
+                        bossData.atk = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40,
+                        bossData.def = Math.round(Math.pow(authorData.level, 1.3)) * RandInt(10, 15) + 40,
+                        bossData.dateSummoned = Date.now();
                     SaveData(bossData);
                 }
                 let data = newData || bossData;
