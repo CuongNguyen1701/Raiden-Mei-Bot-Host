@@ -28,13 +28,13 @@ module.exports = {
         }
         if (!user) return message.reply('cannot find that user!');
         // if(user.presence.status != 'online' &&user.presence.status != 'idle') 
-		// {
-		// 	return message.reply('user is not online or idle !');
-		// }
-		// if(message.author.presence.status != 'online' && message.author.presence.status != 'online')
-		// {
-		// 	return message.reply('please set your status to online or idle !');
-		// }
+        // {
+        // 	return message.reply('user is not online or idle !');
+        // }
+        // if(message.author.presence.status != 'online' && message.author.presence.status != 'online')
+        // {
+        // 	return message.reply('please set your status to online or idle !');
+        // }
         let embed = new Discord.MessageEmbed();
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
@@ -56,11 +56,21 @@ module.exports = {
                 }
                 var range = 1;
 
-                switch (author_rpgData.class) {
-                    case 'healer': case 'elf': case 'paladin': case 'priest':
+                var healClasses1 = ['healer', 'elf', 'paladin', 'darkelf', 'crusader'];
+                var healClasses2 = ['priest', 'avariel', 'exorcist', 'valkyrie'];
+                var healClasses3 = ['cleric'];
+
+
+                switch (healClasses1.includes(user_rpgData.class) ? 1
+                    : healClasses2.includes(user_rpgData.class) ? 2
+                        : healClasses3.includes(user_rpgData.class) ? 3 : 0) {
+                    case 1: case 2:
                         range++;
                         break;
-                    default:
+                    case 3:
+                        range += 2;
+                        break;
+                    case 0:
                         break;
                 }
                 if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
@@ -76,14 +86,20 @@ module.exports = {
                 let healAmount = Math.ceil((user_rpgData.maxHp * 0.1) + (mpCost * 2)) + RandInt(10, 50);
 
 
-                switch (author_rpgData.class) {
-                    case 'healer': case 'elf': case 'paladin':
-                        healAmount = Math.ceil(healAmount * 2);
+                switch (healClasses1.includes(user_rpgData.class) ? 1
+                    : healClasses2.includes(user_rpgData.class) ? 2
+                        : healClasses3.includes(user_rpgData.class) ? 3 : 0) {
+                    case 1:
+                        healAmount *= 2;
                         break;
-                    case 'priest':
-                        healAmount = Math.ceil(healAmount * 3);
+                    case 2:
+                        healAmount *= 3;
                         break;
-                    default:
+                    case 3:
+                        healAmount *= 3;
+                        mpCost = Math.floor(mpCost / 2);
+                        break;
+                    case 0:
                         break;
                 }
                 author_rpgData.mp -= mpCost;

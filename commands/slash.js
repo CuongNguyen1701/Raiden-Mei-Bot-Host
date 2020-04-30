@@ -21,23 +21,16 @@ module.exports = {
     description: 'chém luôn(20 MP)',
     cooldown: 20,
     execute(client, message, args) {
-        if(args[0] == 'boss'){
+        if (args[0] == 'boss') {
             var user = new Object();
             user.id = 1;
         }
-        else{
-            var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
+        else {
+            var user = message.mentions.users.first() || client.users.cache.get(args[0]);
         }
         if (!user) return message.reply('cannot find that user!');
         if (user.id == message.author.id) return message.reply("don't hit yourself please");
-        // if(user.presence.status != 'online' &&user.presence.status != 'idle') 
-		// {
-		// 	return message.reply('user is not online or idle !');
-		// }
-		// if(message.author.presence.status != 'online' && message.author.presence.status != 'online')
-		// {
-		// 	return message.reply('please set your status to online or idle !');
-		// }
+
         let embed = new Discord.MessageEmbed();
         function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
@@ -57,7 +50,9 @@ module.exports = {
                 if (!user_rpgData) {
                     return message.reply('user has not enter the map yet!');
                 }
-                var meleeType = ['swordman', 'paladin', 'knight', 'ranger']
+                var meleeClasses1 = ['swordman', 'paladin', 'knight', 'ranger','cyborg', 'valkyrie', 'darkelf'];
+                var meleeClasses2 = ['knight', 'ninja', 'vampire', 'crusader'];
+                var meleeClasses3 = ['gladiator', 'samurai'];
                 let range = 1;
                 //both directions' distance is larger than 1
                 if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
@@ -66,37 +61,45 @@ module.exports = {
                 //else the player is nearby
                 if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
                 if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
-                let mpCost =  -20;
+                let mpCost = 0;
                 let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 75) + RandInt(1, 10);
                 let crit = false;
                 function CritRate(critRate) {
                     let chance = RandInt(1, 100);
                     if (chance <= critRate) dmg *= 2;
-                    crit =true;
+                    crit = true;
 
                 }
 
 
 
-                switch (author_rpgData.class) {
-                    case meleeType[2]:
-                        dmg *= 3;
-                        CritRate(60)
-                        break;
-                    case meleeType[0]: case meleeType[1]: case meleeType[3]:
+                switch (meleeClasses1.includes(author_rpgData.class) ? 1
+                    : meleeClasses2.includes(author_rpgData.class) ? 2
+                        : meleeClasses3.includes(author_rpgData.class) ? 3 : 0) {
+                    case 1:
                         dmg *= 2;
                         CritRate(50);
                         break;
+                    case 2:
+                        dmg *= 3;
+                        CritRate(60)
+                        break;
+                    case 3:
+                        dmg *= 3;
+                        CritRate(80)
+                        break;
+                    case 0:
+                        break;
                 }
 
 
-                if(crit) embed.setTitle( 'CRIT!! ' + author_rpgData.name + ' attack!');
+                if (crit) embed.setTitle('CRIT!! ' + author_rpgData.name + ' attack!');
                 else embed.setTitle(author_rpgData.name + ' attack!');
                 user_rpgData.hp -= dmg;
                 author_rpgData.mp -= mpCost;
-				if(author_rpgData.mp > author_rpgData.maxMp) author_rpgData.mp = author_rpgData.maxMp;
+                if (author_rpgData.mp > author_rpgData.maxMp) author_rpgData.mp = author_rpgData.maxMp;
 
-                
+
                 embed.setDescription(author_rpgData.name + ' deal ' + dmg + ' damage to ' + user_rpgData.name + '!')
                 if (user_rpgData.hp <= 0) {
                     user_rpgData.hp = 0;
@@ -107,10 +110,10 @@ module.exports = {
                     embed.addField(user_rpgData.name + ':heart: HP:  ', user_rpgData.hp + '/' + user_rpgData.maxHp);
                 }
                 SaveData(user_rpgData);
-				SaveData(author_rpgData);
-                if(args[0] == 'boss'){//if user attack the boss
-					lootBoss.execute(message, dmg);
-				}
+                SaveData(author_rpgData);
+                if (args[0] == 'boss') {//if user attack the boss
+                    lootBoss.execute(message, dmg);
+                }
                 message.channel.send(embed);
                 bossAttack.execute(message, range);
 
