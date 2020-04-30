@@ -16,6 +16,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'position',
     description: 'vị trí hiện tại của bạn',
+    aliases: ['pos', 'loc', 'location'],
     execute(client, message, args) {
        // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
