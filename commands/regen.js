@@ -36,15 +36,16 @@ module.exports = {
             }
             if (!author_rpgData.lastRecovered) author_rpgData.lastRecovered = 0;
             let restTime = Date.now() - author_rpgData.lastRecovered;
-            let mpRecover = Math.floor((restTime / 60000) * (author_rpgData.maxMp / 100)); //1% max mp per 1 min 
+            let mpRecover = Math.floor((restTime / 300000) * (author_rpgData.maxMp / 100)); //1% max mp per 5 min 
+            let maxRegen = author_rpgData.maxMp - author_rpgData.mp;
+            mpRecover = (mpRecover <= maxRegen) ? mpRecover : maxRegen;
             author_rpgData.mp += mpRecover;
-            author_rpgData.mp = (author_rpgData.mp <= author_rpgData.maxMp) ? author_rpgData.mp : author_rpgData.maxMp;
             author_rpgData.lastRecovered = Date.now();
 
 
 
             SaveData(author_rpgData);
-            message.reply('you regenarated ' + mpRecover + ' MP. Current :star2: MP:  ' + author_rpgData.mp + '/' + author_rpgData.maxMp)
+            message.reply('you regenerated ' + mpRecover + ' MP. Current :star2: MP:  ' + author_rpgData.mp + '/' + author_rpgData.maxMp)
 
 
         })
