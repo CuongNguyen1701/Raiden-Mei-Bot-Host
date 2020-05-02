@@ -21,7 +21,7 @@ module.exports = {
     description: 'chém luôn(20 MP)',
     cooldown: 20,
     execute(client, message, args) {
-        if (args[0] == 'boss') {
+        if (args[0] == 'boss'|| !args[0]) {
             var user = new Object();
             user.id = 1;
         }

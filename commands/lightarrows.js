@@ -19,9 +19,9 @@ const RpgData = require('../models/rpgdata.js');
 
 
 module.exports = {
-	name: 'shoot',
-	description: 'bắn luôn(50 MP)',
-	cooldown: 30,
+	name: 'lightarrows',
+	description: '[Elf+]bắn tên ánh sáng (100 MP)',
+	cooldown: 60,
 	execute(client, message, args) {
 		if (args[0] == 'boss'|| !args[0]) {
 			var user = new Object();
@@ -52,30 +52,14 @@ module.exports = {
 				if (!user_rpgData) {
 					return message.reply('user has not enter the map yet!');
 				}
-				var rangedClasses1 = ['archer', 'elf', 'ranger', 'avariel', 'exorcist', 'ninja'];
-				var rangedClasses2 = ['sniper', 'darkelf', 'vampire', 'cyborg'];
-				var rangedClasses3 = ['commander'];
-				var rangedClasses = rangedClasses1.concat(rangedClasses2.concat(rangedClasses3));
-				if (!rangedClasses.includes(author_rpgData.class)) {
-					return message.reply('you have to be a ranged type to use this command! ranged type classes: ' + rangedClasses);
+				var elves =['elf', 'darkelf', 'avariel'];
+				
+				if (!elves.includes(author_rpgData.class)) {
+					return message.reply("This is an exclusive move of elves(" + elves + ")!");
 				}
 
 				let range = 2;
-				let mpCost = 50;
-				switch (rangedClasses1.includes(author_rpgData.class) ? 1
-					: rangedClasses2.includes(author_rpgData.class) ? 2
-						: rangedClasses3.includes(author_rpgData.class) ? 3 : 0) {
-					case 1:
-						break;
-					case 2:
-						range++
-						break;
-					case 3:
-						range++
-						mpCost /= 2;
-						break;
-
-				}
+				let mpCost = 100;
 
 				//both directions' distance is larger than 1
 				if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
@@ -85,27 +69,22 @@ module.exports = {
 				if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
 				if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
 
-				let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 100) + RandInt(10, 50);
+				let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 500) + RandInt(100, 250);
 				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
-				switch (rangedClasses1.includes(author_rpgData.class) ? 1
-					: rangedClasses2.includes(author_rpgData.class) ? 2
-						: rangedClasses3.includes(author_rpgData.class) ? 3 : 0) {
-					case 1:
-						dmg = Math.round(dmg*1.2);
+				switch (author_rpgData.class) {
+					case elves[2]:
+						dmg = Math.round(dmg*1.3);
 						break;
-					case 2:
-						dmg = Math.round(dmg*1.4) + RandInt(20, 70);
+					case elves[1]:
+						dmg = Math.round(dmg*1.5) + RandInt(70, 100);
 						
-						break;
-					case 3:
-						dmg = Math.round(dmg*1.4) + RandInt(20, 70);
 						break;
 
 				}
 				author_rpgData.mp -= mpCost;
 				user_rpgData.hp -= dmg;
 
-				embed.setTitle(author_rpgData.name + ' attack!')
+				embed.setTitle(author_rpgData.name + ' attack using light arrrows!')
 				embed.setDescription(author_rpgData.name + ' deal ' + dmg + ' damage to ' + user_rpgData.name + '!')
 				if (user_rpgData.hp <= 0) {
 					user_rpgData.hp = 0;
