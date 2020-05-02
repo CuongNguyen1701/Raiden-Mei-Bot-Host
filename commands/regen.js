@@ -44,7 +44,7 @@ module.exports = {
 
 
             SaveData(author_rpgData);
-            message.channel.reply('you regenarated ' + mpRecover + ' MP. Current :star2: MP:  ' + author_rpgData.mp + '/' + author_rpgData.maxMp)
+            message.reply('you regenarated ' + mpRecover + ' MP. Current :star2: MP:  ' + author_rpgData.mp + '/' + author_rpgData.maxMp)
 
 
         })
