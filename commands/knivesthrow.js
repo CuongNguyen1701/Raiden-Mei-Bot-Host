@@ -56,7 +56,7 @@ module.exports = {
                 if (!rangerType.includes(author_rpgData.class)) {
 					return message.reply("This is an exclusive move of " + rangerType + "!");
 				}
-				let range = 3;
+				let range = 2;
 				let mpCost = 75;
 	
 

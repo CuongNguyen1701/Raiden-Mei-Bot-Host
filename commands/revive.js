@@ -40,7 +40,7 @@ module.exports = {
                 let time = ms(timeout - (Date.now() - author_rpgData.dateSummoned))
                 embed.setColor('ff0000');
                 embed.setDescription('you cannot revive yet!');
-                embed.addField('able to summon in: ', time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
+                embed.addField('able to revive in: ', time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
                 return message.channel.send(embed);
             }
                 author_rpgData.dateSummoned = Date.now();
