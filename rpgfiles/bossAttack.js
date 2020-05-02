@@ -29,15 +29,20 @@ module.exports = {
             }, (err, bossData) => {
                 if (!bossData) return;//return nothing if there is no boss
                 if (bossData.hp == 0) return;//also if boss is dead
-                let bossRange = range;
-                if ((Math.abs(authorData.posY - bossData.posY) > bossRange) || (Math.abs(authorData.posX - bossData.posX) > bossRange)) {
+                let bossRange = range || 2;
+                let distanceY = Math.abs(authorData.posY - bossData.posY);
+                let distanceX = Math.abs(authorData.posX - bossData.posX);
+
+                let distance = (distanceX > distanceY) ? distanceX : distanceY; //use the higher value for distance
+
+                if ((distanceY > bossRange) || distanceX > bossRange) {
                     return;// not in range => does not attack
                 }
                 if (authorData.hp <= 0) return; //does not attack dead player
 
-                let dmg = parseInt(Math.log(bossData.atk) / Math.log(authorData.def) * 150) + RandInt(50, 100);
+                let dmg = parseInt(Math.log(bossData.atk) / Math.log(authorData.def) * 150 + RandInt(50, 100)/distance) ;
                 let chance = RandInt(1, 100);
-                let missRate = 30;
+                let missRate = 20*distance;
                 let critRate = missRate + 20;//the number add with missRate is the crit rate(%)
                 if (chance <= missRate) {
                     embed.setColor(color.green);

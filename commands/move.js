@@ -85,7 +85,7 @@ module.exports = {
                 else msg += ('\n' + mapTiles.repeat(size));
             }
             message.channel.send(msg);
-            bossAttack.execute(message, 2);
+            bossAttack.execute(message);
 
 
 
