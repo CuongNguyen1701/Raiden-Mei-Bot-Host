@@ -17,7 +17,7 @@ const RpgData = require('../models/rpgdata.js');
 
 module.exports = {
     name: 'revive',
-    description: 'hồi sinh',
+    description: 'hồi sinh lên 30% máu',
     execute(client, message, args) {
 
 
@@ -44,8 +44,7 @@ module.exports = {
                 return message.channel.send(embed);
             }
                 author_rpgData.dateSummoned = Date.now();
-                author_rpgData.mp = author_rpgData.maxMp;
-                author_rpgData.hp = author_rpgData.maxHp;
+                author_rpgData.hp =  Math.round(author_rpgData.maxHp * 0.3);
         
 
                 embed.setTitle(author_rpgData.name + ' revived!')

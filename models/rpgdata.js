@@ -15,6 +15,7 @@ const dataSchema = mongoose.Schema({
     atk: Number,
     def: Number,
     dateSummoned: Number,
+    lastRecovered: Number,
 
 
 })

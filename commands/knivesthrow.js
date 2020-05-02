@@ -68,11 +68,11 @@ module.exports = {
 				if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
 				if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
 
-				let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 300) + RandInt(200, 300);
+				let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 300) + RandInt(100, 200);
 				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
 				switch (author_rpgData.class){
 					case rangerType[1]:
-						dmg = Math.round(dmg*1.3);
+						dmg = Math.round(dmg*1.4);
 						break;
 					case rangerType[2]:
 						dmg = Math.round(dmg*1.1) + RandInt(50, 300);
