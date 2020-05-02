@@ -90,7 +90,7 @@ module.exports = {
 				}
 				SaveData(user_rpgData);
 				SaveData(author_rpgData);
-				if(args[0] == 'boss'){//if user attack the boss
+				if(user.id == 1){//if user attack the boss
 					lootBoss.execute(message, dmg);
 				}
 				message.channel.send(embed);
