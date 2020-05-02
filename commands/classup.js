@@ -77,8 +77,7 @@ module.exports = {
 
                     }
 
-                    if (!args[0]) upClass = 'unknown';
-                    upClass = args[0].toLowerCase();
+                    upClass = args[0].toLowerCase() || 'unknown';
 
                     switch (rpgData.class) {
                         case 'newbie':
