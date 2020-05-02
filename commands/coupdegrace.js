@@ -86,8 +86,8 @@ module.exports = {
                 }
 
 
-                if (crit) embed.setTitle('CRIT!! ' + author_rpgData.name + ' attack!');
-                else embed.setTitle(author_rpgData.name + ' attack!');
+                if (crit) embed.setTitle('CRIT!! ' + author_rpgData.name + ' perform a coup de grâce attack!');
+                else embed.setTitle(author_rpgData.name + ' perform a coup de grâce attack!');
                 user_rpgData.hp -= dmg;
                 author_rpgData.mp -= mpCost;
                 if (author_rpgData.mp > author_rpgData.maxMp) author_rpgData.mp = author_rpgData.maxMp;
