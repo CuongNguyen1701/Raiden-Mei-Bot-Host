@@ -65,6 +65,8 @@ module.exports = {
                 let hpBuff = author_rpgData.maxHp/ (user_rpgData.hp * 3);
                 let buffFromHp = (hpBuff <= 3) ? hpBuff : 3;
                 let mpCost = 80;
+				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
+
                 let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 200 * buffFromHp) + RandInt(100, 200);
                 let crit = false;
                 function CritRate(critRate) {

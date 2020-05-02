@@ -77,7 +77,7 @@ module.exports = {
 
                     }
 
-                    if (!args[0]) return message.reply('please provide the class you wanna upgrade to');
+                    if (!args[0]) upClass = 'unknown';
                     upClass = args[0].toLowerCase();
 
                     switch (rpgData.class) {

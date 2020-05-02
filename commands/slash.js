@@ -62,6 +62,8 @@ module.exports = {
                 if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
                 if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
                 let mpCost = 20;
+				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
+
                 let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 75) + RandInt(1, 10);
                 let crit = false;
                 function CritRate(critRate) {
@@ -97,6 +99,7 @@ module.exports = {
                 else embed.setTitle(author_rpgData.name + ' attack!');
                 user_rpgData.hp -= dmg;
                 author_rpgData.mp -= mpCost;
+
                 if (author_rpgData.mp > author_rpgData.maxMp) author_rpgData.mp = author_rpgData.maxMp;
 
 

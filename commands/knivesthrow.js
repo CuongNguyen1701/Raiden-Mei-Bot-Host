@@ -20,7 +20,7 @@ const RpgData = require('../models/rpgdata.js');
 
 module.exports = {
 	name: 'knivesthrow',
-	description: '[ranger+]phi dao, đòn tầm xa và có thể crit (75 MP)',
+	description: '[Ranger+]phi dao, đòn tầm xa và có thể crit (75 MP)',
 	cooldown: 60,
 	execute(client, message, args) {
 		if (args[0] == 'boss'|| !args[0]) {

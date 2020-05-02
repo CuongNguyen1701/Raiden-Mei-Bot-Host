@@ -56,6 +56,8 @@ module.exports = {
 				}
 				let range = 3;
                 let mpCost = 150;
+				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
+
                 //both directions' distance is larger than 1
                 let distanceY = Math.abs(authorData.posY - bossData.posY);
                 let distanceX = Math.abs(authorData.posX - bossData.posX);
