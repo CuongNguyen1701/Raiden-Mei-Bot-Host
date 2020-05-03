@@ -14,8 +14,8 @@ const Data = require('../models/data.js');
 
 module.exports = {
 
-    execute(message, range) {
-        function RandInt(min, max) { return Math.floor(Math.random() * (max - min+1)) + min; }
+    execute(message, range = 2) {
+        function RandInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
         function SaveData(data) { data.save().catch(err => console.log(err)); }
         let embed = new Discord.MessageEmbed();
 
@@ -29,7 +29,7 @@ module.exports = {
             }, (err, bossData) => {
                 if (!bossData) return;//return nothing if there is no boss
                 if (bossData.hp <= 0) return;//also if boss is dead
-                let bossRange = range || 2;
+                let bossRange = range;
                 let distanceY = Math.abs(authorData.posY - bossData.posY);
                 let distanceX = Math.abs(authorData.posX - bossData.posX);
 
@@ -40,9 +40,9 @@ module.exports = {
                 }
                 if (authorData.hp <= 0) return; //does not attack dead player
 
-                let dmg = parseInt(Math.log(bossData.atk) / Math.log(authorData.def) * 150 + RandInt(70, 150)/(distance+ 0.5)) ;
+                let dmg = parseInt(Math.log(bossData.atk) / Math.log(authorData.def) * 150 + RandInt(70, 150) / (distance + 0.5));
                 let chance = RandInt(1, 100);
-                let missRate = 20*distance;
+                let missRate = 20 * distance;
                 let critRate = missRate + 20;//the number add with missRate is the crit rate(%)
                 if (chance <= missRate) {
                     embed.setColor(color.green);
@@ -52,7 +52,7 @@ module.exports = {
                 }
                 else if (chance <= critRate) {
                     embed.setColor(color.red);
-                    dmg = Math.round(dmg*1.5);
+                    dmg = Math.round(dmg * 1.5);
                     embed.setDescription('in fact, ' + bossData.name + ' turned on fury mode and deal ' + dmg + ' damage to ' + authorData.name + '!!!');
 
                 }
