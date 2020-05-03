@@ -43,8 +43,12 @@ module.exports = {
                 case 'checkpoint': case 'cp':
                     var user = new Object();
                     user.id = 2;
-                    player = ':flag_vn:'
+                    player = ':fleur_de_lis:'
                     break;
+                case 'treasure': case 'treas':
+                    var user = new Object();
+                    user.id = 3;
+                    player = ':moneybag:'
                 default:
                     var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
                     break;
