@@ -57,6 +57,8 @@ module.exports = {
                     authorData.posX = cpData.posX;
                     authorData.posY = cpData.posY;
                 moneyData.pMoney -= cost;
+                SaveData(moneyData);
+                SaveData(authorData);
                  
 
                 message.reply('you returned to the checkpoint!');
