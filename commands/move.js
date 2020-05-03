@@ -18,7 +18,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'move',
     description: 'di chuyển, 4 hướng đông tây nam bắc',
-    cooldown: 15,
+    cooldown: 10,
     execute(client, message, args) {
         //if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
@@ -47,12 +47,12 @@ module.exports = {
         }, (err, rpgData) => {
             if (err) console.log(err);
             if (!rpgData) {
-               return message.reply('please declare your position using ' + prefix + 'position first!')
+                return message.reply('please declare your position using ' + prefix + 'position first!')
             }
             let data = rpgData;
-            if(data.hp <= 0) return message.reply("you can't move" );
+            if (data.hp <= 0) return message.reply("you can't move");
 
-            
+
             switch (dir) {
                 case 'north': case 'n':
                     if (data.posY == 1) return message.reply('you cannot move in that direction!');
@@ -70,11 +70,11 @@ module.exports = {
                     if (data.posX == 1) return message.reply('you cannot move in that direction!');
                     data.posX--;
                     break;
-                }
-                data.mp += 20;
-				if(data.mp > data.maxMp) data.mp = data.maxMp;
-                
-                SaveData(data);
+            }
+            data.mp += 20;
+            if (data.mp > data.maxMp) data.mp = data.maxMp;
+
+            SaveData(data);
             let msg = client.users.cache.get(user.id).username + ' moved ' + dir;
 
             msg += '\n' + client.users.cache.get(user.id).username + "'s new position: " + data.posX + ',' + data.posY;
