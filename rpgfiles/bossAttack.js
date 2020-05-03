@@ -35,7 +35,7 @@ module.exports = {
 
                 let distance = (distanceX > distanceY) ? distanceX : distanceY; //use the higher value for distance
 
-                if ((distanceY > bossRange) || distanceX > bossRange) {
+                if (distance > bossRange) {
                     return;// not in range => does not attack
                 }
                 if (authorData.hp <= 0) return; //does not attack dead player

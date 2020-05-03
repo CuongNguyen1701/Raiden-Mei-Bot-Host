@@ -34,7 +34,7 @@ module.exports = {
         }
         else {
             switch (args[0]) {
-                case 'boss':
+                case 'boss': case 'b':
                     var user = new Object();
                     user.id = 1;
                     player = ':japanese_ogre:'
