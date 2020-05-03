@@ -59,7 +59,7 @@ module.exports = {
                 moneyData.pMoney -= cost;
                  
 
-                message.channel.reply('you returned to the checkpoint!');
+                message.reply('you returned to the checkpoint!');
 
 
                 })
