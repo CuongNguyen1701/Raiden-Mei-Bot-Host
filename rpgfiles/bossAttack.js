@@ -28,7 +28,7 @@ module.exports = {
                 userID: 1//boss ID
             }, (err, bossData) => {
                 if (!bossData) return;//return nothing if there is no boss
-                if (bossData.hp == 0) return;//also if boss is dead
+                if (bossData.hp <= 0) return;//also if boss is dead
                 let bossRange = range || 2;
                 let distanceY = Math.abs(authorData.posY - bossData.posY);
                 let distanceX = Math.abs(authorData.posX - bossData.posX);
