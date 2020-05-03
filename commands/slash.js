@@ -21,7 +21,7 @@ module.exports = {
     description: 'chém luôn(20 MP)',
     cooldown: 20,
     execute(client, message, args) {
-        if (args[0] == 'boss'|| !args[0]) {
+        if (args[0] == 'boss' || !args[0]) {
             var user = new Object();
             user.id = 1;
         }
@@ -50,7 +50,7 @@ module.exports = {
                 if (!user_rpgData) {
                     return message.reply('user has not enter the map yet!');
                 }
-                var meleeClasses1 = ['swordman', 'paladin', 'knight', 'ranger','cyborg', 'valkyrie', 'darkelf'];
+                var meleeClasses1 = ['swordman', 'paladin', 'knight', 'ranger', 'cyborg', 'valkyrie', 'darkelf'];
                 var meleeClasses2 = ['knight', 'ninja', 'vampire', 'crusader'];
                 var meleeClasses3 = ['gladiator', 'samurai'];
                 let range = 1;
@@ -62,7 +62,7 @@ module.exports = {
                 if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
                 if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
                 let mpCost = 20;
-				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
+                if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
 
                 let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 75) + RandInt(1, 10);
                 let crit = false;
@@ -118,7 +118,7 @@ module.exports = {
                     lootBoss.execute(message, dmg);
                 }
                 message.channel.send(embed);
-                bossAttack.execute(message, range);
+                bossAttack.execute(message);
 
 
             })
