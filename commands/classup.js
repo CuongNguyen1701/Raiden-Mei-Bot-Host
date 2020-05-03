@@ -76,8 +76,10 @@ module.exports = {
                         message.reply('please use ' + prefix + 'char command first!');
 
                     }
-
-                    upClass = args[0].toLowerCase() || 'unknown';
+                    if (!args[0]) {
+                        args[0] = 'unknown';
+                    }
+                    upClass = args[0].toLowerCase();
 
                     switch (rpgData.class) {
                         case 'newbie':

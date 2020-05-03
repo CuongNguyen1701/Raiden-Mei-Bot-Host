@@ -69,8 +69,8 @@ module.exports = {
                     if ((Math.abs(authorData.posY - chestData.posY) > range) || (Math.abs(authorData.posX - chestData.posX) > range)) {
                         return message.reply('the treasure is not in range, you must be in the same position as the treasure!');//out of 3x3 square
                     }
-                    if(authorData.hp = 0) return message.reply('you are already dead!');
-                    if(!authorData.lastCollected) authorData.lastCollected = 0;
+                    if (authorData.hp = 0) return message.reply('you are already dead!');
+                    if (!authorData.lastCollected) authorData.lastCollected = 0;
                     if (timeout - (Date.now() - authorData.lastCollected) > 0) {
                         let time = ms(timeout - (Date.now() - authorData.lastCollected));
                         embed.setColor(color.red);
@@ -80,7 +80,7 @@ module.exports = {
 
                     }
                     authorData.lastCollected = Date.now();
-                    let reward = RandInt(200, 500);
+                    let reward = RandInt(400, 700);
                     moneyData.pMoney += reward;
                     chestData.posX = RandInt(1, 10);
                     chestData.posY = RandInt(1, 10);
@@ -88,10 +88,10 @@ module.exports = {
                     SaveData(moneyData);
                     SaveData(chestData);
                     embed.setColor(color.green);
-                    embed.setDescription(authorData.name + ' collected :moneybag: :moneybag: :moneybag: ' + reward +pCurrency + '!')
+                    embed.setDescription(authorData.name + ' collected :moneybag: :moneybag: :moneybag: ' + reward + pCurrency + '!')
 
 
-                    message.channel.send(embed); 
+                    message.channel.send(embed);
 
 
 

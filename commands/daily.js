@@ -7,9 +7,9 @@ const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log( 'Database Connected' ))
-.catch(err => console.log( err ));
+mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Database Connected'))
+    .catch(err => console.log(err));
 //MODELS
 const Data = require('../models/data.js');
 
@@ -94,13 +94,12 @@ module.exports = {
                     embed.setColor('ff0000');
                     embed.setDescription('you already collected your daily reward');
                     embed.addField('collect again in: ', time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
-               
+
 
                     return message.channel.send(embed);
                 }
                 else {
-                    if(data.faction == 'ice')
-                    {
+                    if (data.faction == 'ice') {
                         reward *= 10;
                         embed.setTitle('Ice faction boosted Daily Reward!')
                     }
@@ -130,7 +129,7 @@ module.exports = {
                 else
                 {
                     data.save().catch(err => console.log(err));
-                    
+
                 }
             })
 */
