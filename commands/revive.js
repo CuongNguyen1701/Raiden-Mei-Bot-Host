@@ -48,7 +48,7 @@ module.exports = {
         
 
                 embed.setTitle(author_rpgData.name + ' revived!')
-                embed.setDescription(author_rpgData.name + ' is fully recovered!');
+                embed.setDescription(author_rpgData.name + ' recovered a bit!');
                 embed.addField(author_rpgData.name + ':heart: HP:  ', author_rpgData.hp + '/' + author_rpgData.maxHp);
                 embed.addField(author_rpgData.name + ':star2: MP:  ', author_rpgData.mp + '/' + author_rpgData.maxMp);
 
