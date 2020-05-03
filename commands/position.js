@@ -49,6 +49,7 @@ module.exports = {
                     var user = new Object();
                     user.id = 3;
                     player = ':moneybag:'
+                    break;
                 default:
                     var user = message.mentions.users.first() || client.users.cache.get(args[0]); 
                     break;
