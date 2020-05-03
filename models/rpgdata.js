@@ -17,6 +17,7 @@ const dataSchema = mongoose.Schema({
     dateSummoned: Number,
     lastRecovered: Number,
     lastCollected: Number,
+    lastCollectedHidden: Number,
 
 
 })

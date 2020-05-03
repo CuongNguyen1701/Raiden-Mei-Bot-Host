@@ -17,8 +17,8 @@ const Data = require('../models/data.js');
 
 
 module.exports = {
-    name: 'collect',
-    description: 'nhặt tiền trong rương',
+    name: 'detect',
+    description: 'dò kho báu ẩn',
     execute(client, message, args) {
         // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
         let embed = new Discord.MessageEmbed();
@@ -35,19 +35,19 @@ module.exports = {
             if (!authorData) {
                 return message.reply('please declare your existence using ' + prefix + 'char first!');
             }
-            var id = 3;
+            var id = 4;
             RpgData.findOne({
                 userID: id,
             }, (err, chestData) => {
                 if (!chestData) {
                     var newData = new RpgData({
-                        name: 'TREASURE CHEST',
+                        name: 'HIDDEN TREASURE CHEST',
                         userID: id,
                         level: 100000,
                         lb: 'treasure chest',
-                        class: 'chest',
-                        posX: 8,
-                        posY: 8,
+                        class: 'hidden chest',
+                        posX: RandInt(1, 10),
+                        posY: RandInt(1, 10),
                         hp: 0,
                         maxHp: 0,
                         atk: 0,
@@ -66,21 +66,26 @@ module.exports = {
                     let timeout = 7200000;
                     //both directions' distance is larger than range
                     if ((Math.abs(authorData.posY - chestData.posY) > range) || (Math.abs(authorData.posX - chestData.posX) > range)) {
-                        return message.reply('the treasure is not in range, you must be in the same position as the treasure!');//out of 3x3 square
+                        let distanceY = Math.abs(authorData.posY - chestData.posY);
+                        let distanceX = Math.abs(authorData.posX - chestData.posX);
+
+                        let distanceTotal = distanceX + distanceY;
+                        return message.reply(`you are ${distanceTotal} squares away from the hidden treasure!`)
+
                     }
 
                     if (authorData.hp == 0) return message.reply('you are already dead!');
-                    if (!authorData.lastCollected) authorData.lastCollected = 0;
-                    if (timeout - (Date.now() - authorData.lastCollected) > 0) {
-                        let time = ms(timeout - (Date.now() - authorData.lastCollected));//parse ms to time object
+                    if (!authorData.lastCollectedHidden) authorData.lastCollectedHidden = 0;
+                    if (timeout - (Date.now() - authorData.lastCollectedHidden) > 0) {
+                        let time = ms(timeout - (Date.now() - authorData.lastCollectedHidden));//parse ms to time object
                         embed.setColor(color.red);
-                        embed.setDescription('you cannot collect the treasure yet!');
+                        embed.setDescription('you cannot collect the hidden treasure yet!');
                         embed.addField('collect again in: ', time.hours + 'h' + time.minutes + 'm' + time.seconds + 's');
                         return message.channel.send(embed);
 
                     }
-                    authorData.lastCollected = Date.now();//set individual cd
-                    let reward = RandInt(400, 700);
+                    authorData.lastCollectedHidden = Date.now();//set individual cd
+                    let reward = RandInt(700, 1000);
                     moneyData.pMoney += reward;
                     chestData.posX = RandInt(1, 10);//refresh new location everytime someone collect
                     chestData.posY = RandInt(1, 10);//
@@ -89,6 +94,7 @@ module.exports = {
                     SaveData(chestData);
 
                     embed.setColor(color.green);
+                    embed.setTitle('HIDDEN TREASURE!!')
                     embed.setDescription(authorData.name + ' collected :moneybag: :moneybag: :moneybag: ' + reward + pCurrency + '!')
 
                     message.channel.send(embed);
