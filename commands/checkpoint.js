@@ -18,6 +18,8 @@ const Data = require('../models/data.js');
 module.exports = {
     name: 'checkpoint',
     description: 'điểm hồi HP và MP',
+    aliases: ['cp'],
+
     cooldown: 30,
     execute(client, message, args) {
         // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
@@ -59,34 +61,34 @@ module.exports = {
                 }
                 Data.findOne({
                     userID: message.author.id,
-                }, (err, moneyData) =>{
-                 if(!moneyData) return;
+                }, (err, moneyData) => {
+                    if (!moneyData) return;
                     let range = 1;
                     let cost = 100;
-				//both directions' distance is larger than 1
-				if ((Math.abs(authorData.posY - cpData.posY) > range) || (Math.abs(authorData.posX - cpData.posX) > range)) {
-					return message.reply('the checkpoint is too far away!');//out of 3x3 square
-                }
-                if(moneyData.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency + ' to activate the checkpoint!')
-                 moneyData.pMoney -= cost;
-                 authorData.hp += Math.round((1/10)*(authorData.maxHp));
-                 authorData.mp += Math.round((1/10)*(authorData.maxMp));
-                 if(authorData.hp > authorData.maxHp) authorData.hp = authorData.maxHp;
-                 if(authorData.mp > authorData.maxMp) authorData.mp = authorData.maxMp;
-                 SaveData(moneyData);
-                 SaveData(authorData);
-                embed.setTitle(authorData.name + ' had a noice sleep')
-                embed.setDescription(authorData.name + ' recovered a little!');
-                embed.addField(authorData.name + ':heart: HP:  ', authorData.hp + '/' + authorData.maxHp);
-                embed.addField(authorData.name + ':star2: MP:  ', authorData.mp + '/' + authorData.maxMp);
-                embed.addField('balance: ', moneyData.pMoney + pCurrency)
+                    //both directions' distance is larger than 1
+                    if ((Math.abs(authorData.posY - cpData.posY) > range) || (Math.abs(authorData.posX - cpData.posX) > range)) {
+                        return message.reply('the checkpoint is too far away!');//out of 3x3 square
+                    }
+                    if (moneyData.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency + ' to activate the checkpoint!')
+                    moneyData.pMoney -= cost;
+                    authorData.hp += Math.round((1 / 10) * (authorData.maxHp));
+                    authorData.mp += Math.round((1 / 10) * (authorData.maxMp));
+                    if (authorData.hp > authorData.maxHp) authorData.hp = authorData.maxHp;
+                    if (authorData.mp > authorData.maxMp) authorData.mp = authorData.maxMp;
+                    SaveData(moneyData);
+                    SaveData(authorData);
+                    embed.setTitle(authorData.name + ' had a noice sleep')
+                    embed.setDescription(authorData.name + ' recovered a little!');
+                    embed.addField(authorData.name + ':heart: HP:  ', authorData.hp + '/' + authorData.maxHp);
+                    embed.addField(authorData.name + ':star2: MP:  ', authorData.mp + '/' + authorData.maxMp);
+                    embed.addField('balance: ', moneyData.pMoney + pCurrency)
 
 
-                message.channel.send(embed);
+                    message.channel.send(embed);
 
 
                 })
-               
+
 
 
             })

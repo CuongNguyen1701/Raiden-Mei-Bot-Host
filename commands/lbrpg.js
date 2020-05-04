@@ -14,6 +14,8 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'lbrpg',
     description: 'xem BXH RPG' + config.currency,
+    aliases: ['lb', 'leaderboard'],
+
 
     execute(client, message, args) {
         if (args[0] == 'atk' || args[0] == 'def' || args[0] == 'level') {
