@@ -16,7 +16,8 @@ for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     // set a new item in the Collection
     // with the key as the command name and the value as the exported module
-    client.commands.set((command.name || command.aliases), command);
+    client.commands.set(command.name, command);
+    command.aliases.forEach(alias => client.aliases.set(alias, command.name));
 }
 
 
@@ -51,8 +52,9 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
 
     const commandName = args.shift().toLowerCase();
+    // const commandArray = [...message.client.commands.keys()]
     const command = message.client.commands.get(commandName)
-    // || message.client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
+        || message.client.commands.get(message.client.aliases.get(commandName));
 
 
 
