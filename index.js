@@ -5,6 +5,7 @@ const { prefix, noPrefix, token, giphyToken } = require('./config.json');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 
 
