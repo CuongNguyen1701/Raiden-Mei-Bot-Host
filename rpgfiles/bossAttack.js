@@ -41,6 +41,9 @@ module.exports = {
                 if (authorData.hp <= 0) return; //does not attack dead player
 
                 let dmg = parseInt(Math.log(bossData.atk) / Math.log(authorData.def) * 150 + RandInt(70, 150) / (distance + 0.5));
+                if (bossData.level > 5) {
+                    dmg = Math.round(dmg * Math.pow((bossData.level - 5), 0.5));
+                }
                 let chance = RandInt(1, 100);
                 let missRate = 20 * distance;
                 let critRate = missRate + 20;//the number add with missRate is the crit rate(%)

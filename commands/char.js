@@ -16,7 +16,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'char',
     description: 'xem nhân vật rpg của bạn',
-    aliases: ['status', 'stat', 'properties'],
+    aliases: ['status', 'stat', 'stats', 'properties'],
 
     execute(client, message, args) {
         // if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
