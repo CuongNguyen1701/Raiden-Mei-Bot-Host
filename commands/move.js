@@ -18,7 +18,7 @@ const RpgData = require('../models/rpgdata.js');
 module.exports = {
     name: 'move',
     description: 'di chuyển, 4 hướng đông tây nam bắc',
-    cooldown: 10,
+    cooldown: 5,
     execute(client, message, args) {
         //if(message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
 
@@ -34,11 +34,31 @@ module.exports = {
 
         let user = message.author;
 
-        if (args[0] != 'north' && args[0] != 'south' && args[0] != 'west' && args[0] != 'east' &&
-            args[0] != 'n' && args[0] != 's' && args[0] != 'w' && args[0] != 'e') {
+        var viableArgs = ['north', 'n', 'south', 's', 'west', 'w', 'east', 'e', 'up', 'down', 'left', 'right', 'u', 'd', 'l', 'r'];
+
+        if (!viableArgs.includes(args[0])) {
             return message.reply('please provide a specific direction(north, south, west, east)')
         }
-        let dir = args[0];
+        var dir;
+        switch (args[0]) {
+            case 'n': case 'up': case 'u':
+                dir = 'north';
+                break;
+            case 's': case 'down': case 'd':
+                dir = 'south';
+                break;
+            case 'w': case 'left': case 'l':
+                dir = 'west';
+                break;
+            case 'e': case 'right': case 'r':
+                dir = 'east';
+                break;
+            default:
+                dir = args[0];
+                break;
+
+
+        }
 
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
@@ -54,19 +74,19 @@ module.exports = {
 
 
             switch (dir) {
-                case 'north': case 'n':
+                case 'north':
                     if (data.posY == 1) return message.reply('you cannot move in that direction!');
                     data.posY--;
                     break;
-                case 'south': case 's':
+                case 'south':
                     if (data.posY == 10) return message.reply('you cannot move in that direction!');
                     data.posY++;
                     break;
-                case 'east': case 'e':
+                case 'east':
                     if (data.posX == 10) return message.reply('you cannot move in that direction!');
                     data.posX++;
                     break;
-                case 'west': case 'w':
+                case 'west':
                     if (data.posX == 1) return message.reply('you cannot move in that direction!');
                     data.posX--;
                     break;

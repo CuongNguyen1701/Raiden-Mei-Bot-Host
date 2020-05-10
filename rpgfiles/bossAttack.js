@@ -19,7 +19,6 @@ module.exports = {
         function SaveData(data) { data.save().catch(err => console.log(err)); }
         let embed = new Discord.MessageEmbed();
 
-
         RpgData.findOne({
             userID: message.author.id,
         }, (err, authorData) => {
