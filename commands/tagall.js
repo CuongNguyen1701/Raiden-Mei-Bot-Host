@@ -8,7 +8,7 @@ module.exports = {
         if (message.author.id != '609937407445434384') return message.reply('you cannot use this command!');
 
 
-        let members = message.guild.members.filter(mb => mb.presence.status !== "hdhdhd")
+        let members = message.guild.members.cache.filter(mb => mb.presence.status !== "hdhdhd")
             .catch(console.error);
         let msg = '';
         members.forEach((member) => {
