@@ -1,18 +1,15 @@
 {
-    "tier1":{"id": "701312308202307604", "name":" khởi nghiệp ", "cost": 100},
-    "tier2":{"id": "701104006382092308", "name":" doanh nhân trẻ ", "cost": 1000},
-    "tier3":{"id": "699780231258439681", "name":" doanh nhân giàu ", "cost": 5000},
+	"tier1": { "id": "701312308202307604", "name": " khởi nghiệp ", "cost": 100 },
+	"tier2": { "id": "701104006382092308", "name": " doanh nhân trẻ ", "cost": 1000 },
+	"tier3": { "id": "699780231258439681", "name": " doanh nhân giàu ", "cost": 5000 },
 
-    "tier4":{"id": "701326126093566014", "name":" doanh nhân ngầu ", "cost": 10000},
-    "tier5":{"id": "701326258574983228", "name":" stonks man ", "cost": 30000},
-    "tier6":{"id": "701326119781269504", "name":" chủ tịch ", "cost": 50000},
+	"tier4": { "id": "701326126093566014", "name": " doanh nhân ngầu ", "cost": 10000 },
+	"tier5": { "id": "701326258574983228", "name": " stonks man ", "cost": 30000 },
+	"tier6": { "id": "701326119781269504", "name": " chủ tịch ", "cost": 50000 },
 
-    "tier7":{"id": "701326204870852668", "name":" tổng thống ", "cost": 75000},
-    "tier8":{"id": "701326375554121759", "name":" sứ giả nhà trời ", "cost": 100000},
-    
-    "tier9":{"id": "701326382222934057", "name":" demigod ", "cost": 200000},
-    "tier10":{"id": "701326384479469578", "name":" god ", "cost": 1000000}
+	"tier7": { "id": "701326204870852668", "name": " tổng thống ", "cost": 75000 },
+	"tier8": { "id": "701326375554121759", "name": " sứ giả nhà trời ", "cost": 100000 },
 
-
-
+	"tier9": { "id": "701326382222934057", "name": " demigod ", "cost": 200000 },
+	"tier10": { "id": "701326384479469578", "name": " god ", "cost": 1000000 }
 }

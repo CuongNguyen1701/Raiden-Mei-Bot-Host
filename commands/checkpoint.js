@@ -37,7 +37,7 @@ module.exports = {
             if (!authorData) {
                 return message.reply('please declare your existence using ' + prefix + 'char first!');
             }
-            var id = 2
+            var id = 2;
             RpgData.findOne({
                 userID: id,//checkpoint ID
             }, (err, cpData) => {

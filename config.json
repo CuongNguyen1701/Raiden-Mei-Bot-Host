@@ -1,10 +1,7 @@
 {
-    "prefix": "//",
-    "noPrefix": "",
-    "token": "Njk4MzkwMDQzMzAzMjE1MTY2.Xp2o_Q.gpdegzQkUYALSTIkhNgvDy5ZTtA",
-    "mongoPass": "mongodb://CuongNguyen:kevinnguyen@raiden-mei-bot-shard-00-00-z7yfa.mongodb.net:27017,raiden-mei-bot-shard-00-01-z7yfa.mongodb.net:27017,raiden-mei-bot-shard-00-02-z7yfa.mongodb.net:27017/test?ssl=true&replicaSet=Raiden-Mei-Bot-shard-0&authSource=admin&retryWrites=true&w=majority",
-    "giphyToken": "ipIyDHITDvnTdNlK4YmvyS0mLlFJkIJ5",
-    "currency": " NEO",
-    "pCurrency": " WEO "
-
+	"prefix": "//",
+	"noPrefix": "",
+	"giphyToken": "ipIyDHITDvnTdNlK4YmvyS0mLlFJkIJ5",
+	"currency": " NEO",
+	"pCurrency": " WEO "
 }
