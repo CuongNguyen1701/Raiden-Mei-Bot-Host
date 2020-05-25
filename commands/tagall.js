@@ -9,7 +9,6 @@ module.exports = {
 
         // Fetch all members from a guild
         let members = message.guild.members.fetch()
-            .then(console.log)
             .catch(console.error);
         let index = args[0];
         message.channel.send(members[index].id).catch(console.error);
