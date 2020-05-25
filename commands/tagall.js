@@ -10,9 +10,17 @@ module.exports = {
 
         let members = message.guild.members.cache.filter(mb => mb.presence.status !== "hdhdhd");
         let msg = '';
+        let msg2 = '';
         members.forEach((member) => {
-            msg += ` ${member.nickname}`;
+            let tag = ` ${member.id}`
+            if (msg.length + tag.length < 2000) {
+                msg += tag;
+            }
+            else {
+                msg2 += tag;
+            }
         });
         message.channel.send(msg);
+        if (msg2) message.channel.send(msg2);
     },
 };
