@@ -12,6 +12,6 @@ module.exports = {
             .then(console.log)
             .catch(console.error);
         let index = args[0];
-        message.channel.send(members[index]);
+        message.channel.send(members[index].id).catch(console.error);
     },
 };
