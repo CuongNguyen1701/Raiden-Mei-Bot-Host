@@ -11,7 +11,7 @@ module.exports = {
         let members = message.guild.members.cache.filter(mb => mb.presence.status !== "hdhdhd");
         let msg = '';
         members.forEach((member) => {
-            msg += ` ${member.id}`;
+            msg += ` ${member.nickname}`;
         });
         message.channel.send(msg);
     },
