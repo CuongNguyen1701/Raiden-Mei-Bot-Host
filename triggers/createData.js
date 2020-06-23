@@ -9,7 +9,6 @@ mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopol
     .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 //MODELS
-const RpgData = require('../models/rpgdata.js');
 const data = require('../models/data.js');
 
 module.exports = {
