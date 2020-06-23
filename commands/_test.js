@@ -40,6 +40,7 @@ module.exports = {
             userID: user.id
         }, (err, rpgData) => {
             if (err) console.log(err);
+            rpgData.testObject = { prp1, prp2, prp3 };
             rpgData.testObject.prp1 = property;
             rpgData.testObject.prp2 = 2 * property;
             rpgData.testObject.prp3 = 3 * property;
