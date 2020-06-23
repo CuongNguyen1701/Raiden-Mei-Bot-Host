@@ -1,0 +1,8 @@
+/elf -> darkelf, avariel
+priest -> cleric, excorcist
+/paladin -> valkyrie, crusader
+/knight -> gladiator, samurai
+/ranger -> ninja, vampire
+/sniper ->  commander, cyborg
+
+ChangeStats(data, maxHp, maxMp, atk, def)

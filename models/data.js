@@ -4,16 +4,15 @@ const dataSchema = mongoose.Schema({
     name: String,
     userID: String,
     lb: String,
-    money: Number,
-    pMoney: Number,
-    faction: String,
-    daily: Number,
-    investMoney: Number,
-    investTime: Number,
-    investCD: Boolean,
-    investStonks: Boolean,
-    coup: Number,
-
+    level: Number,
+    class: String,
+    pos: { x: Number, y: Number, },
+    stats:
+    {
+        hp: Number, maxHp: Number,
+        mp: Number, maxMp: Number,
+        atk: Number, def: Number,
+    }
 })
 
 module.exports = mongoose.model('Data', dataSchema);
