@@ -42,8 +42,8 @@ module.exports = {
             if (err) console.log(err);
             rpgData.testObject = { prp1, prp2, prp3 };
             rpgData.testObject.prp1 = property;
-            rpgData.testObject.prp2 = 2 * property;
-            rpgData.testObject.prp3 = 3 * property;
+            rpgData.testObject.prp2 = 2 + property;
+            rpgData.testObject.prp3 = 3 + property;
             SaveData(rpgData);
             if (!args[1]) args[1] = 1;
             switch (args[1]) {

@@ -18,7 +18,7 @@ const dataSchema = mongoose.Schema({
     lastRecovered: Number,
     lastCollected: Number,
     lastCollectedHidden: Number,
-    testObject: Object,
+
 
 
 })
