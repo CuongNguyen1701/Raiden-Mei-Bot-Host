@@ -13,6 +13,7 @@ const data = require('../models/data.js');
 
 module.exports = {
     execute(client, user) {
+        function RandInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
         function SaveData(data) { data.save().catch(err => console.log(err)); }
         var newData = new data({
