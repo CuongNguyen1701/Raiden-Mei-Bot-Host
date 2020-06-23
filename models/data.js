@@ -6,13 +6,14 @@ const dataSchema = mongoose.Schema({
     lb: String,
     level: Number,
     class: String,
+    skills: [String],
     pos: { x: Number, y: Number, },
     stats:
     {
         hp: Number, maxHp: Number,
         mp: Number, maxMp: Number,
         atk: Number, def: Number,
-    }
+    },
 })
 
 module.exports = mongoose.model('Data', dataSchema);
