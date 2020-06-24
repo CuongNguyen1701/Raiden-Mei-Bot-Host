@@ -6,6 +6,7 @@ const dataSchema = mongoose.Schema({
     lv: Number,
     atk: Number,
     crt: Number,
+    bonus_crit: Number,
     tdm: Number,
     tdm_r: Number,
     phys: Number,

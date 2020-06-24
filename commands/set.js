@@ -1,9 +1,3 @@
-const Discord = require('discord.js');
-const ms = require('parse-ms');
-
-const { currency, prefix, mongoPass } = require('../config.json');
-const role = require('../roles.json');
-const color = require('../color.json');
 
 const mongoose = require('mongoose');
 
@@ -22,7 +16,9 @@ module.exports = {
     execute(client, message, args) {
         let user = message.author;
         function SaveData(data) { data.save().catch(err => console.log(err)); }
-        CalcData.findOne({}, (err, calcData) => {
+        CalcData.findOne({
+            userID: user.id
+        }, (err, calcData) => {
             if (!calcData) {
                 var newData = new CalcData({
                     name: client.users.cache.get(user.id).username,
@@ -30,6 +26,7 @@ module.exports = {
                     lv: 80,
                     atk: 1000,
                     crt: 100,
+                    bonus_crit: 0,
                     tdm: 0,
                     tdm_r: 0,
                     phys: 0,
@@ -78,6 +75,9 @@ module.exports = {
                     break;
                 case 'ele_r':
                     data.ele_r = args[1];
+                    break;
+                case 'bonus_crit':
+                    data.bonus_crit = args[1];
                     break;
                 default:
                     correctInput = false;
