@@ -18,8 +18,8 @@ const CalcData = require('../models/calcdata.js');
 
 
 module.exports = {
-    name: '',
-    description: '',
+    name: 'set',
+    description: 'set the value for the buff',
     execute(client, message, args) {
         let user = message.author;
         function SaveData(data) { data.save().catch(err => console.log(err)); }
