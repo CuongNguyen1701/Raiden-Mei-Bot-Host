@@ -53,10 +53,22 @@ module.exports = {
             let critRate = Math.round((crt / (lv * 5 + 75)) * 100 + bonus_crit);
             if (critRate > 100) critRate = 100;
             embed.setTitle(`${data.name}'s calculation`);
+            embed.addField(`LV:`, lv, true)
+            embed.addField(`ATK:`, atk, true)
+            embed.addField(`CRT:`, crt, true)
+            embed.addField(`bonus crit:`, `${bonus_crit}%`, true)
+            embed.addField(`TDM:`, `${Calc(tdm)}%`, true)
+            embed.addField(`TDM received:`, `${Calc(tdm_r)}%`, true)
+            embed.addField(`phys:`, `${Calc(phys)}%`, true)
+            embed.addField(`phys received:`, `${Calc(phys_r)}%`, true)
+            embed.addField(`crit damage:`, `${cdm}%`, true)
+            embed.addField(`ele:`, `${ele}%`, true)
+            embed.addField(`ele received:`, `${ele_r}%`)
+
             embed.addField(`physical final multiplier(without crit):`, `${fdm_phys_noCrit}%`, true);
-            embed.addField(`physical final multiplier(with crit):`, `${fdm_phys_yesCrit}%`, true);
-            embed.addField(`elemental final multiplier:`, `${fdm_ele}%`, true);
-            embed.addField(`crit rate:`, `${critRate}%`, true);
+            embed.addField(`physical final multiplier(with crit):`, `${fdm_phys_yesCrit}%`);
+            embed.addField(`elemental final multiplier:`, `${fdm_ele}%`);
+            embed.addField(`final crit rate:`, `${critRate}%`);
             message.channel.send(embed);
 
 
