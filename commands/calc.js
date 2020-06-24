@@ -50,7 +50,7 @@ module.exports = {
             let fdm_phys_noCrit = Math.round(base * Calc(phys) * Calc(phys_r));
             let fdm_phys_yesCrit = Math.round(fdm_phys_noCrit * (2 + cdm / 100));
             let fdm_ele = Math.round(base * Calc(ele) * Calc(ele_r));
-            let critRate = Math.round((crt / lv * 5 + 75) * 100 + bonus_crit);
+            let critRate = Math.round((crt / (lv * 5 + 75)) * 100 + bonus_crit);
             if (critRate > 100) critRate = 100;
             embed.setTitle(`${data.name}'s calculation`);
             embed.addField(`physical final multiplier(without crit):`, `${fdm_phys_noCrit}%`, true);
