@@ -15,7 +15,8 @@ mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopol
 
 //MODELS
 const CalcData = require('../models/calcdata.js');
-const data = require('../models/data');
+
+
 module.exports = {
     name: '',
     description: '',
@@ -84,6 +85,7 @@ module.exports = {
                     message.reply(`please use the correct syntax!`);
                     break;
             }
+            SaveData(data);
             if (correctInput) message.channel.send(`${args[0]} is set to ${args[1]}`);
 
         })
