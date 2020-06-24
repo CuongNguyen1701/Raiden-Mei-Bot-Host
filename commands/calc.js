@@ -53,10 +53,10 @@ module.exports = {
             let critRate = Math.round((crt / lv * 5 + 75) * 100 + bonus_crit);
             if (critRate > 100) critRate = 100;
             embed.setTitle(`${data.name}'s calculation`);
-            embed.addField(`physical final multiplier(without crit):`, fdm_phys_noCrit, true);
-            embed.addField(`physical final multiplier(with crit):`, fdm_phys_yesCrit, true);
-            embed.addField(`elemental final multiplier:`, fdm_ele, true);
-            embed.addField(`crit rate:`, critRate, true);
+            embed.addField(`physical final multiplier(without crit):`, `${fdm_phys_noCrit}%`, true);
+            embed.addField(`physical final multiplier(with crit):`, `${fdm_phys_yesCrit}%`, true);
+            embed.addField(`elemental final multiplier:`, `${fdm_ele}%`, true);
+            embed.addField(`crit rate:`, `${critRate}%`, true);
             message.channel.send(embed);
 
 
