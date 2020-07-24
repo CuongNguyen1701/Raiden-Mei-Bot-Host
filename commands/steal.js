@@ -7,7 +7,6 @@ const color = require('../color.json');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 
 //MODELS
@@ -100,50 +99,50 @@ module.exports = {
                                 //if author doesnt provide any number of currency to steal
                                 if (!args[1] || !parseInt(args[1])) {
                                     if (userData.money > steal) args[1] = Math.floor(Math.random() * steal + 1);
-        
+
                                     else args[1] = Math.floor(Math.random() * userData.money) + 1;
                                 }
                                 if (parseInt(args[1]) < 1) return message.reply("you cannot steal less than 1" + currency + ", that's meaningless!");
-        
+
                                 //if tagged person is Mei
                                 if (userData.name == "Raiden Mei 2.0#4150") {
                                     authorData.money -= 10 * steal;
                                     SaveData(authorData);
                                     return message.reply("You cannot steal from Mei! Here's a fine of " + 10 * steal + currency + "!");
                                 }
-        
+
                                 //if provided number(arg[1]) larger than max steal
                                 if (parseInt(args[1]) > steal) return message.reply("stop being greedy! you can only steal up to " + steal + currency + "!");
                                 //if steal number is more than the user's balance
                                 if (parseInt(args[1]) > userData.money) return message.reply('they do not have that much money!');
-        
+
                                 //obvious
-        
-        
+
+
                                 //check if the author has negative balance 
                                 if (authorData.money < 0) return message.reply('you are too poor to steal!');
                                 let chances = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
                                 var pick = chances[Math.floor(Math.random() * chances.length)];
-        
+
                                 let stealNumber = parseInt(args[1]);
-        
+
                                 if (authorData.faction == 'physical') {//if phys have chance to increase steal
                                     let critPool = [true, false]
                                     var crit = critPool[Math.floor(Math.random() * critPool.length)];
                                     if (crit) stealNumber *= 2;
                                     else stealNumber *= 1;
                                 }
-        
+
                                 if (pick >= 3) {
-        
-        
+
+
                                     userData.money -= stealNumber;
-        
+
                                     authorData.money += stealNumber;
-        
+
                                     SaveData(userData);
                                     SaveData(authorData);
-        
+
                                     embed.setColor(color.green);
                                     if (crit) {
                                         embed.setTitle(message.author.username + ' got a physical faction boost and successfully CRIT stealed ' + stealNumber + currency + ' from '
@@ -152,45 +151,45 @@ module.exports = {
                                     else {
                                         embed.setTitle(message.author.username + ' successfully stealed ' + stealNumber + currency + ' from '
                                             + client.users.cache.get(user.id).username + '. ' + message.author.username + "'s new balance: " + authorData.money + currency);
-        
+
                                     }
                                     embed.setDescription(client.users.cache.get(user.id).username + ' lost their money. ' + client.users.cache.get(user.id).username
                                         + "'s new balance: " + userData.money + currency);
-        
+
                                     embed.setFooter('');
                                     message.channel.send(embed);
-        
+
                                 }
                                 else {
                                     let fine = 2 * parseInt(args[1])
-        
+
                                     if (authorData.faction == 'physical') fine = parseInt(args[1]);
-        
+
                                     authorData.money -= fine;
                                     userData.money += parseInt(fine / 2);
-        
-        
+
+
                                     SaveData(userData);
                                     SaveData(authorData);
-        
+
                                     embed.setColor(color.red);
                                     if (authorData.faction == 'physical') {
                                         embed.setTitle(message.author.username + ' failed but only received a fine of ' + fine + currency + ' thanks to physical faction boost. '
                                             + message.author.username + "'s new balance: " + authorData.money + currency);
-        
+
                                     }
                                     else {
-        
+
                                         embed.setTitle(message.author.username + ' failed and received a fine of ' + fine + currency + '. '
                                             + message.author.username + "'s new balance: " + authorData.money + currency);
-        
+
                                     }
-        
+
                                     embed.setDescription(client.users.cache.get(user.id).username + ' was compensated ' + parseInt(fine / 2) + currency + '. '
                                         + client.users.cache.get(user.id).username + "'s new balance: " + userData.money + currency);
                                     embed.setFooter('');
                                     message.channel.send(embed);
-        
+
                                 }
 
                             })

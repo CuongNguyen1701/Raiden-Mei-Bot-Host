@@ -10,7 +10,6 @@ const lootBoss = require('../rpgfiles/lootBoss');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then(() => console.log('Database Connected'))
 	.catch(err => console.log(err));
 
 //MODELS
@@ -23,7 +22,7 @@ module.exports = {
 	description: '[Elf+]bắn tên ánh sáng (100 MP)',
 	cooldown: 60,
 	execute(client, message, args) {
-		if (args[0] == 'boss'|| !args[0]) {
+		if (args[0] == 'boss' || !args[0]) {
 			var user = new Object();
 			user.id = 1;
 		}
@@ -52,8 +51,8 @@ module.exports = {
 				if (!user_rpgData) {
 					return message.reply('user has not enter the map yet!');
 				}
-				var elves =['elf', 'darkelf', 'avariel'];
-				
+				var elves = ['elf', 'darkelf', 'avariel'];
+
 				if (!elves.includes(author_rpgData.class)) {
 					return message.reply("This is an exclusive move of elves(" + elves + ")!");
 				}
@@ -73,11 +72,11 @@ module.exports = {
 				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
 				switch (author_rpgData.class) {
 					case elves[2]:
-						dmg = Math.round(dmg*1.3);
+						dmg = Math.round(dmg * 1.3);
 						break;
 					case elves[1]:
-						dmg = Math.round(dmg*1.5) + RandInt(70, 100);
-						
+						dmg = Math.round(dmg * 1.5) + RandInt(70, 100);
+
 						break;
 
 				}

@@ -9,9 +9,8 @@ const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log( 'Database Connected' ))
-.catch(err => console.log( err ));
+mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
+    .catch(err => console.log(err));
 
 
 //MODELS
@@ -52,8 +51,8 @@ module.exports = {
 
 
         if (!args[0] || isNaN(args[0])) return message.reply('please specify the number of money you want to bet');//if the input is NaN or no input
-        
-        
+
+
         try {
             var bet = parseInt(args[0]);
         }
@@ -61,30 +60,29 @@ module.exports = {
         {
             return message.reply('you can only enter intergers');
         }
-        
-        
+
+
         if (bet > maxBet) return message.reply('you cannot bet more than ' + maxBet + currency + '!');
-        
+
         Data.findOne({
             userID: message.author.id
         }, (err, data) => {
-            if(err) console.log(err);
-            if(!data){ //check if user has no data on database
+            if (err) console.log(err);
+            if (!data) { //check if user has no data on database
                 return message.reply('please use ' + prefix + 'create first');
             }
-            else
-            {
+            else {
                 if (data.money < bet) return message.reply('you do not have enough money');
                 if (data.money <= 0) return message.reply('you have no money!');//if author has no positive balance or have no account
                 let chances = ['win', 'lose', 'lose', 'lose'];
-                if(data.faction == 'fire') chances = ['win', 'win','lose', 'lose'];
-              
+                if (data.faction == 'fire') chances = ['win', 'win', 'lose', 'lose'];
+
 
                 var pick = chances[Math.floor(Math.random() * chances.length)];
-                
+
                 if (pick == 'lose') {
                     data.money -= Math.floor(bet * (base + 1) / (base + 3));
-        
+
                     data.save().catch(err => console.log(err));
                     //write in the values into database
                     embed.setColor(color.red);
@@ -93,19 +91,19 @@ module.exports = {
                 }
                 else {
                     data.money += Math.floor((4 * bet * (base + 1)) / (5 * (base + 3)));
-                    
+
                     data.save().catch(err => console.log(err));
                     //write in the values into database
-                    if(data.faction == 'fire') embed.setTitle('you got a fire faction boost!')
+                    if (data.faction == 'fire') embed.setTitle('you got a fire faction boost!')
                     embed.setColor(color.green);
                     embed.setDescription('you win!! New balance: ' + data.money + currency);
                     message.channel.send(embed);
                 }
-                
+
             }
         })
 
-       
+
 
 
 

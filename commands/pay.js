@@ -7,9 +7,8 @@ const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log( 'Database Connected' ))
-.catch(err => console.log( err ));
+mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
+    .catch(err => console.log(err));
 
 //MODELS
 const Data = require('../models/data.js');
@@ -100,14 +99,14 @@ module.exports = {
                         SaveData(newData);
                         authorData.money -= parseInt(args[1]); //money take
                         SaveData(authorData);
-                        
+
                     }
                     else {
                         userData.money += parseInt(args[1]);//add money
                         authorData.money -= parseInt(args[1]);//take money
                         SaveData(userData);
                         SaveData(authorData);
-                        
+
                     }
                     return message.channel.send(message.author.username + ' paid ' + args[1] + currency + ' to ' + client.users.cache.get(user.id).username);
                 })

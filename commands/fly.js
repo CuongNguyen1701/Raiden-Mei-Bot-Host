@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 //MODELS
 const RpgData = require('../models/rpgdata.js');
@@ -35,11 +34,10 @@ module.exports = {
             if (!authorData) {
                 return message.reply('please declare your existence using ' + prefix + 'char first!');
             }
-            if(args[0] == 'checkpoint' || args[0] == 'cp')
-            {
+            if (args[0] == 'checkpoint' || args[0] == 'cp') {
                 var id = 2
             }
-            else{
+            else {
                 return message.reply('you can only fly to the checkpoint atm!')
             }
             RpgData.findOne({
@@ -50,22 +48,22 @@ module.exports = {
                 }
                 Data.findOne({
                     userID: message.author.id,
-                }, (err, moneyData) =>{
-                 if(!moneyData) return;
-                 let cost = 200;
-                 if(moneyData.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency)
+                }, (err, moneyData) => {
+                    if (!moneyData) return;
+                    let cost = 200;
+                    if (moneyData.pMoney < cost) return message.reply('you need at least ' + cost + pCurrency)
                     authorData.posX = cpData.posX;
                     authorData.posY = cpData.posY;
-                moneyData.pMoney -= cost;
-                SaveData(moneyData);
-                SaveData(authorData);
-                 
+                    moneyData.pMoney -= cost;
+                    SaveData(moneyData);
+                    SaveData(authorData);
 
-                message.reply('you returned to the checkpoint!');
+
+                    message.reply('you returned to the checkpoint!');
 
 
                 })
-               
+
 
 
             })

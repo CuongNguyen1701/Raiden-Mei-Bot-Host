@@ -8,7 +8,6 @@ const lootBoss = require('../rpgfiles/lootBoss');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 
 //MODELS
@@ -21,7 +20,7 @@ module.exports = {
     description: '[Knight+]đòn đánh cận chiến, máu càng thấp sát thương càng cao(80 MP)',
     cooldown: 20,
     execute(client, message, args) {
-        if (args[0] == 'boss'|| !args[0]) {
+        if (args[0] == 'boss' || !args[0]) {
             var user = new Object();
             user.id = 1;
         }
@@ -52,8 +51,8 @@ module.exports = {
                 }
                 var knightType = ['knight', 'gladiator', 'samurai'];
                 if (!knightType.includes(author_rpgData.class)) {
-					return message.reply("This is an exclusive move of " + knightType + "!");
-				}
+                    return message.reply("This is an exclusive move of " + knightType + "!");
+                }
                 let range = 1;
                 //both directions' distance is larger than 1
                 if ((Math.abs(author_rpgData.posY - user_rpgData.posY) > range) || (Math.abs(author_rpgData.posX - user_rpgData.posX) > range)) {
@@ -62,10 +61,10 @@ module.exports = {
                 //else the player is nearby
                 if (author_rpgData.hp <= 0) return message.reply('you are already dead!');
                 if (user_rpgData.hp <= 0) return message.reply(user_rpgData.name + ' is already dead!');
-                let hpBuff = author_rpgData.maxHp/ (user_rpgData.hp * 3);
+                let hpBuff = author_rpgData.maxHp / (user_rpgData.hp * 3);
                 let buffFromHp = (hpBuff <= 3) ? hpBuff : 3;
                 let mpCost = 80;
-				if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
+                if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
 
                 let dmg = parseInt(Math.log(author_rpgData.atk) / Math.log(user_rpgData.def) * 200 * buffFromHp) + RandInt(100, 200);
                 let crit = false;
@@ -76,8 +75,7 @@ module.exports = {
 
                 }
 
-                switch(author_rpgData.class)
-                {
+                switch (author_rpgData.class) {
                     case knightType[1]: case knightType[2]:
                         CritRate(30)
                         break;

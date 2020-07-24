@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 
 //MODELS
@@ -28,7 +27,7 @@ module.exports = {
 
         function SaveData(d) { d.save().catch(err => console.log(err)); }
 
-        
+
         Data.findOne({
             userID: message.author.id
         }, (err, data) => {
@@ -51,18 +50,18 @@ module.exports = {
                         SaveData(newCoupData);
                     }
                     else {
-                        if(args[0] == 'all' || args[0] == 'max') args[0] = data.coup;
+                        if (args[0] == 'all' || args[0] == 'max') args[0] = data.coup;
                         else if (isNaN(args[0]) || !args[0]) {//avoid errors
-                           return message.reply('please specify the number of coupons you wanna sell. Current value per coupon: ' + coupData.coupValue + currency)
+                            return message.reply('please specify the number of coupons you wanna sell. Current value per coupon: ' + coupData.coupValue + currency)
                         }
-                        if(data.money > 10*role.tier10.cost) return message.reply("you have capped your money, please spend it!")
+                        if (data.money > 10 * role.tier10.cost) return message.reply("you have capped your money, please spend it!")
 
-                
+
                         let sellNumber = parseInt(args[0]);
-                        if(sellNumber > data.coup || !data.coup) return message.reply("you don't have enough coupons!");
+                        if (sellNumber > data.coup || !data.coup) return message.reply("you don't have enough coupons!");
                         if (sellNumber <= 0) return message.reply('please use a positive number!');//prevent buying coupon using this command
-        
-        
+
+
                         data.money += coupData.coupValue * sellNumber;
                         data.coup -= sellNumber;
 

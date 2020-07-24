@@ -1,22 +1,21 @@
 
-const {currency, mongoPass} = require('../config.json');
+const { currency, mongoPass } = require('../config.json');
 const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log( 'Database Connected' ))
-.catch(err => console.log( err ));
+mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
+    .catch(err => console.log(err));
 
 //MODELS
 const Data = require('../models/data.js');
 
 
 module.exports = {
-	name: 'adpay',
-	description: 'tạo tiền từ không khí rồi trả',
-	execute(client, message, args) {
-        if(message.author.id != '609937407445434384') return message.reply('you cannot use this command!');
+    name: 'adpay',
+    description: 'tạo tiền từ không khí rồi trả',
+    execute(client, message, args) {
+        if (message.author.id != '609937407445434384') return message.reply('you cannot use this command!');
         let user = message.mentions.members.first() || client.users.cache.get(args[0]);
 
         function SaveData(data) { data.save().catch(err => console.log(err)); }
@@ -61,22 +60,22 @@ module.exports = {
                         })
                         SaveData(newData);
 
-                        
+
                     }
                     else {
                         userData.money += parseInt(args[1]);//add money
 
                         SaveData(userData);
-                        
+
                     }
                     return message.channel.send(message.author.username + ' paid ' + args[1] + currency + ' to ' + client.users.cache.get(user.id).username);
                 })
 
 
-              
+
             }
         })
 
 
-	},
+    },
 };

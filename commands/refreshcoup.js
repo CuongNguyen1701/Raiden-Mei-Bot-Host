@@ -11,7 +11,6 @@ const mongoose = require('mongoose');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 
 //MODELS
@@ -27,14 +26,14 @@ module.exports = {
 
         let roleMember = message.guild.member(message.author);
         function hasTier(tier) { return roleMember.roles.cache.has(tier.id) }//check tier
-        if (!hasTier(role.tier5) && !hasTier(role.tier6) && !hasTier(role.tier7) && !hasTier(role.tier8) && !hasTier(role.tier9)  && !hasTier(role.tier10)  ) {
+        if (!hasTier(role.tier5) && !hasTier(role.tier6) && !hasTier(role.tier7) && !hasTier(role.tier8) && !hasTier(role.tier9) && !hasTier(role.tier10)) {
             return message.reply('you have to be at least a ' + role.tier5.name + ' to refresh coupon value!')
         }
         let timeout = 1800000;  //time until author can refresh again
         ;
-        
-        
-        
+
+
+
         Data.findOne({
             userID: message.author.id
         }, (err, data) => {
@@ -43,7 +42,7 @@ module.exports = {
                 return message.reply('please use ' + prefix + 'create first');
             }
             else {
-                
+
                 CoupData.findOne({
                     coupID: 'RaidenMei',
                 }, (err, coupData) => {
@@ -58,20 +57,19 @@ module.exports = {
                     }
                     else {
                         if (timeout - (Date.now() - coupData.refreshTime) > 0)//if last refresh cd has not been over
-                      {
+                        {
                             let time = ms(timeout - (Date.now() - coupData.refreshTime));
-                
+
                             return message.reply('Coupon value has already been refreshed by someone, able to refresh in ' + time.minutes + 'm'
                                 + time.seconds + 's')
                         }
                         coupData.refreshTime = Date.now();
-                        function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min;}
+                        function RandInt(min, max) { return Math.floor(Math.random() * (max - min)) + min; }
 
 
-                        switch(coupData.coupValue >= 200 ? 1 : 
+                        switch (coupData.coupValue >= 200 ? 1 :
                             (coupData.coupValue < 200 && coupData.coupValue >= 100) ? 2 :
-                            (coupData.coupValue < 100 && coupData.coupValue >=50) ? 3 : 0)
-                        {
+                                (coupData.coupValue < 100 && coupData.coupValue >= 50) ? 3 : 0) {
                             case 1: coupData.coupValue += RandInt(-100, 50); break;
                             case 2: coupData.coupValue += RandInt(-50, 50); break;
                             case 3: coupData.coupValue += RandInt(-50, 100); break;
@@ -79,7 +77,7 @@ module.exports = {
                         }
                         SaveData(coupData);
                         message.channel.send('Coupon value refreshed! New value per Coupon: ' + coupData.coupValue + currency);
-                        
+
                     }
                 })
             }

@@ -6,9 +6,8 @@ const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log( 'Database Connected' ))
-.catch(err => console.log( err ));
+mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
+    .catch(err => console.log(err));
 
 //MODELS
 const Data = require('../models/data.js');
@@ -47,7 +46,7 @@ module.exports = {
             SaveData(data);
 
         }
-        
+
         Data.findOne({
             userID: message.author.id
         }, (err, data) => {
@@ -57,47 +56,46 @@ module.exports = {
             }
             else {
 
-                if(!hasTier(role.tier1) && !hasTier(role.tier2) && !hasTier(role.tier3)&& !hasTier(role.tier4)
-                && !hasTier(role.tier5)&& !hasTier(role.tier6)&& !hasTier(role.tier7)&& !hasTier(role.tier8)
-                && !hasTier(role.tier9)&& !hasTier(role.tier10))
-                {
+                if (!hasTier(role.tier1) && !hasTier(role.tier2) && !hasTier(role.tier3) && !hasTier(role.tier4)
+                    && !hasTier(role.tier5) && !hasTier(role.tier6) && !hasTier(role.tier7) && !hasTier(role.tier8)
+                    && !hasTier(role.tier9) && !hasTier(role.tier10)) {
                     return message.reply('Golden Experience Requiem just said NO');
                 }
 
                 switch ((hasTier(role.tier1) && data.money <= 100) ? 1
-                : (hasTier(role.tier6) && data.money >= role.tier7.cost) ? 6
-                : hasTier(role.tier10) ? 10 : 0) {
-                    
+                    : (hasTier(role.tier6) && data.money >= role.tier7.cost) ? 6
+                        : hasTier(role.tier10) ? 10 : 0) {
+
                     //prevent exploiting the reborn command        
                     case 1: message.reply('khôn như đồng chí quê tôi xích đầy. Không làm mà đòi có ăn...'); break;
-                    
-                    case 6: 
-                    Reborn(role.tier3.cost, data);
-                    SaveData(data);
-                    roleMember.roles.add(role.tier7.id);
-                    roleMember.roles.remove(role.tier6.id);
-                    message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency +  ' and ' + data.pMoney + pCurrency + "... Wait, that's unusual...");
-                    break;
-                    
+
+                    case 6:
+                        Reborn(role.tier3.cost, data);
+                        SaveData(data);
+                        roleMember.roles.add(role.tier7.id);
+                        roleMember.roles.remove(role.tier6.id);
+                        message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency + "... Wait, that's unusual...");
+                        break;
+
                     case 10:
-                        if(data.money > 2.5 * role.tier10.cost) data.money = 2.5 * role.tier10.cost;//cap the covertable money
-                        
+                        if (data.money > 2.5 * role.tier10.cost) data.money = 2.5 * role.tier10.cost;//cap the covertable money
+
                         data.pMoney += 5000;//add premium money
                         data.pMoney += Math.floor(data.money / 500); //increase premium money base on the current money
-                        
+
                         Reborn(10000, data);
                         SaveData(data);
                         message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
                         break;
 
-                    case 0: 
-                    Reborn(100, data);
-                    message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
-                    break;
+                    case 0:
+                        Reborn(100, data);
+                        message.channel.send(client.users.cache.get(message.author.id).username + ' has been reborn with ' + data.money + currency + ' and ' + data.pMoney + pCurrency);
+                        break;
 
-                    
+
                 }
-                
+
 
             }
         })

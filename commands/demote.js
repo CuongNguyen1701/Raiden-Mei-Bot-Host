@@ -8,9 +8,8 @@ const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log( 'Database Connected' ))
-.catch(err => console.log( err ));
+mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
+    .catch(err => console.log(err));
 //MODELS
 const Data = require('../models/data.js');
 
@@ -23,35 +22,34 @@ module.exports = {
         let roleMember = message.guild.member(message.author);
         let embed = new Discord.MessageEmbed;
         function hasTier(tier) { return roleMember.roles.cache.has(tier.id) } //check if the author has the specific role
-        
+
         function Demote(currentTier, demoteTier) {
             var support = 0.5 * currentTier.cost; //support money
 
             Data.findOne({
                 userID: message.author.id
             }, (err, data) => {
-                if(err) console.log(err);
-                if(!data){ //check if user has no data on database
-                return message.reply('please use ' + prefix + 'create first');
+                if (err) console.log(err);
+                if (!data) { //check if user has no data on database
+                    return message.reply('please use ' + prefix + 'create first');
                 }
-                else
-                {
+                else {
                     data.money += support;
-        
+
                     data.save().catch(err => console.log(err));
-        
+
                     roleMember.roles.remove(currentTier.id);
-        
+
                     if (demoteTier != null) roleMember.roles.add(demoteTier.id); //used for cases that author has no economic role
-        
+
                     embed.setTitle(message.author.username + ' has been demoted from ' + currentTier.name + ' to ' + demoteTier.name + '!');
                     embed.setDescription('you received a support of ' + support + currency + '! Current balance: ' + data.money);
                     embed.setColor(color.purple)
                     return message.channel.send(embed);
-                    
+
                 }
             })
-            
+
 
 
         }

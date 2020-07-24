@@ -38,13 +38,13 @@ client.on('message', message => {
     //check if the message author is a bot
     if (message.author.bot) return;
 
-    const commandName_noPrefix = message.content.toLowerCase();
-    const command_noPrefix = message.client.commands.get(commandName_noPrefix);
+    // const commandName_noPrefix = message.content.toLowerCase();
+    // const command_noPrefix = message.client.commands.get(commandName_noPrefix);
 
-    switch (commandName_noPrefix) {
-        case 'alo mei': command_noPrefix.execute(message, args); break;
-        case 'mei ơi': command_noPrefix.execute(message, args); break;
-    }
+    // switch (commandName_noPrefix) {
+    //     case '': command_noPrefix.execute(message, args); break;
+    //     case '': command_noPrefix.execute(message, args); break;
+    // }
 
 
 

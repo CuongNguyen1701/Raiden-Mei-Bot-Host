@@ -10,7 +10,6 @@ const lootBoss = require('../rpgfiles/lootBoss');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 
 //MODELS
@@ -72,7 +71,7 @@ module.exports = {
                 if (author_rpgData.mp < mpCost) return message.reply("you don't have enough MP!");
 
                 let stealth = false;
-                function StealthRate(rate){
+                function StealthRate(rate) {
                     let chance = RandInt(1, 100);
                     if (chance <= rate) stealth = true;
                 }
@@ -96,7 +95,7 @@ module.exports = {
                 }
                 message.channel.send(embed);
                 StealthRate(30);
-                if(stealth) return;//if user stealth successfully, boss wont attack
+                if (stealth) return;//if user stealth successfully, boss wont attack
                 bossAttack.execute(message, range);
 
 

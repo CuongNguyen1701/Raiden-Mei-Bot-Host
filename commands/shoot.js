@@ -10,7 +10,6 @@ const lootBoss = require('../rpgfiles/lootBoss');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then(() => console.log('Database Connected'))
 	.catch(err => console.log(err));
 
 //MODELS
@@ -23,7 +22,7 @@ module.exports = {
 	description: 'bắn luôn(50 MP)',
 	cooldown: 30,
 	execute(client, message, args) {
-		if (args[0] == 'boss'|| !args[0]) {
+		if (args[0] == 'boss' || !args[0]) {
 			var user = new Object();
 			user.id = 1;
 		}
@@ -91,14 +90,14 @@ module.exports = {
 					: rangedClasses2.includes(author_rpgData.class) ? 2
 						: rangedClasses3.includes(author_rpgData.class) ? 3 : 0) {
 					case 1:
-						dmg = Math.round(dmg*1.2);
+						dmg = Math.round(dmg * 1.2);
 						break;
 					case 2:
-						dmg = Math.round(dmg*1.4) + RandInt(20, 70);
-						
+						dmg = Math.round(dmg * 1.4) + RandInt(20, 70);
+
 						break;
 					case 3:
-						dmg = Math.round(dmg*1.4) + RandInt(20, 70);
+						dmg = Math.round(dmg * 1.4) + RandInt(20, 70);
 						break;
 
 				}

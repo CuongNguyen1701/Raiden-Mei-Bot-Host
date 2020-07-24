@@ -1,24 +1,23 @@
-const {mongoPass} = require('../config.json');
+const { mongoPass } = require('../config.json');
 const mongoose = require('mongoose');
 
 
 //CONNECT TO DATABASE
-mongoose.connect( process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log( 'Database Connected' ))
-.catch(err => console.log( err ));
+mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
+    .catch(err => console.log(err));
 
 //MODELS
 const Data = require('../models/data.js');
 
 module.exports = {
-	name: 'create',
-	description: 'tạo thông tin trên database',
-	execute(client, message, args) {
+    name: 'create',
+    description: 'tạo thông tin trên database',
+    execute(client, message, args) {
         Data.findOne({
             userID: message.author.id
         }, (err, data) => {
-            if(err) console.log(err);
-            if(!data){ //check if user has no data on database
+            if (err) console.log(err);
+            if (!data) { //check if user has no data on database
                 const newData = new Data({
                     name: client.users.cache.get(message.author.id).username,
                     userID: message.author.id,
@@ -40,5 +39,5 @@ module.exports = {
             }
         })
     },
-    
+
 };

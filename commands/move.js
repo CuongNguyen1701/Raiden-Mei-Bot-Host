@@ -9,7 +9,6 @@ const bossAttack = require('../rpgfiles/bossAttack');
 
 //CONNECT TO DATABASE
 mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Database Connected'))
     .catch(err => console.log(err));
 //MODELS
 const RpgData = require('../models/rpgdata.js');
