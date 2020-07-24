@@ -52,7 +52,7 @@ module.exports = {
 
 
             SaveData(data);
-            if (correctInput) message.channel.send(`calculator has been set to default!`);
+            message.channel.send(`calculator has been set to default!`);
 
         })
     }
