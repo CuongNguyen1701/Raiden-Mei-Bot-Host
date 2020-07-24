@@ -63,9 +63,9 @@ module.exports = {
             embed.addField(`phys received:`, `${phys_r}%`, true)
             embed.addField(`crit damage:`, `${cdm}%`, true)
             embed.addField(`ele:`, `${ele}%`, true)
-            embed.addField(`ele received:`, `${ele_r}%`)
+            embed.addField(`ele received:`, `${ele_r}%`, true)
 
-            embed.addField(`physical final multiplier(without crit):`, `${fdm_phys_noCrit}%`, true);
+            embed.addField(`physical final multiplier(without crit):`, `${fdm_phys_noCrit}%`);
             embed.addField(`physical final multiplier(with crit):`, `${fdm_phys_yesCrit}%`);
             embed.addField(`elemental final multiplier:`, `${fdm_ele}%`);
             embed.addField(`final crit rate:`, `${critRate}%`);
