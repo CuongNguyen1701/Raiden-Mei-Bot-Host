@@ -31,12 +31,13 @@ module.exports = {
             }, (err, data) => {
                 if (err) console.log(err);
                 if (data) {
-                    embed.setTitle(`CONGRATULATION! ${data.name} WIN!`)
-                    embed.setColor(color.green);
-                    embed.setDescription(`guessed number: ${data.guess}`)
+                    embed.setTitle(`CONGRATULATION! ${data.name} WIN!`);
+                    embed.setColor(color.green);;
+                    embed.setDescription(`guessed number: ${data.guess}`);
+                    message.channel.send(embed);
                 }
                 else {
-                    message.channel.send(`there's no winner!`)
+                    message.channel.send(`there's no winner!`);
                 }
             })
 
