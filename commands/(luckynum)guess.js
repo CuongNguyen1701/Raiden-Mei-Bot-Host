@@ -18,7 +18,7 @@ module.exports = {
         var user = message.author;
         let min = 1;
         let max = 57;
-        if (!args[0] || !Number.isInteger(args[0]) || args[0] < min || args[0] > max) {
+        if (!args[0] || !Number.isInteger(Number(args[0])) || args[0] < min || args[0] > max) {
             return message.reply(`please enter a whole number between ${min} and ${max}`)
         } else {
             Data.findOne({
