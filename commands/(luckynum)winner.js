@@ -17,6 +17,8 @@ module.exports = {
     name: 'winner',
     description: 'tìm người thắng cuộc',
     execute(client, message, args) {
+        if (message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
+
 
         let embed = new Discord.MessageEmbed();
 
