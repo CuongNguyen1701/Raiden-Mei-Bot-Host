@@ -37,6 +37,7 @@ module.exports = {
 
                 else msg += `   ${available[i]}`
             }
+
             message.channel.send(msg);
         })
 
