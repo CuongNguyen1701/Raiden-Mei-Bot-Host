@@ -25,29 +25,29 @@ module.exports = {
                 userID: user.id
             }, (err, data) => {
                 if (err) console.log(err);
-                if (!data) {
-                    Data.findOne({
-                        guess: args[0]
-                    }, (err, guessdata) => {
-                        if (err) console.log(err);
-                        if (!guessdata) {
-                            var newData = new Data({
-                                name: client.users.cache.get(user.id).username,
-                                userID: user.id,
-                                guess: args[0],
-                                checkable: true
-                            })
-                            SaveData(newData);
-                            return message.reply(`you guessed ${args[0]}!`);
-                        }
-                        else {
-                            return message.reply(`${args[0]} is already guessed by someone!`);
-                        }
-                    })
-                }
-                else {
-                    return message.reply(`you have already guessed ${data.guess}!`);
-                }
+                // if (!data) {
+                Data.findOne({
+                    guess: args[0]
+                }, (err, guessdata) => {
+                    if (err) console.log(err);
+                    if (!guessdata) {
+                        var newData = new Data({
+                            name: client.users.cache.get(user.id).username,
+                            userID: user.id,
+                            guess: args[0],
+                            checkable: true
+                        })
+                        SaveData(newData);
+                        return message.reply(`you guessed ${args[0]}!`);
+                    }
+                    else {
+                        return message.reply(`${args[0]} is already guessed by someone!`);
+                    }
+                })
+                // }
+                // else {
+                // return message.reply(`you have already guessed ${data.guess}!`);
+                // }
             })
 
         }

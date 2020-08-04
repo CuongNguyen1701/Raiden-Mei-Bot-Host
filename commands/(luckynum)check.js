@@ -32,7 +32,7 @@ module.exports = {
             let msg = 'available numbers: '
             var available = guessPool;
             for (j = 0; j < res.length; j++) {
-                available = available.filter(guessedNum => guessedNum != res[j].guess)
+                available = available.filter(availNum => availNum != res[j].guess)
 
             }
 

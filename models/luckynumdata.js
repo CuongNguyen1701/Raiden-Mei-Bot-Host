@@ -8,4 +8,4 @@ const dataSchema = mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('LuckyNumData', dataSchema);
+module.exports = mongoose.model('LuckyNumberData', dataSchema);
