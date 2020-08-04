@@ -25,7 +25,7 @@ module.exports = {
         ]).exec((err, res) => {
             if (err) console.log(err);
             if (!res) return message.reply(`there's no guess yet`);
-            let msg = `guessed numbers: `
+            let msg = 'guessed numbers: '
             for (i = 0; i < res.length; i++) {
                 if (i % 5 == 0) {
                     msg += ('\n' + res[i].guess)
