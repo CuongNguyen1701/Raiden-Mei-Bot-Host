@@ -25,7 +25,7 @@ module.exports = {
         Data.find({
             chẹkable: true,
         }).sort([
-            ['guess', 'descending']
+            ['guess', 'desc']
         ]).exec((err, res) => {
             if (err) console.log(err);
             if (res.length = 0) return message.reply(`there's no guess yet`);
