@@ -22,10 +22,7 @@ module.exports = {
             guessPool[i] = (i + 1);
         }
 
-        Data.find({
-            // checkable: true,
-            name: "TsuyoshiJoestar"
-        }).sort([
+        Data.find({}).sort([
             ['guess', 'descending']
         ]).exec((err, res) => {
             if (err) console.log(err);
