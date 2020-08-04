@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.set('debug', true);
 
 const dataSchema = mongoose.Schema({
     name: String,

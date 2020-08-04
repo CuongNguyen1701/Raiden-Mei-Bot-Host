@@ -22,7 +22,9 @@ module.exports = {
             guessPool[i] = (i + 1);
         }
 
-        Data.find({}).sort([
+        Data.find({
+            chẹkable: true,
+        }).sort([
             ['guess', 'descending']
         ]).exec((err, res) => {
             if (err) console.log(err);
