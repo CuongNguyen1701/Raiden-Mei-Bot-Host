@@ -23,7 +23,8 @@ module.exports = {
         }
 
         Data.find({
-            checkable: true
+            // checkable: true,
+            name: "TsuyoshiJoestar"
         }).sort([
             ['guess', 'descending']
         ]).exec((err, res) => {
