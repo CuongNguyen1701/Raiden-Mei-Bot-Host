@@ -29,6 +29,7 @@ module.exports = {
         ]).exec((err, res) => {
             if (err) console.log(err);
             if (res.length = 0) return message.reply(`there's no guess yet`);
+            console.log(res);
             let msg = 'available numbers: '
             var available = guessPool;
             for (j = 0; j < res.length; j++) {
