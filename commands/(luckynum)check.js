@@ -28,7 +28,7 @@ module.exports = {
             ['guess', 'descending']
         ]).exec((err, res) => {
             if (err) console.log(err);
-            if (!res) return message.reply(`there's no guess yet`);
+            if (res.length = 0) return message.reply(`there's no guess yet`);
             let msg = 'available numbers: '
             var available = guessPool;
             for (j = 0; j < res.length; j++) {
