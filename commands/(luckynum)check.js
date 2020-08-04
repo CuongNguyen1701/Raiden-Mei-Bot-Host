@@ -39,7 +39,7 @@ module.exports = {
             for (i = 0; i < available.length; i++) {
                 if ((i % 10) == 0) msg += `\n ${available[i]}`
 
-                else msg += `   ${available[i]}`
+                else msg += `    ${available[i]}`
             }
 
             message.channel.send(msg);
