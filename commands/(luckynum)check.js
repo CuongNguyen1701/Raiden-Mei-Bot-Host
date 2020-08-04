@@ -37,7 +37,7 @@ module.exports = {
             }
 
             for (i = 0; i < available.length; i++) {
-                if ((i % 5) == 0) msg += `\n ${available[i]}`
+                if ((i % 10) == 0) msg += `\n ${available[i]}`
 
                 else msg += `   ${available[i]}`
             }
