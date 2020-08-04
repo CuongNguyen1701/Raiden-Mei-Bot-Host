@@ -30,7 +30,11 @@ module.exports = {
             if (err) console.log(err);
             if (!res) return message.reply(`there's no guess yet`);
             let msg = 'available numbers: '
-            let available = guessPool.filter(guessedNum => !res.includes(guessedNum));
+            var available = guessPool;
+            for (j = 0; j < res.length; j++) {
+                available = available.filter(guessedNum => guessedNum != res[j].guess)
+
+            }
 
             for (i = 0; i < available.length; i++) {
                 if ((i % 5) == 0) msg += `\n ${available[i]}`
