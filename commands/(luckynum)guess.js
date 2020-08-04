@@ -35,6 +35,7 @@ module.exports = {
                                 name: client.users.cache.get(user.id).username,
                                 userID: user.id,
                                 guess: args[0],
+                                checkable: true
                             })
                             SaveData(newData);
                             return message.reply(`you guessed ${args[0]}!`);
