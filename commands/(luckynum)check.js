@@ -28,9 +28,9 @@ module.exports = {
             let msg = 'guessed numbers: '
             for (i = 0; i < res.length; i++) {
                 if (i % 5 == 0) {
-                    msg += ('\n' + res[i].guess)
+                    msg += ('\n dsad' + res[i].guess)
                 } else {
-                    msg += ('   ' + res[i].guess)
+                    msg += ('   sada' + res[i].guess)
                 }
             }
             message.channel.send(msg);
