@@ -29,11 +29,11 @@ module.exports = {
         ]).exec((err, res) => {
             if (err) console.log(err);
             if (res.length == 0) return message.reply(`there's no guess yet`);
-            console.log(res);
+            // console.log(res);
             let msg = 'available numbers: '
             var available = guessPool;
             for (j = 0; j < res.length; j++) {
-                available = available.filter(availNum => availNum != res[j].guess)
+                available = available.filter(availNum => availNum != res[j].guess)//exclude the guessed numbers
 
             }
 
@@ -41,7 +41,7 @@ module.exports = {
                 if ((i % 10) == 0) msg += `\n ${available[i]}`
 
                 else msg += `    ${available[i]}`
-            }
+            }//max 10 numbers per line
 
             message.channel.send(msg);
         })
