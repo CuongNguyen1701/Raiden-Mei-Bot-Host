@@ -19,8 +19,14 @@ module.exports = {
         var user = message.author;
         let min = 1;
         let max = 57;
-        if (Cooldown.guessDisabled)
-            return message.reply(`you cannot guess now!`);
+
+        Cooldown.findOne({
+            id: 1
+        }, (err, cooldown) => {
+            if (err) console.log(err);
+            if (cooldown.guessDisabled)
+                return message.reply(`you cannot guess now!`);
+        })
 
         if (!args[0] || !Number.isInteger(Number(args[0])) || args[0] < min || args[0] > max)
             return message.reply(`please enter a whole number between ${min} and ${max}`);
