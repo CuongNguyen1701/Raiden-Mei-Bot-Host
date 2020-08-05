@@ -30,8 +30,8 @@ module.exports = {
             }
             data.guessDisabled = !data.guessDisabled || newData;
             SaveData(data);
-            if (data.guessDisabled) return message.reply('you disabled the guessing function!')
-            return message.reply(`you enabled the guessing function!`)
+            if (data.guessDisabled) return message.reply('you disabled the guessing function!');
+            return message.reply(`you enabled the guessing function!`);
         }
 
 
