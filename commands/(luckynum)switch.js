@@ -19,7 +19,9 @@ module.exports = {
         console.log(`on`)
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
-        cooldown.findOne({ id: 1 }), (err, data) => {
+        cooldown.findOne({
+            id: 1
+        }, (err, data) => {
             if (err) console.log(err);
             if (!data) {
                 var newData = new cooldown({
@@ -32,7 +34,7 @@ module.exports = {
             SaveData(data);
             if (data.guessDisabled) return message.reply('you disabled the guessing function!');
             return message.reply(`you enabled the guessing function!`);
-        }
+        })
 
 
 
