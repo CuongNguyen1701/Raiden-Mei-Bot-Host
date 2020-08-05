@@ -9,7 +9,7 @@ mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopol
 
 //MODELS
 const Data = require('../models/luckynumdata.js');
-const cooldown = require('../models/cooldowns.js')
+const Cooldown = require('../models/cooldowns.js')
 
 module.exports = {
     name: 'guess',
@@ -19,7 +19,7 @@ module.exports = {
         var user = message.author;
         let min = 1;
         let max = 57;
-        if (cooldown.guessDisabled)
+        if (Cooldown.guessDisabled)
             return message.reply(`you cannot guess now!`);
 
         if (!args[0] || !Number.isInteger(Number(args[0])) || args[0] < min || args[0] > max)

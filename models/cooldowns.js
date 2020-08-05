@@ -6,4 +6,4 @@ const dataSchema = mongoose.Schema({
     guessDisabled: Boolean
 })
 
-module.exports = mongoose.model('cooldowns', dataSchema);
+module.exports = mongoose.model('Cooldowns', dataSchema);
