@@ -16,7 +16,7 @@ module.exports = {
     description: 'bật/tắt chức năng đoán',
     execute(client, message, args) {
         if (message.author.id != '609937407445434384') return message.reply('you cannot use this command yet!');
-
+        console.log(`on`)
         function SaveData(data) { data.save().catch(err => console.log(err)); }
 
         cooldown.findOne({ id: 1 }), (err, data) => {
