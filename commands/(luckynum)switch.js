@@ -9,7 +9,7 @@ mongoose.connect(process.env.mongoPass, { useNewUrlParser: true, useUnifiedTopol
 
 //MODELS
 const Data = require('../models/luckynumdata.js');
-const cooldown = require('../models/cooldowns.js')
+const cooldown = require('../models/cooldowns.js');
 
 module.exports = {
     name: 'switch',
