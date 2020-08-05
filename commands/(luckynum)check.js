@@ -23,7 +23,7 @@ module.exports = {
         }
 
         Data.find({
-            chẹkable: true,
+            chekable: true,
         }).sort([
             ['guess', 'desc']
         ]).exec((err, res) => {
